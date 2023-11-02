@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponChest : MonoBehaviour
@@ -31,10 +30,16 @@ public class WeaponChest : MonoBehaviour
 
     private GameObject GetRandomItem()
     {
-        int randId = Random.Range(0, weapons.Length);
-        int chance = Random.Range(1, 101);
-        if (weapons[randId].dropChance >= chance) return weapons[randId].dropObject;
-        else return GetRandomItem();
+        int randId, chance;
+
+        do
+        {
+            randId = Random.Range(0, weapons.Length);
+            chance = Random.Range(1, 101);
+        }
+        while (weapons[randId].dropChance < chance);
+
+        return weapons[randId].dropObject;
     }
 
     private float RandomVelocity() => Random.Range(-dropVelocity, dropVelocity);

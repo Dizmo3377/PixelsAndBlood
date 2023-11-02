@@ -5,15 +5,29 @@ public class Inventory : MonoBehaviour
     public static Weapon[] slots = new Weapon[2];
     public static int currentWeapon = 0;
     private static float throwForce = 5;
-    public static int primaryDamage { get => slots[currentWeapon].damage; }
+    public static int primaryDamage => slots[currentWeapon].damage;
 
-    public void ChangeWeapon()
+    private void Start() => UpdateWeaponIcon();
+
+    private void Update()
     {
-        currentWeapon++;
-        if (currentWeapon >= slots.Length) currentWeapon = 0;
+        if (PauseMenu.isPaused) return;
+        if (Input.GetKeyDown(KeyCode.F)) ThrowPrimary();
     }
 
+    public static void ChangeWeapon()
+    { 
+        if (Player.instance.isDead) return;
+        currentWeapon = (currentWeapon + 1) % slots.Length;
+        UpdateWeaponIcon();
+    }
 
+    public static void UpdateWeaponIcon()
+    {
+        if (slots[currentWeapon] != null) PlayerController.weaponSprite.sprite = slots[currentWeapon].icon;
+        else PlayerController.weaponSprite.sprite = null;
+        UI.instance.UpdateWeapon();
+    }
     private static GameObject GetWeapon(string name) => Resources.Load<GameObject>("Weapons/" + name);
 
     public static void ThrowPrimary()
@@ -26,10 +40,8 @@ public class Inventory : MonoBehaviour
         rb.velocity = new Vector2(Random.Range(-throwForce, throwForce), Random.Range(-throwForce, throwForce));
         Destroy(slots[currentWeapon]);
         slots[currentWeapon] = null;
+
+        UpdateWeaponIcon();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F)) ThrowPrimary();
-    }
 }

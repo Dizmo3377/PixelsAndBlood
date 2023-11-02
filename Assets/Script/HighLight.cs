@@ -34,35 +34,33 @@ public class HighLight : MonoBehaviour
 
     private void Update()
     {
-        if (weaponsTransform.Count >= 1)
-        {
-            if (weaponsTransform.Count == 1)
-            {
-                weaponsScript[0].Highlight(true);
-                currentWeapon = weaponsScript[0];
-            }
-            else
-            {
-                int id = GetClosestWeapon(weaponsTransform.ToArray());
-                currentWeapon = weaponsScript[id];
-                for (int i = 0; i < weaponsScript.Count; i++)
-                {
-                    if (i == id) { weaponsScript[i].Highlight(true); }
-                    else{ weaponsScript[i].Highlight(false); }
-                }
+        if (weaponsTransform.Count < 1) return;
 
-            }
-            if (Input.GetKeyDown(KeyCode.E))
+        if (weaponsTransform.Count == 1)
+        {
+            weaponsScript[0].Highlight(true);
+            currentWeapon = weaponsScript[0];
+        }
+        else
+        {
+            int id = GetClosestWeapon(weaponsTransform.ToArray());
+            currentWeapon = weaponsScript[id];
+            for (int i = 0; i < weaponsScript.Count; i++)
             {
-                currentWeapon.Equiep();
-                Destroy(currentWeapon);
+                if (i == id) weaponsScript[i].Highlight(true);
+                else weaponsScript[i].Highlight(false);
             }
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            currentWeapon.Equiep();
+            Destroy(currentWeapon);
         }
     }
 
     int GetClosestWeapon(Transform[] weapon)
     {
-        int minimumT = 0; //T means transform
+        int minimumT = 0;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
         for (int i = 0; i < weapon.Length; i++)

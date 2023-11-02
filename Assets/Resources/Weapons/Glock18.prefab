@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3194945740399062659}
   - component: {fileID: 3194945740399062658}
   - component: {fileID: 3194945740399062661}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Glock18
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -101,9 +101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  name: Glock18
-  nameColor: {r: 0.2396226, g: 0.48417735, b: 1, a: 1}
-  canvas: {fileID: 3194945741405047274}
   dropSpeed: 0
   curve:
     serializedVersion: 2
@@ -139,6 +136,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bulletPrefab: {fileID: 1268197539575288476, guid: 4a99cc8dc41f50b44b4fb3fc105323c4, type: 3}
+  nameColor: {r: 0.2396226, g: 0.48417735, b: 1, a: 1}
+  name: Glock18
   shootSpeed: 0.3
   bulletForce: 50
   range: 4.5
@@ -190,7 +189,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1 &3194945740426138199
 GameObject:
@@ -203,7 +202,7 @@ GameObject:
   - component: {fileID: 3194945740426138198}
   - component: {fileID: 3194945740426138152}
   - component: {fileID: 3194945740426138153}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +283,7 @@ GameObject:
   - component: {fileID: 3194945741405047278}
   - component: {fileID: 3194945741405047279}
   - component: {fileID: 3194945741405047276}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

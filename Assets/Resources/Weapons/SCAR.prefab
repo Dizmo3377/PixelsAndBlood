@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3925050321146090292}
   - component: {fileID: 3925050321146090291}
   - component: {fileID: 3925050321146090297}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SCAR
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &3925050321146090297
 MonoBehaviour:
@@ -148,9 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: d5dc486b0de5f18449a5fcba09a86f13, type: 3}
-  name: SCAR
-  nameColor: {r: 0.26173997, g: 1, b: 0, a: 1}
-  canvas: {fileID: 3925050322149995612}
   dropSpeed: 0
   curve:
     serializedVersion: 2
@@ -186,11 +183,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bulletPrefab: {fileID: 1268197539575288476, guid: 4a99cc8dc41f50b44b4fb3fc105323c4, type: 3}
+  nameColor: {r: 0.26173997, g: 1, b: 0, a: 1}
+  name: SCAR
   shootSpeed: 0.8
   bulletForce: 50
   range: 7
   damage: 5
-  accuracy: 0.05
+  accuracy: 0.2
   manaCost: 2
   burstDelay: 0.1
 --- !u!1 &3925050321171083233
@@ -204,7 +203,7 @@ GameObject:
   - component: {fileID: 3925050321171083232}
   - component: {fileID: 3925050321171083166}
   - component: {fileID: 3925050321171083167}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +284,7 @@ GameObject:
   - component: {fileID: 3925050322149995608}
   - component: {fileID: 3925050322149995609}
   - component: {fileID: 3925050322149995610}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

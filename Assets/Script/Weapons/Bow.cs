@@ -33,6 +33,7 @@ public class Bow : Weapon
 
     public override void AfterShoot() 
     {
+        base.AfterShoot();
         damage = deafultDamage;
         stretchTime = 0f;
         TensionBar.Instance.Activate(false);

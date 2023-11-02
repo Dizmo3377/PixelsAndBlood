@@ -635,17 +635,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f464d7fea95c404b96102e797bf9df0, type: 3}
---- !u!114 &844422674 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4137910853468930818, guid: 6f464d7fea95c404b96102e797bf9df0, type: 3}
-  m_PrefabInstance: {fileID: 844422673}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e1eef8030ee3c24db8ebe7d4bab77d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &854938236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,7 +1128,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 844422674}
+      - m_Target: {fileID: 4137910853468930818, guid: 6f464d7fea95c404b96102e797bf9df0, type: 3}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
         m_MethodName: StartSceneTransition
         m_Mode: 5
@@ -1148,7 +1137,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SampleScene
+          m_StringArgument: NewGame
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1191780642

@@ -1,64 +1,57 @@
 using UnityEngine;
 using System.Collections;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
-    private Vector2 moveVector;
+    [SerializeField] public static Animator animator;
+    [SerializeField] public static SpriteRenderer weaponSprite;
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] public static Animator animator;
 
-    [SerializeField] private SpriteRenderer weaponSprite;
     private Player playerData;
+    private bool isShooting = false;
+    private Vector3 aimTarget = Vector2.zero;
+    private Vector3 mousePos = Vector2.zero;
+    private Vector2 moveVector;
 
-    private void Start()
+    private void Awake()
     {
         playerData = Player.instance;
         animator = GetComponent<Animator>();
+        weaponSprite = transform.Find("Weapon").GetComponent<SpriteRenderer>();
     }
     private void FixedUpdate() => rb.velocity = moveVector * speed;
 
     private void Update()
     {
-        moveVector = new Vector2(
-            Input.GetAxisRaw("Horizontal"),
-            Input.GetAxisRaw("Vertical")).normalized;
+        if (Player.instance.isDead) return;
 
-        if (moveVector.x != 0)
-            FaceRotate((Vector2)transform.position + moveVector);
+        GetInputData();
 
-        if (Input.GetMouseButton(0) && playerData.canShoot && !RaycastUtilities.PointerIsOverUI(Input.mousePosition))
-            StartCoroutine(Shooting());
+        if (Input.GetMouseButton(0) && !isShooting && !RaycastUtilities.PointerIsOverUI(Input.mousePosition))
+            StartCoroutine(Shoot());
 
-        if (moveVector != Vector2.zero) animator.SetBool("isMoving", true);
-        else animator.SetBool("isMoving", false);
-
-        RotateWeapon(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-
-        //Pod voprosom vot eta hueta
-        if (Inventory.slots[Inventory.currentWeapon] != null)
-            weaponSprite.sprite = Inventory.slots[Inventory.currentWeapon].icon;
-        else weaponSprite.sprite = null;
+        animator.SetBool("isMoving", moveVector != Vector2.zero ? true : false);
+        RotateFace(isShooting ? aimTarget - transform.position : moveVector);
+        RotateWeapon(isShooting ? aimTarget : mousePos);
     }
 
-    private IEnumerator Shooting()
+    private IEnumerator Shoot()
     {
         Weapon weapon = Inventory.slots[Inventory.currentWeapon];
         if (weapon == null || playerData.manaPoints < weapon.manaCost) yield break;
 
-        playerData.canShoot = false;
+        isShooting = true;
         yield return weapon.OnShoot();
 
-        Vector3 target = playerData.attack.ClosestEnemy();
-        weapon.Shoot(target);
-        FaceRotate(target);
-        RotateWeapon(target);
+        weapon.Shoot(aimTarget);
         playerData.ChangeMana(-weapon.manaCost);
         weapon.AfterShoot();
 
         yield return new WaitForSeconds(weapon.shootSpeed);
-        playerData.canShoot = true;
+        isShooting = false;
     }
 
     public void RotateWeapon(Vector3 target)
@@ -71,11 +64,16 @@ public class PlayerController : MonoBehaviour
         else weaponSprite.flipY = true;
     }
 
-    public void FaceRotate(Vector3 target)
+    public void RotateFace(Vector3 target)
     {
-        Vector2 rotateVector = target - transform.position;
-        if (rotateVector.x > 0) sprite.flipX = false;
-        else sprite.flipX = true;
+        if (!isShooting && target.x == 0) return;
+        sprite.flipX = (target.x >= 0) ? false : true;
     }
 
+    private void GetInputData()
+    {
+        moveVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        aimTarget = playerData.attack.ClosestEnemy();
+    }
 }

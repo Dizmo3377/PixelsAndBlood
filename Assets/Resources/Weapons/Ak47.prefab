@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2646405588713808076}
   - component: {fileID: 2646405588713808077}
   - component: {fileID: 2646405588713808078}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 2646405589692988276}
   - component: {fileID: 2646405589692988170}
   - component: {fileID: 2646405589692988171}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 2646405589720057760}
   - component: {fileID: 2646405589720057767}
   - component: {fileID: 2646405589720057773}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Ak47
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ Transform:
   m_GameObject: {fileID: 2646405589720057772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 262.3, y: 258.34, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.8876}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2646405588713808079}
@@ -286,7 +286,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 1.875}
+    oldSize: {x: 1.7777778, y: 1.6666666}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -314,7 +314,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &2646405589720057773
 MonoBehaviour:
@@ -329,9 +329,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  name: Ak47
-  nameColor: {r: 0.091252565, g: 1, b: 0, a: 1}
-  canvas: {fileID: 2646405588713808072}
   dropSpeed: 0
   curve:
     serializedVersion: 2
@@ -367,9 +364,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bulletPrefab: {fileID: 1268197539575288476, guid: 4a99cc8dc41f50b44b4fb3fc105323c4, type: 3}
+  nameColor: {r: 0.091252565, g: 1, b: 0, a: 1}
+  name: Ak47
   shootSpeed: 0.1
   bulletForce: 50
   range: 5
   damage: 3
   accuracy: 0.1
   manaCost: 1
+  shake: 0.1

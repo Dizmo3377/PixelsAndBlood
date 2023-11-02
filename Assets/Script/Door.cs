@@ -5,30 +5,26 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     private BoxCollider2D boxCollider;
-    private Animator anim;
+    private Animator animator;
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>(); 
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
     void OnEnable()
     {
         EnemyRoom.OnEntered += Switch;
+        BossRoom.OnEntered += Switch;
     }
-
-    void OnDisable()
+    void OnDisable() 
     {
         EnemyRoom.OnEntered -= Switch;
-    }
-
-    void OnDestroy()
-    {
-        EnemyRoom.OnEntered -= Switch;
+        BossRoom.OnEntered -= Switch;
     }
 
     private void Switch()
     {
-        if (boxCollider.isTrigger) { boxCollider.isTrigger = false; anim.SetTrigger("Close"); }
-        else { boxCollider.isTrigger = true; anim.SetTrigger("Open"); }
+        boxCollider.isTrigger = !boxCollider.isTrigger;
+        animator.SetTrigger(boxCollider.isTrigger ? "Open" : "Close");
     }
 }

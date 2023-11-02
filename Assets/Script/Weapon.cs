@@ -25,6 +25,7 @@ public abstract class Weapon : MonoBehaviour
     public int damage;
     public float accuracy;
     public int manaCost;
+    public float shake;
 
     private void Start()
     {
@@ -50,8 +51,9 @@ public abstract class Weapon : MonoBehaviour
     public void Equiep()
     {
         if (Inventory.slots[Inventory.currentWeapon] != null) Inventory.ThrowPrimary();
-        Inventory.slots[Inventory.currentWeapon] = (Weapon)this.Clone();
-        Destroy(this.gameObject);
+        Inventory.slots[Inventory.currentWeapon] = (Weapon)Clone();
+        Inventory.UpdateWeaponIcon();
+        Destroy(gameObject);
     }
 
     public virtual void Shoot(Vector3 target)
@@ -71,5 +73,5 @@ public abstract class Weapon : MonoBehaviour
     public void Highlight(bool state) => canvas.SetActive(state);
     public object Clone() => MemberwiseClone();
     public virtual IEnumerator OnShoot() => null;
-    public virtual void AfterShoot() { }
+    public virtual void AfterShoot() => CameraShaker.Shake(0.1f,shake,1);
 }

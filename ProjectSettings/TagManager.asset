@@ -30,8 +30,8 @@ TagManager:
   - Entity
   - Bullet
   - Player
-  - 
-  - 
+  - EnemyBullet
+  - Item
   - 
   - 
   - 

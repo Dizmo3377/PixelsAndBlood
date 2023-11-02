@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+[System.Serializable]
+public class Player : MonoBehaviour, ISaveableJson, IDamagable
 {
     [Header("Stats")]
     public int healPoints;
@@ -17,48 +19,83 @@ public class Player : MonoBehaviour
     public int maxManaPoints;
     public int maxShieldPoints;
 
-
+    [HideInInspector] public bool isDead = false;
     private static float hitTime;
-    [SerializeField] public PlayerController controller;
+
+    [NonSerialized, HideInInspector] public AttackRange attack;
 
     public static Vector3 position => instance.transform.position;
-    public static Player instance;
-    public bool canShoot = true;
-    [SerializeField] public AttackRange attack;
 
-    private void Start()
+    public string saveName => "Player";
+
+    [NonSerialized] public static Player instance;
+
+    private void OnEnable() => SceneController.onTransitionStart += () => JsonHelper.Save(this);
+    private void OnDisable() => SceneController.onTransitionStart -= () => JsonHelper.Save(this);
+
+    private void Awake()
     {
         instance = GetComponent<Player>();
-        controller = GetComponent<PlayerController>();
+        attack = GetComponentInChildren<AttackRange>();
 
-        healPoints = maxHealPoints;
-        manaPoints = maxManaPoints;
-        shieldPoints = maxShieldPoints;
+        (healPoints, manaPoints, shieldPoints) = (maxHealPoints, maxManaPoints, maxShieldPoints);
 
         StartCoroutine(ShieldRecovery(2f));
         StartCoroutine(EffectsIterator());
     }
 
+    private void Start() => JsonHelper.LoadOnNextLevel(this);
     public void AddCoins(int count) => coins += count;
-
-    public void GetDamge(int amount)
+    public void Heal(int amount) => healPoints = Mathf.Clamp(healPoints += amount, 0, maxHealPoints);
+    public void ChangeMana(int amount) => manaPoints = Mathf.Clamp(manaPoints += amount, 0, maxManaPoints);
+    public void GetDamage(int amount)
     {
         hitTime = Time.time;
         PlayerController.animator.SetTrigger("GetDamage");
+
         if (shieldPoints > 0)
         {
-            shieldPoints -= amount;
-            shieldPoints = Mathf.Clamp(shieldPoints, 0, maxShieldPoints);
+            shieldPoints = Mathf.Clamp(shieldPoints -= amount, 0, maxShieldPoints);
+            if (shieldPoints == 0) CameraShaker.Shake(0.1f, 0.5f, 2);
         }
         else
         {
             healPoints -= amount;
-            if (healPoints <= 0) Debug.Log("DEATH");
+            CameraShaker.Shake(0.1f, 0.5f, 2);
+            if (healPoints <= 0) Die();
+        }
+    }
+
+    public void Deactivate()
+    {
+        isDead = true;
+        Destroy(GetComponent<Collider2D>());
+        Destroy(GetComponent<Rigidbody2D>());
+        Destroy(GetComponent<PlayerController>());
+    }
+
+    private void Die()
+    {
+        Deactivate();
+
+        UI.instance.FadeOut(2f);
+        PlayerController.animator.SetTrigger("Death");
+        PlayerController.weaponSprite.sprite = null;
+        (healPoints, manaPoints, shieldPoints) = (0,0,0);
+
+        StopAllCoroutines();
+        StartCoroutine(ShowDeathMenu());
+
+        IEnumerator ShowDeathMenu()
+        {
+            yield return new WaitForSeconds(2f);
+            UI.instance.deathMenu.Show();
         }
     }
 
     private IEnumerator EffectsIterator()
     {
+        //In future we can make "fired" and "poisened" classes
         while (true)
         {
             EffectApply(ref fired);
@@ -72,22 +109,8 @@ public class Player : MonoBehaviour
         if (effect > 0)
         {
             effect -= 1;
-            GetDamge(1);
+            GetDamage(1);
         }
-    }
-
-    public void Heal(int amount)
-    {
-        healPoints += amount;
-        healPoints = Mathf.Clamp(healPoints, 0, maxHealPoints);
-        GameObject particle = ParticleManager.Create("Heal", position);
-        particle.transform.parent = instance.transform;
-    }
-
-    public void ChangeMana(int amount)
-    {
-        manaPoints += amount;
-        manaPoints = Mathf.Clamp(manaPoints, 0, maxManaPoints);
     }
 
     private IEnumerator ShieldRecovery(float delay)
@@ -95,8 +118,16 @@ public class Player : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(delay);
-            if (shieldPoints < maxShieldPoints && (Time.time - hitTime) > delay)
-                shieldPoints++;
+            if (shieldPoints < maxShieldPoints && (Time.time - hitTime) > delay) shieldPoints++;
         }
+    }
+
+    public string SaveJson() => JsonUtility.ToJson(this, true);
+    public void LoadJson(string data)
+    {
+        JsonUtility.FromJsonOverwrite(data, this);
+        shieldPoints = maxShieldPoints;
+        (fired, poisoned) = (0,0);
+        Inventory.UpdateWeaponIcon();
     }
 }

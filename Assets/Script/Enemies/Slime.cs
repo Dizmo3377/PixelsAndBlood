@@ -5,66 +5,53 @@ using System;
 
 public class Slime : Enemy
 {
-    [SerializeField] private AnimationCurve curve;
-    private float moveStartTime = 0f;
-    private float speed = 0f;
-    [SerializeField] private float moveDelay;
-    private bool isAtacking = false;
+    [SerializeField] private AnimationCurve jumpCurve;
+    [SerializeField] private float jumpDelay;
 
-    private void Start()
-    {
-        StartCoroutine(Move(moveDelay));
-    }
+    private float moveStartTime = 0f;
+    private float evaluation = 0f;
+    private bool isAtacking = false;
+    private Vector2 jumpDirection => (sight.player.transform.position - transform.position).normalized;
+    private void Start() => StartCoroutine(Move(0.5f));
+    private void OnCollisionEnter2D(Collision2D collision) => Attack(collision.collider);
+    private void OnCollisionStay2D(Collision2D collision) => Attack(collision.collider);
 
     private void FixedUpdate()
     {
-        if (canMove)
-        {
-            rb.velocity = (rb.velocity * speed) * 1.2f;
-            speed = curve.Evaluate(Time.time - moveStartTime);
-            if (speed <= 0)
-            {
-                isAtacking = false;
-                canMove = false;
-                speed = 0f;
-            }
-        }
+        if (!canMove || sight.player == null) return;
+
+        evaluation = jumpCurve.Evaluate(Time.time - moveStartTime);
+        rb.velocity = jumpDirection * evaluation * speed;
+        if (evaluation <= 0) SetTriggerState(false);
+    }
+
+    private void Attack(Collider2D toAttack)
+    {
+        if (!toAttack.CompareTag("Player") || !isAtacking) return;
+
+        Player.instance.GetDamage(damage);
+        animator.SetTrigger("Attack");
+        isAtacking = false;
+    }
+
+    private void SetTriggerState(bool state)
+    {
+        (canMove, isAtacking) = (state,state);
+        evaluation = state ? 1f : 0f;
     }
 
     private IEnumerator Move(float delay)
     {
+        yield return new WaitForSeconds(delay);
         while (true)
         {
-            yield return new WaitForSeconds(delay);
-            if (sight.seePlayer)
-            {
-                canMove = true;
-                isAtacking = true;
-                speed = 1f;
-                moveStartTime = Time.time;
-                rb.velocity = (sight.player.transform.position - this.transform.position).normalized;
-                if (rb.velocity.x < 0) { spriteRenderer.flipX = false; }
-                if (rb.velocity.x >= 0) { spriteRenderer.flipX = true; }
+            if (!sight.seePlayer) { yield return null; continue; }
 
-                animator.SetTrigger("Jump");
-            }
+            SetTriggerState(true);
+            moveStartTime = Time.time;
+            RotateFaceTo(sight.player.transform.position);
+            animator.SetTrigger("Jump");
+            yield return new WaitForSeconds(jumpDelay);
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            Player.instance.GetDamge(2);
-            isAtacking = false;
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (!collision.collider.CompareTag("Player") || !isAtacking) return;
-
-        Player.instance.GetDamge(2);
-        isAtacking = false;
     }
 }

@@ -2,37 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hatch : MonoBehaviour
+public class Hatch : InteractObject
 {
-    private Player player;
-    [SerializeField] private new CircleCollider2D collider;
-    [SerializeField] private float triggerRange;
-    [SerializeField] private GameObject button;
-
-    private void Start() => collider.radius = triggerRange;
-
-    private void Update()
+    protected override void OnInteract() => Transition();
+    private void Transition()
     {
-        if (Input.GetKeyUp(KeyCode.E) && player != null) Transition();
-    }
+        int lvl = LevelData.instance.lvl + 1;
+        int stage = lvl >= 6 ? LevelData.instance.stage + 1 : LevelData.instance.stage;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<Player>(out Player p))
-        {
-            player = p;
-            button.SetActive(true);
-        }
+        SceneController.instance.StartSceneTransition($"Dungeon_{stage}");
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<Player>(out Player p))
-        {
-            player = null;
-            button.SetActive(false);
-        }
-    }
-
-    private void Transition() => SceneController.StartSceneTransition("Dungeon_1");
 }

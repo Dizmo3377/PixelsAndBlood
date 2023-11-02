@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8159313070769209131}
   - component: {fileID: 8159313070769209130}
   - component: {fileID: 8159313070769209129}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 8159313071899239571}
   - component: {fileID: 8159313071899239661}
   - component: {fileID: 8159313071899239660}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 8159313071909378119}
   - component: {fileID: 8159313071909378112}
   - component: {fileID: 8159313071909378143}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SawedOff
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -314,7 +314,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &8159313071909378143
 MonoBehaviour:
@@ -329,8 +329,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  name: SawedOff
-  nameColor: {r: 0.9583843, g: 1, b: 0, a: 1}
   dropSpeed: 0
   curve:
     serializedVersion: 2
@@ -366,10 +364,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bulletPrefab: {fileID: 1268197539575288476, guid: 4a99cc8dc41f50b44b4fb3fc105323c4, type: 3}
+  nameColor: {r: 0.9583843, g: 1, b: 0, a: 1}
+  name: SawedOff
   shootSpeed: 1
   bulletForce: 50
   range: 5
   damage: 4
   accuracy: 0.7
   manaCost: 1
+  shake: 0.25
   fraction: 5

@@ -205,9 +205,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c56a3f7974c2c0f46a333d888089b269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 1375837125}
   triggerRange: 2
   button: {fileID: 1517544614692892963}
+  key: 101
 --- !u!58 &1375837125
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7642829138514221850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7642829138514221848}
+  - component: {fileID: 7642829138514221851}
+  m_Layer: 0
+  m_Name: LevelCreator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7642829138514221848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642829138514221850}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3646, z: 0.02435047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7642829138514221851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642829138514221850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae04adcdf8d1b34f904cb945c66a5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRoom: 0900000009000000
+  enemyRoomsCount: 3
+  bonusRoomsCount: 2
+  bonusRoomsPrefabs:
+  - {fileID: 1241989789273151111, guid: 6cdef7d8672159a4eb10eaeb4f2b2297, type: 3}
+  - {fileID: 1241989789273151111, guid: 5edeb0c170810b94cab591f9a2831989, type: 3}
+  - {fileID: 1241989789273151111, guid: a4b9f4abb75ba1943ac1f9f2d93c44fd, type: 3}
+  roomsPrefabs:
+  - {fileID: 1241989789273151111, guid: 0050e7af2b2417f45bdc6351cb23f96d, type: 3}
+  - {fileID: 1241989789273151111, guid: ca4df696dd06cf647b564f5fe2309762, type: 3}
+  - {fileID: 1241989789273151111, guid: 6cdef7d8672159a4eb10eaeb4f2b2297, type: 3}
+  - {fileID: 1241989789273151111, guid: 72dd6f024356b9b419dc37ec2c4dbfe2, type: 3}
+  - {fileID: 1241989789273151111, guid: 2d5623427068427489bddd47ceaa2831, type: 3}
+  bossRoom: 0

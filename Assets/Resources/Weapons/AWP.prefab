@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8304837158429359589}
   - component: {fileID: 8304837158429359586}
   - component: {fileID: 8304837158429359594}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: AWP
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8304837158429359593}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 259.5, y: 258.65, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.8876}
+  m_LocalScale: {x: 1, y: 1, z: 0.8876}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8304837159569791626}
@@ -105,7 +105,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.2857144, y: 2.2857144}
+    oldSize: {x: 1.7777778, y: 1.7777778}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -133,7 +133,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &8304837158429359594
 MonoBehaviour:
@@ -148,9 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  name: AWP
-  nameColor: {r: 1, g: 0.3830654, b: 0, a: 1}
-  canvas: {fileID: 8304837159569791629}
   dropSpeed: 0
   curve:
     serializedVersion: 2
@@ -186,12 +183,15 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bulletPrefab: {fileID: 1268197539575288476, guid: fd0ae3ed2b205d246a90a2b554629fb2, type: 3}
+  nameColor: {r: 1, g: 0.3830654, b: 0, a: 1}
+  name: AWP
   shootSpeed: 0.8
   bulletForce: 90
   range: 15
   damage: 12
   accuracy: 0
   manaCost: 3
+  shake: 0.25
 --- !u!1 &8304837158438961456
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 8304837158438961457}
   - component: {fileID: 8304837158438961487}
   - component: {fileID: 8304837158438961486}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 8304837159569791625}
   - component: {fileID: 8304837159569791624}
   - component: {fileID: 8304837159569791627}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
