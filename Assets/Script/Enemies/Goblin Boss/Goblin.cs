@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Goblin : Boss
 {
+    [SerializeField] private GameObject bombPrefab;
+    [SerializeField] private float throwForce;
 
     public override void Start() { base.Start(); StartCoroutine(Behavior()); }
 
@@ -12,10 +14,19 @@ public class Goblin : Boss
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(RunToPlayer());
-            yield return StartCoroutine(Hit());
+
+            //3 Hits in close combat
+            for (int i = 0; i < 3; i++)
+            {
+                yield return StartCoroutine(RunToPlayer());
+                yield return StartCoroutine(Hit());
+                yield return new WaitForSeconds(2f);
+            }
+
+            //1 Hill
             yield return StartCoroutine(Heal());
-            yield return new WaitForSeconds(10f);
+            //1 Bomb
+            yield return StartCoroutine(ThrowBomb());
         }
     }
 
@@ -44,7 +55,17 @@ public class Goblin : Boss
 
     private IEnumerator ThrowBomb()
     {
-        yield return null;
+        Vector3 throwVector = (sight.player.transform.position - transform.position).normalized;
+
+        Rigidbody2D bomb = Instantiate
+        (
+            bombPrefab,
+            transform.position + throwVector,
+            Quaternion.identity
+        ).GetComponent<Rigidbody2D>();
+
+        bomb.AddForce(throwVector * throwForce * 100, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(1f);
     }
 
     //Run to player, rage and then punch

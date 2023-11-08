@@ -381,6 +381,8 @@ MonoBehaviour:
   hp: 10
   showedName: Goblin
   bossRoom: {fileID: 0}
+  bombPrefab: {fileID: 8072290158052972934, guid: 059c0059aa440274ea8f026e18c678e4, type: 3}
+  throwForce: 3
 --- !u!114 &1242579630087862947
 MonoBehaviour:
   m_ObjectHideFlags: 0

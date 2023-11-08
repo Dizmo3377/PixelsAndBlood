@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class JsonHelper
 {
-    private static bool enableDebug = true;
+    private static bool enableDebug = false;
     public static string savePath {  get => $"{Application.persistentDataPath}/"; }
     public static void Save(ISaveableJson file)
     {

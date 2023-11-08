@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections;
-using static UnityEngine.GraphicsBuffer;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IPushable
 {
     [SerializeField] public static Animator animator;
     [SerializeField] public static SpriteRenderer weaponSprite;
@@ -16,13 +15,34 @@ public class PlayerController : MonoBehaviour
     private Vector3 mousePos = Vector2.zero;
     private Vector2 moveVector;
 
+    public float pushTime { get; set; }
+    private Vector2 pushVectorValue;
+    public Vector2 pushVector 
+    {
+        get 
+        {
+            pushVectorValue = (pushTime <= 0) ? Vector2.zero : pushVectorValue * 0.9f;
+            return pushVectorValue;
+        }
+        set 
+        {
+            pushTime = Time.time;
+            pushVectorValue = value * 10;
+        }
+    }
+
     private void Awake()
     {
         playerData = Player.instance;
         animator = GetComponent<Animator>();
         weaponSprite = transform.Find("Weapon").GetComponent<SpriteRenderer>();
     }
-    private void FixedUpdate() => rb.velocity = moveVector * speed;
+
+    private void FixedUpdate()
+    {
+        rb.velocity = moveVector * speed + pushVector;
+        pushTime -= (pushTime <= 0) ? 0 : Time.unscaledDeltaTime;
+    }
 
     private void Update()
     {
