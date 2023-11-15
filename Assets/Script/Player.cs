@@ -78,6 +78,7 @@ public class Player : MonoBehaviour, ISaveableJson, IDamagable
     {
         Deactivate();
 
+        UI.instance.bossMenu.SetState(false);
         UI.instance.FadeOut(2f);
         PlayerController.animator.SetTrigger("Death");
         PlayerController.weaponSprite.sprite = null;

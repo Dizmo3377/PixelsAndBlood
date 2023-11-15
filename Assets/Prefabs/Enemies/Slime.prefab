@@ -240,7 +240,7 @@ MonoBehaviour:
   speed: 6
   damage: 2
   manaCount: 3
-  hp: 8
+  <hp>k__BackingField: 7
   jumpCurve:
     serializedVersion: 2
     m_Curve:

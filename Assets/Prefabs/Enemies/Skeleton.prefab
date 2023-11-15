@@ -103,19 +103,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9640a2c1ba66a2f4c93fbe60fdd9441b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyRoom: {fileID: 0}
+  room: {fileID: 0}
   sight: {fileID: 5516617923602958939}
   animator: {fileID: 1425054967}
   rb: {fileID: 1425054965}
   spriteRenderer: {fileID: 2169374588448054964}
+  speed: 3
+  damage: 4
   manaCount: 5
-  hp: 12
+  <hp>k__BackingField: 10
   burstDelay: 0.2
   shootDelay: 2
   bulletForce: 20
   accuracy: 0.1
-  damage: 4
-  speed: 3
   arrow: {fileID: 4962012465246733656, guid: bd88c3b5b4155d94ba7e1caa2154872b, type: 3}
 --- !u!50 &1425054965
 Rigidbody2D:
@@ -199,6 +199,8 @@ MonoBehaviour:
   spriteTransform: {fileID: 1477844999273889080}
   sight: {fileID: 5516617923602958939}
   maxOffsetDistance: 0.3
+  rotateOffset: 0
+  positionOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &6465183898622074350
 GameObject:
   m_ObjectHideFlags: 0

@@ -178,7 +178,7 @@ MonoBehaviour:
   speed: 4
   damage: 2
   manaCount: 7
-  hp: 20
+  <hp>k__BackingField: 20
   hitDistance: 1.2
   hitDelay: 2
   hitSpeed: 0.35

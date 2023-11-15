@@ -1,32 +1,55 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Goblin : Boss
 {
     [SerializeField] private GameObject bombPrefab;
+    [SerializeField] private GameObject minionPrefab;
     [SerializeField] private float throwForce;
 
-    public override void Start() { base.Start(); StartCoroutine(Behavior()); }
+    private Vector2 spawnPoint;
+    private int startHealth;
+
+    public override void Start() 
+    {
+        base.Start();
+        StartCoroutine(Behavior());
+
+        spawnPoint = transform.position;
+        startHealth = hp;
+    }
 
     private IEnumerator Behavior()
     {
+        //Just a little delay befor start
+        yield return new WaitForSeconds(1f);
+
+        //Sequence of actions, boss pattern basically
         while (true)
         {
-            yield return new WaitForSeconds(1f);
-
             //3 Hits in close combat
             for (int i = 0; i < 3; i++)
             {
                 yield return StartCoroutine(RunToPlayer());
                 yield return StartCoroutine(Hit());
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(1f);
             }
 
-            //1 Hill
-            yield return StartCoroutine(Heal());
-            //1 Bomb
-            yield return StartCoroutine(ThrowBomb());
+            //Run in to the middle of the room
+            yield return StartCoroutine(RunToSpawnPoint());
+
+            //Throw 3 bombs at player
+            for (int i = 0; i < 3; i++)
+            {
+                ThrowBomb();
+                yield return new WaitForSeconds(0.4f);
+            }
+
+            //Hill if hp is less then 70 percent
+            if (hp <= startHealth * 0.7f) yield return StartCoroutine(Heal());
+
+            //Spawn slimes if half health left
+            if (hp <= startHealth * 0.5f) SpawnMinions();
         }
     }
 
@@ -35,7 +58,7 @@ public class Goblin : Boss
         if (!CanHitPlayer(2f)) yield break;
 
         animator.SetTrigger("Hit");
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / 2);
+        yield return new WaitForSeconds(0.1f);
         sight.player.GetComponent<IDamagable>().GetDamage(damage);
     }
 
@@ -53,8 +76,11 @@ public class Goblin : Boss
         return false;
     }
 
-    private IEnumerator ThrowBomb()
+    private void ThrowBomb()
     {
+        if (sight.player == null) return;
+        RotateFaceTo(sight.player.transform.position);
+
         Vector3 throwVector = (sight.player.transform.position - transform.position).normalized;
 
         Rigidbody2D bomb = Instantiate
@@ -65,10 +91,25 @@ public class Goblin : Boss
         ).GetComponent<Rigidbody2D>();
 
         bomb.AddForce(throwVector * throwForce * 100, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(1f);
     }
 
-    //Run to player, rage and then punch
+    private IEnumerator RunToSpawnPoint()
+    {
+        animator.SetBool("Run", true);
+        RotateFaceTo(spawnPoint);
+
+        float startTime = Time.time;
+        const float maxTime = 4f;
+
+        while (Vector2.Distance(spawnPoint, transform.position) > 1.5f && maxTime > Time.time - startTime)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, spawnPoint, speed * Time.unscaledDeltaTime);
+            yield return null;
+        }
+
+        animator.SetBool("Run", false);
+    }
+
     private IEnumerator RunToPlayer()
     {
         Vector3 player = sight.player.transform.position;
@@ -88,10 +129,10 @@ public class Goblin : Boss
         animator.SetBool("Run", false);
     }
 
-    //Rage befor punch, so we give player some time to dodge
-    private IEnumerator Rage()
+    private void SpawnMinions()
     {
-        yield return null;
+        Instantiate(minionPrefab, (Vector2)transform.position + Vector2.left * 2, Quaternion.identity);
+        Instantiate(minionPrefab, (Vector2)transform.position + Vector2.right * 2, Quaternion.identity);
     }
 
     private IEnumerator Heal()
@@ -99,6 +140,7 @@ public class Goblin : Boss
         animator.SetTrigger("Heal");
         GameObject particle = ParticleManager.Create("Heal", transform.position);
         particle.transform.parent = transform;
-        yield return 1f;
+        Heal(30);
+        yield return new WaitForSeconds(2f);
     }
 }

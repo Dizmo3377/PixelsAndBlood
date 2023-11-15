@@ -178,7 +178,7 @@ MonoBehaviour:
   speed: 6
   damage: 1
   manaCount: 3
-  hp: 12
+  <hp>k__BackingField: 15
   burstDelay: 0.2
   shootDelay: 1.5
   bulletForce: 10

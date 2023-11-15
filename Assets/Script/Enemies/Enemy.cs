@@ -14,7 +14,8 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     [HideInInspector] protected bool canMove = false;
 
     [SerializeField] private int manaCount;
-    [SerializeField] private int hp;
+    [field:SerializeField] public int hp {  get; private set; }
+
     public void GetDamage(int amount)
     {
         hp -= amount;
@@ -22,6 +23,8 @@ public abstract class Enemy : MonoBehaviour, IDamagable
         if (hp <= 0) Die();
         else animator.SetTrigger("GetDamage");
     }
+
+    public void Heal(int amount) => hp += amount;
 
     protected void RotateFaceTo(Vector3 point)
     {

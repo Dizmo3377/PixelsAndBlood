@@ -147,10 +147,10 @@ MonoBehaviour:
   animator: {fileID: 8172935618518976465}
   rb: {fileID: 8172935618518976478}
   spriteRenderer: {fileID: 8172935618518976472}
-  manaCount: 3
-  hp: 15
   speed: 7
   damage: 3
+  manaCount: 3
+  <hp>k__BackingField: 9
   runDealy: 1
   runTime: 2.5
   layersForBounce:
