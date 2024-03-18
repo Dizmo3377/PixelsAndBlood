@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour, IPushable
 {
@@ -33,9 +34,13 @@ public class PlayerController : MonoBehaviour, IPushable
 
     private void Awake()
     {
+        weaponSprite = transform.Find("Weapon").GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
         playerData = Player.instance;
         animator = GetComponent<Animator>();
-        weaponSprite = transform.Find("Weapon").GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()

@@ -750,10 +750,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelCreator
       objectReference: {fileID: 0}
-    - target: {fileID: 7642829138514221851, guid: 94607c863a731f645a4c84d921202352, type: 3}
-      propertyPath: bossRoom
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94607c863a731f645a4c84d921202352, type: 3}
 --- !u!1001 &7660464824112185520

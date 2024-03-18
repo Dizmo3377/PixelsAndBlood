@@ -112,6 +112,7 @@ public class Goblin : Boss
 
     private IEnumerator RunToPlayer()
     {
+        if (sight.player == null) yield break;
         Vector3 player = sight.player.transform.position;
 
         animator.SetBool("Run", true);

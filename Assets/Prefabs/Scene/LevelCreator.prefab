@@ -51,10 +51,13 @@ MonoBehaviour:
   - {fileID: 1241989789273151111, guid: 6cdef7d8672159a4eb10eaeb4f2b2297, type: 3}
   - {fileID: 1241989789273151111, guid: 5edeb0c170810b94cab591f9a2831989, type: 3}
   - {fileID: 1241989789273151111, guid: a4b9f4abb75ba1943ac1f9f2d93c44fd, type: 3}
+  enemyRoomsPrefabs:
+  - {fileID: 1241989789273151111, guid: fc71967d0c70be946a2328ec8414a57f, type: 3}
+  - {fileID: 1241989789273151111, guid: ca4df696dd06cf647b564f5fe2309762, type: 3}
   roomsPrefabs:
   - {fileID: 1241989789273151111, guid: 0050e7af2b2417f45bdc6351cb23f96d, type: 3}
   - {fileID: 1241989789273151111, guid: ca4df696dd06cf647b564f5fe2309762, type: 3}
   - {fileID: 1241989789273151111, guid: 6cdef7d8672159a4eb10eaeb4f2b2297, type: 3}
   - {fileID: 1241989789273151111, guid: 72dd6f024356b9b419dc37ec2c4dbfe2, type: 3}
   - {fileID: 1241989789273151111, guid: 2d5623427068427489bddd47ceaa2831, type: 3}
-  bossRoom: 0
+  bossRoom: 1

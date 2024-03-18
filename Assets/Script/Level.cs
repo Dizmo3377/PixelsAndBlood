@@ -11,6 +11,7 @@ public class Level : MonoBehaviour
     [SerializeField] [Range(2, 5)] private int enemyRoomsCount;
     [SerializeField] [Range(1, 5)] private int bonusRoomsCount;
     [SerializeField] private GameObject[] bonusRoomsPrefabs;
+    [SerializeField] private GameObject[] enemyRoomsPrefabs;
     [SerializeField] private GameObject[] roomsPrefabs;
     [SerializeField] private bool bossRoom; //Should not be SerializeField, but it is for debugging
     private Vector2Int[] dirMap = { Vector2Int.left, Vector2Int.up, Vector2Int.right, Vector2Int.down};
@@ -35,6 +36,8 @@ public class Level : MonoBehaviour
         Room newRoom;
         if (roomId == (int)RoomType.Bonus)
             newRoom = bonusRoomsPrefabs[Random.Range(0, bonusRoomsPrefabs.Length)].GetComponent<Room>();
+        else if (roomId == (int)RoomType.Enemy)
+            newRoom = enemyRoomsPrefabs[Random.Range(0, enemyRoomsPrefabs.Length)].GetComponent<Room>();
         else
             newRoom = roomsPrefabs[roomId].GetComponent<Room>();
         //Write New Room

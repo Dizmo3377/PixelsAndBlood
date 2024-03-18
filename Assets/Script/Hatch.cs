@@ -10,6 +10,8 @@ public class Hatch : InteractObject
         int lvl = LevelData.instance.lvl + 1;
         int stage = lvl >= 6 ? LevelData.instance.stage + 1 : LevelData.instance.stage;
 
+        if (stage == 2) SceneController.instance.StartSceneTransition($"Final");
+
         SceneController.instance.StartSceneTransition($"Dungeon_{stage}");
     }
 }
