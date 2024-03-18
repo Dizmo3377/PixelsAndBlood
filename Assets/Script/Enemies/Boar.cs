@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class Boar : Enemy
 {
     [SerializeField] private float runDealy;
+    [SerializeField] private float pushForce;
     [SerializeField] private float runTime;
     [SerializeField] private LayerMask layersForBounce;
 
@@ -34,7 +35,15 @@ public class Boar : Enemy
         RotateFaceTo((Vector2)transform.position + moveDir);
     }
 
-    private void Attack(Collider2D toAttack) => Player.instance.GetDamage(damage);
+    private void Attack(Collider2D toAttack)
+    {
+        Player player = toAttack.GetComponent<Player>();
+
+        player.GetDamage(damage);
+        player.GetComponent<IPushable>().pushVector 
+            = (player.transform.position - transform.position).normalized * pushForce;
+    }
+
     private void SetTriggerState(bool state)
     {
         canMove = state;

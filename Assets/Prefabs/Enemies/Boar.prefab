@@ -152,6 +152,7 @@ MonoBehaviour:
   manaCount: 3
   <hp>k__BackingField: 9
   runDealy: 1
+  pushForce: 3
   runTime: 2.5
   layersForBounce:
     serializedVersion: 2

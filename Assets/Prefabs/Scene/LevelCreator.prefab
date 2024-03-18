@@ -54,6 +54,8 @@ MonoBehaviour:
   enemyRoomsPrefabs:
   - {fileID: 1241989789273151111, guid: fc71967d0c70be946a2328ec8414a57f, type: 3}
   - {fileID: 1241989789273151111, guid: ca4df696dd06cf647b564f5fe2309762, type: 3}
+  - {fileID: 1241989789273151111, guid: 00b7d0c505da3fb478bd1da5741d0ecf, type: 3}
+  - {fileID: 1241989789273151111, guid: 225556811c51434428b7c92e33606371, type: 3}
   roomsPrefabs:
   - {fileID: 1241989789273151111, guid: 0050e7af2b2417f45bdc6351cb23f96d, type: 3}
   - {fileID: 1241989789273151111, guid: ca4df696dd06cf647b564f5fe2309762, type: 3}

@@ -31,7 +31,7 @@ public class ParticleManager : Singleton<ParticleManager>
         }
         catch (System.NullReferenceException)
         {
-            Debug.LogError("Error loading audio assets in ParticleManager. Folder is missing or something, idk");
+            Debug.LogError("Error loading assets in ParticleManager. Folder is missing or has a wrong name");
             throw;
         }
     }
