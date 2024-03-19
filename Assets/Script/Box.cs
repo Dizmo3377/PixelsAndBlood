@@ -1,3 +1,4 @@
+using Pathfinding;
 using UnityEngine;
 
 public class Box : MonoBehaviour, IDamagable
@@ -9,6 +10,7 @@ public class Box : MonoBehaviour, IDamagable
         hp -= amount;
 
         ParticleManager.Create("BoxDestroy", transform.position, 4);
+        AstarPath.active.UpdateGraphs(GetComponent<Collider2D>().bounds);
         if (hp <= 0) Destroy(gameObject);
     }
 }

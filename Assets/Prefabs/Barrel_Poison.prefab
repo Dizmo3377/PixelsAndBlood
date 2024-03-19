@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8711119589625804950}
   - component: {fileID: 8711119589625804945}
   - component: {fileID: 8711119589625804951}
+  - component: {fileID: 3377432490183799928}
   m_Layer: 0
   m_Name: Barrel_Poison
   m_TagString: Untagged
@@ -138,3 +139,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spillPrefab: {fileID: 588422827540256301, guid: b8285c9f8eaa0764ca42f9bcefeef4e0, type: 3}
   smokePrefab: {fileID: 4409511394704213796, guid: 1f7f4121f62b6fa43957fa4668de97c6, type: 3}
+--- !u!114 &3377432490183799928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711119589625804946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53675b79930e844aab914e72aa97e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
