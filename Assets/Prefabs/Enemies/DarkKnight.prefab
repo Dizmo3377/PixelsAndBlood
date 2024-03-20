@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc4d48d8e6bc8c47aedde0baa2c0a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 0}
   sight: {fileID: 6326506566117314631}
   animator: {fileID: 6326506566053678839}
   rb: {fileID: 6326506566053678834}
@@ -179,8 +178,12 @@ MonoBehaviour:
   damage: 2
   manaCount: 7
   <hp>k__BackingField: 20
-  hitDistance: 1.2
-  hitDelay: 2
+  room: {fileID: 0}
+  pathUpdateSpeed: 0.2
+  reachingDelta: 0.2
+  drawGizmos: 0
+  minimalHitDelta: 1.2
+  delayBetweenAttacks: 2
   hitSpeed: 0.35
   dashForce: 4
   slashSpawnPoint: {fileID: 3835494785666668352}

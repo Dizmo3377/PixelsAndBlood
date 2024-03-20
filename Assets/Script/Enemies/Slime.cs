@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Slime : Enemy
+public class Slime : Pathfinder
 {
     [SerializeField] private AnimationCurve jumpCurve;
     [SerializeField] private float jumpDelay;
@@ -11,17 +11,23 @@ public class Slime : Enemy
     private float moveStartTime = 0f;
     private float evaluation = 0f;
     private bool isAtacking = false;
-    private Vector2 jumpDirection => (sight.player.transform.position - transform.position).normalized;
+
+    private Vector2 JumpDirection => (pathPoints[CurrentPathIndex] - transform.position).normalized;
+
     private void Start() => StartCoroutine(Move(0.5f));
+
     private void OnCollisionEnter2D(Collision2D collision) => Attack(collision.collider);
     private void OnCollisionStay2D(Collision2D collision) => Attack(collision.collider);
 
+    //Need to refactor this later
     private void FixedUpdate()
     {
-        if (!canMove || sight.player == null) return;
+        if (!canMove || sight.player == null || !HasBuiltPathToPlayer()) return;
+
+        if (ReachedCurrentPathPoint()) CurrentPathIndex++;
 
         evaluation = jumpCurve.Evaluate(Time.time - moveStartTime);
-        rb.velocity = jumpDirection * evaluation * speed;
+        if(pathPoints != null) rb.velocity = JumpDirection * evaluation * speed;
         if (evaluation <= 0) SetTriggerState(false);
     }
 
@@ -43,9 +49,12 @@ public class Slime : Enemy
     private IEnumerator Move(float delay)
     {
         yield return new WaitForSeconds(delay);
+
         while (true)
         {
             if (!sight.seePlayer) { yield return null; continue; }
+            DeletePath();
+            yield return StartCoroutine(GeneratePath());
 
             SetTriggerState(true);
             moveStartTime = Time.time;

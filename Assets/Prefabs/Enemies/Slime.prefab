@@ -232,7 +232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18066e5f7955324d96c7c65c7ec8f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 0}
   sight: {fileID: 4107920873320264891}
   animator: {fileID: 4107920873392810499}
   rb: {fileID: 4107920873392810510}
@@ -241,6 +240,10 @@ MonoBehaviour:
   damage: 2
   manaCount: 3
   <hp>k__BackingField: 7
+  room: {fileID: 0}
+  pathUpdateSpeed: 0.7
+  reachingDelta: 0.3
+  drawGizmos: 0
   jumpCurve:
     serializedVersion: 2
     m_Curve:

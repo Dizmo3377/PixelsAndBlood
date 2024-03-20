@@ -2,19 +2,21 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour, IDamagable
 {
-    [SerializeField] public EnemyRoom room;
-
+    [Header("Components")]
     [SerializeField] protected Sight sight;
     [SerializeField] protected Animator animator;
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] protected SpriteRenderer spriteRenderer;
 
+    [Header("Stats")]
     [SerializeField] protected float speed;
     [SerializeField] protected int damage;
     [HideInInspector] protected bool canMove = false;
 
     [SerializeField] private int manaCount;
     [field:SerializeField] public int hp {  get; private set; }
+
+    [HideInInspector] public EnemyRoom room;
 
     public void GetDamage(int amount)
     {
