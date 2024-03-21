@@ -19,6 +19,7 @@ public class EnemyRoom : Room
         if (isCleared || !collision.CompareTag("Player")) return;
 
         OnEntered();
+        PathfindingManager.instance.SetSurface(transform.position);
         ActivateSpawners(0);
     }
 

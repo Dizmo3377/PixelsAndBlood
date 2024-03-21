@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Essence : Singleton<Essence>
+public class Essence : Singletone<Essence>
 {
     private static GameObject manaPrefab;
     public override void Awake() { base.Awake(); manaPrefab = Resources.Load<GameObject>("Essence/Mana"); }

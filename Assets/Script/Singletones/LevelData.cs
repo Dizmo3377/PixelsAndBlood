@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class LevelData : Singleton<LevelData>, ISaveableJson
+public class LevelData : Singletone<LevelData>, ISaveableJson
 {
     public int lvl;
     public int stage;

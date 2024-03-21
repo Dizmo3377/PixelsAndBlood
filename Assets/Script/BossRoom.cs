@@ -18,6 +18,7 @@ public class BossRoom : Room
         if (isCleared || !collision.CompareTag("Player")) return;
 
         Activate();
+        PathfindingManager.instance.SetSurface(transform.position);
         OnEntered();
     }
 

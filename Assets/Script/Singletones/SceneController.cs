@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 
-public class SceneController : Singleton<SceneController>
+public class SceneController : Singletone<SceneController>
 {
     [SerializeField] private float transitionTime;
     [SerializeField] private CanvasGroup blackScreen;

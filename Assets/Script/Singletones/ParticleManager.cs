@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleManager : Singleton<ParticleManager>
+public class ParticleManager : Singletone<ParticleManager>
 {
     public static GameObject[] particles;
     public override void Awake() { base.Awake(); GetData(); }
