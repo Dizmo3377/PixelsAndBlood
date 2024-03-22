@@ -23,5 +23,9 @@ public class Laser : Weapon
 
         float laserLength = Vector2.Distance(laserStart, endpoint) * 2.05f;
         bullet.localScale = new Vector3(bullet.localScale.x, laserLength, bullet.localScale.z);
+
+        PlayRandomSound();
     }
+
+    private void PlayRandomSound() => SoundManager.Play($"laser{Random.Range(1,4)}");
 }

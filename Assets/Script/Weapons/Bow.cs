@@ -13,6 +13,10 @@ public class Bow : Weapon
     {
         int stage = (int)(stretchTime / stageTime);
         stage = Mathf.Clamp(stage, 0, maxStage);
+
+        if (stage > 2) SoundManager.Play("bow_delay");
+        else SoundManager.Play("bow");
+
         if (stage == 0) return damage / 2;
         return damage * stage;
     }

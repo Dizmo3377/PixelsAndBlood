@@ -18,6 +18,7 @@ public class SCAR : Weapon
         if (curBullet == buletsAmount) yield break;
 
         base.Shoot(target);
+        SoundManager.Play("scar");
         yield return new WaitForSeconds(burstDelay);
         Player.instance.StartCoroutine(BurstShoot(curBullet + 1,buletsAmount,target));
     }
