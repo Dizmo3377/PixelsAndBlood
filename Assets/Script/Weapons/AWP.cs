@@ -7,8 +7,6 @@ public class AWP : Weapon
     public override void Shoot(Vector3 target)
     {
         base.Shoot(target);
-        PlayRandomSound();
+        SoundManager.PlayRandomRange("awp", 1, 2);
     }
-
-    private void PlayRandomSound() => SoundManager.Play($"awp{Random.Range(1, 3)}");
 }

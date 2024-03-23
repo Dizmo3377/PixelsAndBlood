@@ -7,8 +7,6 @@ public class SawedOff : Weapon
     {
         for (int i = 0; i < fraction; i++) base.Shoot(target);
 
-        PlayRandomSound();
+        SoundManager.PlayRandomRange("sawedoff", 1, 2);
     }
-
-    private void PlayRandomSound() => SoundManager.Play($"sawedoff{Random.Range(1, 3)}");
 }

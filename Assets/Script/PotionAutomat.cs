@@ -20,6 +20,7 @@ public class PotionAutomat : InteractObject
         Player.instance.coins -= itemCost;
         int randomPotion = Random.Range(0, potions.Length);
 
+        SoundManager.Play("soda_automat");
         Instantiate(potions[randomPotion], spawnPoint.position, Quaternion.identity);
     }
 

@@ -56,12 +56,14 @@ public class Player : MonoBehaviour, ISaveableJson, IDamagable
         if (shieldPoints > 0)
         {
             shieldPoints = Mathf.Clamp(shieldPoints -= amount, 0, maxShieldPoints);
+            SoundManager.Play("shield");
             if (shieldPoints == 0) CameraShaker.Shake(0.1f, 0.5f, 2);
         }
         else
         {
             healPoints -= amount;
             CameraShaker.Shake(0.1f, 0.5f, 2);
+            SoundManager.PlayRandomRange("hit", 1, 2);
             if (healPoints <= 0) Die();
         }
     }
@@ -82,6 +84,8 @@ public class Player : MonoBehaviour, ISaveableJson, IDamagable
         UI.instance.FadeOut(2f);
         PlayerController.animator.SetTrigger("Death");
         PlayerController.weaponSprite.sprite = null;
+        SoundManager.Play("death");
+        PlayerController.walkingSound.Stop();
         (healPoints, manaPoints, shieldPoints) = (0,0,0);
 
         StopAllCoroutines();

@@ -17,6 +17,7 @@ public class Mana : MonoBehaviour
         if (!collision.gameObject.CompareTag("Player")) return;
 
         int mana = Random.Range(1, 3);
+        SoundManager.PlayRandomRange("essense", 1, 3, false);
         Player.instance.ChangeMana(mana);
         Destroy(gameObject);
     }

@@ -60,6 +60,7 @@ public class Slime : Pathfinder
             moveStartTime = Time.time;
             RotateFaceTo(sight.player.transform.position);
             animator.SetTrigger("Jump");
+            SoundManager.PlayRandomRange("slime_jump", 1, 3);
             yield return new WaitForSeconds(jumpDelay);
         }
     }

@@ -19,6 +19,7 @@ public class Coin : MonoBehaviour
         {
             int coint = Random.Range(1, 4);
             Player.instance.AddCoins(coint);
+            SoundManager.PlayRandomRange("coin", 1 , 2);
             Destroy(gameObject);
         }
     }

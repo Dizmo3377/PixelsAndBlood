@@ -14,6 +14,8 @@ public class CoinsChest : MonoBehaviour
 
         opened = true;
         animator.SetTrigger("Open");
+        SoundManager.PlayRandomRange("chest", 1, 3);
+
         for (int i = 0; i < coinsAmount; i++)
         {
             Rigidbody2D coin = Instantiate(coinPrefab.GetComponent<Rigidbody2D>(), transform.position, Quaternion.identity);

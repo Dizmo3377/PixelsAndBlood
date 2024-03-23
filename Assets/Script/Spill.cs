@@ -9,6 +9,7 @@ public class Spill : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private float destroyDelay;
+    [SerializeField] private AudioSource audioSource;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class Spill : MonoBehaviour
         var main = particle.main;
         main.duration = destroyDelay;
         particle.Play();
+        audioSource.Play();
 
         StartCoroutine(ExtintCor());
     }
@@ -23,8 +25,8 @@ public class Spill : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (fire) { Player.instance.fired = 3; }
-            if (poison) { Player.instance.poisoned = 3; }
+            if (fire) Player.instance.fired = 3;
+            if (poison) Player.instance.poisoned = 3;
         }
     }
 
@@ -37,5 +39,6 @@ public class Spill : MonoBehaviour
     {
         yield return new WaitForSeconds(destroyDelay);
         animator.SetTrigger("Destroy");
+        audioSource.Stop();
     }
 }

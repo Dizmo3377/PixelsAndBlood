@@ -10,7 +10,11 @@ public class Box : MonoBehaviour, IDamagable
         hp -= amount;
 
         ParticleManager.Create("BoxDestroy", transform.position, 4);
-        AstarPath.active.UpdateGraphs(GetComponent<Collider2D>().bounds);
-        if (hp <= 0) Destroy(gameObject);
+
+        if (hp <= 0)
+        {
+            SoundManager.PlayRandomRange("box_destroyed", 1, 4);
+            Destroy(gameObject);
+        }
     }
 }

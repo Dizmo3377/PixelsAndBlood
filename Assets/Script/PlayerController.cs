@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour, IPushable
 
     public float pushTime { get; set; }
     private Vector2 pushVectorValue;
+    public static AudioSource walkingSound;
     public Vector2 pushVector 
     {
         get 
@@ -41,6 +42,9 @@ public class PlayerController : MonoBehaviour, IPushable
     {
         playerData = Player.instance;
         animator = GetComponent<Animator>();
+        walkingSound = GetComponent<AudioSource>();
+        walkingSound.Play();
+        walkingSound.Pause();
     }
 
     private void FixedUpdate()
@@ -98,7 +102,11 @@ public class PlayerController : MonoBehaviour, IPushable
     private void GetInputData()
     {
         moveVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (moveVector == Vector2.zero) walkingSound.Pause();
+        else walkingSound.UnPause();
+
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         aimTarget = playerData.attack.ClosestEnemy();
     }
 }

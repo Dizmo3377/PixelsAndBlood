@@ -23,6 +23,7 @@ public class WeaponChest : MonoBehaviour
         opened = true;
 
         animator.SetTrigger("Open");
+        SoundManager.PlayRandomRange("chest", 1, 3);
         Rigidbody2D weaponRb = Instantiate(GetRandomItem().GetComponent<Rigidbody2D>(),
             transform.position, Quaternion.identity);
         weaponRb.velocity = new Vector2(RandomVelocity(), RandomVelocity());

@@ -24,6 +24,21 @@ public class SoundManager : Singletone<SoundManager>
         else Destroy(audioSource.gameObject, audioSource.clip.length);
     }
 
+    public static void PlayRandomRange(string clipName, int minInclusive, int maxInclusive, bool dontRepeat = true)
+    {
+        if (PlayerPrefs.GetInt("Volume") == 0) return;
+
+        clipName += UnityEngine.Random.Range(minInclusive, maxInclusive + 1).ToString();
+
+        if(dontRepeat) Stop(clipName);
+        AudioSource audioSource = new GameObject(clipName).AddComponent<AudioSource>();
+        audioSource.transform.SetParent(instance.transform);
+        audioSource.clip = Array.Find(gameSounds, sound => sound.name == clipName);
+        audioSource.Play();
+
+        Destroy(audioSource.gameObject, audioSource.clip.length);
+    }
+
     public static void Stop(string clipName)
     {
         Transform toDestry = instance.transform.Find(clipName);

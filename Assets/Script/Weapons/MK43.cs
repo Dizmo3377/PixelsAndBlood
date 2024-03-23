@@ -7,8 +7,6 @@ public class MK43 : Weapon
     public override void Shoot(Vector3 target)
     {
         base.Shoot(target);
-        PlayRandomSound();
+        SoundManager.PlayRandomRange("mk43_", 1, 2);
     }
-
-    private void PlayRandomSound() => SoundManager.Play($"mk43_{Random.Range(1, 3)}");
 }

@@ -40,6 +40,7 @@ public class Bomb : MonoBehaviour
             }
 
             CameraShaker.Shake(0.1f, 0.5f, 2);
+            SoundManager.Play("bomb");
 
             yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
             Destroy(gameObject);
