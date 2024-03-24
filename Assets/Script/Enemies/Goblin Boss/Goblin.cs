@@ -8,6 +8,7 @@ public class Goblin : Boss
     [SerializeField] private float throwForce;
 
     private Vector2 spawnPoint;
+    private AudioSource walkingSound;
     private int startHealth;
 
     public override void Start() 
@@ -17,6 +18,15 @@ public class Goblin : Boss
 
         spawnPoint = transform.position;
         startHealth = hp;
+        walkingSound = GetComponent<AudioSource>();
+        walkingSound.Play();
+        walkingSound.Pause();
+    }
+
+    protected override void Die()
+    {
+        SoundManager.Play("goblin_death");
+        base.Die();
     }
 
     private IEnumerator Behavior()
@@ -58,6 +68,7 @@ public class Goblin : Boss
         if (!CanHitPlayer(2f)) yield break;
 
         animator.SetTrigger("Hit");
+        SoundManager.PlayRandomRange("bonk", 1, 3);
         yield return new WaitForSeconds(0.1f);
         sight.player.GetComponent<IDamagable>().GetDamage(damage);
     }
@@ -91,11 +102,13 @@ public class Goblin : Boss
         ).GetComponent<Rigidbody2D>();
 
         bomb.AddForce(throwVector * throwForce * 100, ForceMode2D.Impulse);
+        SoundManager.PlayRandomRange("woosh", 1, 3);
     }
 
     private IEnumerator RunToSpawnPoint()
     {
         animator.SetBool("Run", true);
+        walkingSound.UnPause();
         RotateFaceTo(spawnPoint);
 
         float startTime = Time.time;
@@ -108,6 +121,7 @@ public class Goblin : Boss
         }
 
         animator.SetBool("Run", false);
+        walkingSound.Pause();
     }
 
     private IEnumerator RunToPlayer()
@@ -116,6 +130,7 @@ public class Goblin : Boss
         Vector3 player = sight.player.transform.position;
 
         animator.SetBool("Run", true);
+        walkingSound.UnPause();
         RotateFaceTo(player);
 
         float startTime = Time.time;
@@ -128,10 +143,12 @@ public class Goblin : Boss
         }
 
         animator.SetBool("Run", false);
+        walkingSound.Pause();
     }
 
     private void SpawnMinions()
     {
+        SoundManager.Play("necromancer");
         Instantiate(minionPrefab, (Vector2)transform.position + Vector2.left * 2, Quaternion.identity);
         Instantiate(minionPrefab, (Vector2)transform.position + Vector2.right * 2, Quaternion.identity);
     }
@@ -139,6 +156,7 @@ public class Goblin : Boss
     private IEnumerator Heal()
     {
         animator.SetTrigger("Heal");
+        SoundManager.Play("goblin_heal");
         GameObject particle = ParticleManager.Create("Heal", transform.position);
         particle.transform.parent = transform;
         Heal(30);

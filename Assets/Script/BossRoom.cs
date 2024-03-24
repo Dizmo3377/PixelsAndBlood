@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossRoom : Room
 {
     private bool isCleared;
+    private bool activated = false;
 
     [SerializeField] private GameObject bossPrefab;
     [SerializeField] private Transform spawnPoint;
@@ -15,7 +16,7 @@ public class BossRoom : Room
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isCleared || !collision.CompareTag("Player")) return;
+        if (activated || isCleared || !collision.CompareTag("Player")) return;
 
         Activate();
         PathfindingManager.instance.SetSurface(transform.position);
@@ -25,6 +26,7 @@ public class BossRoom : Room
     private void Activate()
     {
         Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
+        activated = true;
         //smth
     }
 

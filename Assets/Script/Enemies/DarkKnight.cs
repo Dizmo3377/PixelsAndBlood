@@ -58,6 +58,7 @@ public class DarkKnight : Pathfinder
             {
                 Slash slash = Instantiate(slashPrefab, slashSpawnPoint).GetComponent<Slash>();
                 animator.SetTrigger("Hit");
+                SoundManager.Play("darkknight_attack");
                 slash.Play(sight.player.transform.position);
                 Player.instance.GetDamage(damage);
             }
@@ -95,6 +96,7 @@ public class DarkKnight : Pathfinder
         if (!CanHitPlayer()) return;
         rb.AddForce(-moveDir.normalized * dashForce * 100, ForceMode2D.Impulse);
         GameObject dust = ParticleManager.Create("Dust", transform.position - new Vector3(0, 0.5f, 0));
+        SoundManager.Play("darkknight_dash");
         dust.transform.parent = transform;
     }
 
@@ -113,7 +115,7 @@ public class DarkKnight : Pathfinder
             canMove = false;
             animator.SetBool("Run", false);
             yield return StartCoroutine(Hit(2));
-            BackDash(sight.player.transform.position);
+            if (sight.seePlayer) BackDash(sight.player.transform.position);
 
             yield return new WaitForSeconds(delayBetweenAttacks);
         }

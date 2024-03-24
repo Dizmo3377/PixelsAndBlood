@@ -68,6 +68,7 @@ public class Skeleton : Enemy
         Vector3 rotateVector = target - transform.position;
         float angle = Mathf.Atan2(rotateVector.y, rotateVector.x) * Mathf.Rad2Deg;
         bullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        SoundManager.Play("bow");
     }
 
     private IEnumerator ShootAndMoveOverTime(float delay)

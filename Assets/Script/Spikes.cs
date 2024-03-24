@@ -8,6 +8,8 @@ public class Spikes : MonoBehaviour
     [SerializeField] private Sprite[] stateImages;
     [SerializeField] private float delay;
 
+    private bool trapSoundPlayed = false;
+
     private IEnumerator Start()
     {
         while (true)
@@ -17,12 +19,21 @@ public class Spikes : MonoBehaviour
                 yield return new WaitForSeconds(delay);
                 collider.enabled = !collider.enabled;
                 render.sprite = stateImages[i];
+
+                if (!collider.enabled) trapSoundPlayed = false;
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) Player.instance.GetDamage(1);
+        if (!collision.CompareTag("Player")) return; 
+
+        Player.instance.GetDamage(1);
+        if (!trapSoundPlayed)
+        {
+            SoundManager.Play("spikes");
+            trapSoundPlayed = true;
+        }
     }
 }

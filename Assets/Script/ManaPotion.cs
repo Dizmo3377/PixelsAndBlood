@@ -12,6 +12,7 @@ public class ManaPotion : InteractObject
     {
         Player.instance.ChangeMana(manaAmount);
         GameObject particle = ParticleManager.Create("Mana", Player.instance.transform.position);
+        SoundManager.Play("potion");
         particle.transform.parent = Player.instance.transform;
         Destroy(gameObject);
     }

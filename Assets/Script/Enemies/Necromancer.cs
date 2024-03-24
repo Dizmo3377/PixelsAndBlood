@@ -71,6 +71,8 @@ public class Necromancer : Enemy
         float angleStep = 20f;
         float currentAngle = -angleStep;
 
+        SoundManager.Play("necromancer");
+
         for (int i = 0; i < 3; i++)
         {
             if (sight.player == null) continue;
