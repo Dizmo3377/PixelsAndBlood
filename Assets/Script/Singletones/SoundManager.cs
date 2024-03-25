@@ -4,14 +4,11 @@ using System;
 public class SoundManager : Singletone<SoundManager>
 {
     private static AudioClip[] gameSounds;
-    private void Start()
-    {
-        GetData();
-        SetVolume(true);
-    }
+    private void Start() => GetData();
 
     public static void Play(string clipName, bool loop = false, float delayTime = 0f)
     {
+        Debug.Log(PlayerPrefs.GetInt("Volume"));
         if (PlayerPrefs.GetInt("Volume") == 0) return;
 
         Stop(clipName);

@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 5478190711156134861}
   - component: {fileID: 5478190711156134863}
   - component: {fileID: 5356869792512567649}
+  - component: {fileID: 4831350859061088193}
   m_Layer: 7
   m_Name: Goblin
   m_TagString: Enemy
@@ -363,3 +364,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4831350859061088193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5478190711156134870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c559965e2e02f43a36c093b0df697c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

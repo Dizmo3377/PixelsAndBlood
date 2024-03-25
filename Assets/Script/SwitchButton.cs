@@ -44,6 +44,7 @@ public class SwitchButton : MonoBehaviour
         }
 
         button.spriteState = spriteState;
+        Debug.Log(key + currentState);
         PlayerPrefs.SetInt(key, currentState);
     }
 }

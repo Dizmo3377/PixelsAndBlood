@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1166987032447430557}
   - component: {fileID: 1166987032447430558}
   - component: {fileID: -6187334505490301996}
+  - component: {fileID: 7074131286646563354}
   m_Layer: 0
   m_Name: Fire Spill
   m_TagString: Untagged
@@ -261,6 +262,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7074131286646563354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166987032447430552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c559965e2e02f43a36c093b0df697c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2195787542951792753
 PrefabInstance:
   m_ObjectHideFlags: 0

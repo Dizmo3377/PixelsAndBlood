@@ -7,6 +7,7 @@ public class RikoshetBullet : MonoBehaviour
     [SerializeField] private int bounceAmount;
     [SerializeField] private LayerMask layersForBounce;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private float minMagnitude;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -20,6 +21,11 @@ public class RikoshetBullet : MonoBehaviour
             if (bounceAmount <= 0) Destroy(gameObject);
         }
         else Destroy(gameObject);
+    }
+
+    private void Update()
+    {
+        if(rb.velocity.magnitude < minMagnitude) Destroy(gameObject);
     }
 
     private void Bounce(Collision2D collision)

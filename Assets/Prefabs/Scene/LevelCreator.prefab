@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae04adcdf8d1b34f904cb945c66a5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRoom: 0900000009000000
   enemyRoomsCount: 3
   bonusRoomsCount: 2
+  bossRoom: 0
   bonusRoomsPrefabs:
   - {fileID: 1241989789273151111, guid: 6cdef7d8672159a4eb10eaeb4f2b2297, type: 3}
   - {fileID: 1241989789273151111, guid: 5edeb0c170810b94cab591f9a2831989, type: 3}
@@ -56,10 +56,6 @@ MonoBehaviour:
   - {fileID: 1241989789273151111, guid: ca4df696dd06cf647b564f5fe2309762, type: 3}
   - {fileID: 1241989789273151111, guid: 00b7d0c505da3fb478bd1da5741d0ecf, type: 3}
   - {fileID: 1241989789273151111, guid: 225556811c51434428b7c92e33606371, type: 3}
-  roomsPrefabs:
-  - {fileID: 1241989789273151111, guid: 0050e7af2b2417f45bdc6351cb23f96d, type: 3}
-  - {fileID: 1241989789273151111, guid: ca4df696dd06cf647b564f5fe2309762, type: 3}
-  - {fileID: 1241989789273151111, guid: 6cdef7d8672159a4eb10eaeb4f2b2297, type: 3}
-  - {fileID: 1241989789273151111, guid: 72dd6f024356b9b419dc37ec2c4dbfe2, type: 3}
-  - {fileID: 1241989789273151111, guid: 2d5623427068427489bddd47ceaa2831, type: 3}
-  bossRoom: 1
+  startRoomPrefab: {fileID: 1241989789273151111, guid: 0050e7af2b2417f45bdc6351cb23f96d, type: 3}
+  finishRoomPrefab: {fileID: 1241989789273151111, guid: 72dd6f024356b9b419dc37ec2c4dbfe2, type: 3}
+  bossRoomPrefab: {fileID: 1241989789273151111, guid: 2d5623427068427489bddd47ceaa2831, type: 3}

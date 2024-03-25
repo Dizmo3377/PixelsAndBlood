@@ -367,7 +367,7 @@ MonoBehaviour:
   nameColor: {r: 0.9583843, g: 1, b: 0, a: 1}
   name: SawedOff
   shootSpeed: 1
-  bulletForce: 50
+  bulletForce: 75
   range: 5
   damage: 4
   accuracy: 0.7

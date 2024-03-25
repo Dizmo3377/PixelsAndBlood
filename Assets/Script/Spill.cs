@@ -32,6 +32,7 @@ public class Spill : MonoBehaviour
 
     public void Extint()
     {
+        audioSource.Stop();
         Destroy(gameObject);
     }
 
@@ -39,6 +40,5 @@ public class Spill : MonoBehaviour
     {
         yield return new WaitForSeconds(destroyDelay);
         animator.SetTrigger("Destroy");
-        audioSource.Stop();
     }
 }

@@ -1256,6 +1256,7 @@ GameObject:
   - component: {fileID: 4942391553936132179}
   - component: {fileID: 2008243117}
   - component: {fileID: 2080865210131472751}
+  - component: {fileID: 3476335621132026205}
   m_Layer: 9
   m_Name: Knight
   m_TagString: Player
@@ -1397,7 +1398,6 @@ MonoBehaviour:
   speed: 10
   rb: {fileID: 4942391553936132176}
   sprite: {fileID: 4942391553936132189}
-  walkingSound: {fileID: 2080865210131472751}
 --- !u!95 &4942391553936132178
 Animator:
   serializedVersion: 4
@@ -1548,6 +1548,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3476335621132026205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4942391553936132188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c559965e2e02f43a36c093b0df697c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4942391554863184193
 GameObject:
   m_ObjectHideFlags: 0
