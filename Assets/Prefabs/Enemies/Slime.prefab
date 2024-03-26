@@ -49,7 +49,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.2}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 7
 --- !u!50 &4107920873320264836
 Rigidbody2D:
   serializedVersion: 4
@@ -239,7 +239,7 @@ MonoBehaviour:
   speed: 6
   damage: 2
   manaCount: 3
-  <hp>k__BackingField: 7
+  <hp>k__BackingField: 8
   room: {fileID: 0}
   pathUpdateSpeed: 0.7
   reachingDelta: 0.3

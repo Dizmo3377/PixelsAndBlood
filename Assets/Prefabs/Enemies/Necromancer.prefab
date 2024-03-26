@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f774636488a8b409ab1ceec7071508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 0}
   sight: {fileID: 4570229388241647754}
   animator: {fileID: 4570229388178007587}
   rb: {fileID: 4570229388178007615}
@@ -178,9 +177,10 @@ MonoBehaviour:
   speed: 6
   damage: 1
   manaCount: 3
-  <hp>k__BackingField: 15
+  <hp>k__BackingField: 20
+  room: {fileID: 0}
   burstDelay: 0.2
-  shootDelay: 1.5
+  shootDelay: 1
   bulletForce: 10
   accuracy: 0
   bullet: {fileID: 6295772629760507607, guid: 164d09106a65ee746aa3aa92f5e97080, type: 3}

@@ -142,7 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf70c741a4e63ec4a996c9ffb0563991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 0}
   sight: {fileID: 8172935618580519275}
   animator: {fileID: 8172935618518976465}
   rb: {fileID: 8172935618518976478}
@@ -150,7 +149,8 @@ MonoBehaviour:
   speed: 7
   damage: 3
   manaCount: 3
-  <hp>k__BackingField: 9
+  <hp>k__BackingField: 10
+  room: {fileID: 0}
   runDealy: 1
   pushForce: 3
   runTime: 2.5
@@ -222,7 +222,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.2}
   serializedVersion: 2
-  m_Radius: 6.5
+  m_Radius: 10
 --- !u!50 &8172935618580519252
 Rigidbody2D:
   serializedVersion: 4

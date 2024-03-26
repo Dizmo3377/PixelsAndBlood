@@ -188,10 +188,11 @@ MonoBehaviour:
   shootSpeed: 0.5
   bulletForce: 70
   range: 10
-  damage: 4
+  damage: 10
   accuracy: 0
   manaCost: 2
-  stageTime: 0.5
+  shake: 0
+  stageTime: 0.25
   deafultDamage: 4
   maxStage: 3
 --- !u!1 &6460092103735797787

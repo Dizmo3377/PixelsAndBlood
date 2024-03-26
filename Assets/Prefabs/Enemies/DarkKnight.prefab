@@ -174,7 +174,7 @@ MonoBehaviour:
   animator: {fileID: 6326506566053678839}
   rb: {fileID: 6326506566053678834}
   spriteRenderer: {fileID: 6326506566053678836}
-  speed: 4
+  speed: 6
   damage: 2
   manaCount: 7
   <hp>k__BackingField: 20
@@ -254,7 +254,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.2}
   serializedVersion: 2
-  m_Radius: 9
+  m_Radius: 10
 --- !u!50 &6326506566117314680
 Rigidbody2D:
   serializedVersion: 4

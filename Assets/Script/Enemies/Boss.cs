@@ -14,6 +14,7 @@ public abstract class Boss : Enemy
     protected override void Die()
     {
         bossRoom.OnCleared();
+        MusicManager.instance.StopMusic();
         base.Die();
     }
 }

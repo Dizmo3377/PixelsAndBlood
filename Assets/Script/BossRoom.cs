@@ -26,6 +26,7 @@ public class BossRoom : Room
     private void Activate()
     {
         Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
+        MusicManager.instance.PlayBossMusic();
         activated = true;
         //smth
     }

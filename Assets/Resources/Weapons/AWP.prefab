@@ -188,9 +188,9 @@ MonoBehaviour:
   shootSpeed: 0.8
   bulletForce: 90
   range: 15
-  damage: 12
+  damage: 15
   accuracy: 0
-  manaCost: 3
+  manaCost: 4
   shake: 0.25
 --- !u!1 &8304837158438961456
 GameObject:

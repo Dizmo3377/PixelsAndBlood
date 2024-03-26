@@ -85,6 +85,7 @@ public class Player : MonoBehaviour, ISaveableJson, IDamagable
         PlayerController.animator.SetTrigger("Death");
         PlayerController.weaponSprite.sprite = null;
         SoundManager.Play("death");
+        MusicManager.instance.StopMusic();
         PlayerController.walkingSound.Stop();
         (healPoints, manaPoints, shieldPoints) = (0,0,0);
 
