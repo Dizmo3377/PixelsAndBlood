@@ -245,6 +245,7 @@ MonoBehaviour:
   wave: 0
   enemiesCount: 000000000000000000000000
   spawners: []
+  chest: {fileID: 1723078872583991936, guid: 8e3fdc4199f61f943bf0b4fd7ad373d8, type: 3}
 --- !u!61 &2749908775148019671
 BoxCollider2D:
   m_ObjectHideFlags: 0

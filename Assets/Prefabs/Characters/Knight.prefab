@@ -1396,6 +1396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  meeleDamage: 2
+  meeleSpeed: 0.4
+  closeCombatDistance: 1.6
   rb: {fileID: 4942391553936132176}
   sprite: {fileID: 4942391553936132189}
 --- !u!95 &4942391553936132178

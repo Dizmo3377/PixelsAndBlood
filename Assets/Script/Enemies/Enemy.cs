@@ -17,9 +17,12 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     [field:SerializeField] public int hp {  get; private set; }
 
     [HideInInspector] public EnemyRoom room;
+    private bool isDead = false;
 
     public void GetDamage(int amount)
     {
+        if (isDead) return;
+
         hp -= amount;
 
         if (hp <= 0) Die();
@@ -36,6 +39,9 @@ public abstract class Enemy : MonoBehaviour, IDamagable
 
     protected virtual void Die()
     {
+        if (isDead) return;
+
+        isDead = true;
         Essence.SplashMana(transform, manaCount, 5);
         if (room != null) room.OnEnemyKilled();
         Destroy(gameObject);

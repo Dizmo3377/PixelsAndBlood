@@ -16,10 +16,10 @@ public class AttackRange : MonoBehaviour
         if (collision.CompareTag("Enemy")) enemies.Remove(collision.transform);
     }
 
-    public Vector3 ClosestEnemy()
+    public Enemy ClosestEnemy()
     {
         Vector3 currentPos = transform.position;
-        Vector3 closestEnemy = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Transform closestEnemy = null;
         float minDist = Mathf.Infinity;
 
         Transform[] enemiesArray = enemies.ToArray();
@@ -29,11 +29,11 @@ public class AttackRange : MonoBehaviour
             float dist = Vector3.Distance(enemy.position, currentPos);
             if (dist < minDist)
             {
-                closestEnemy = enemy.position;
+                closestEnemy = enemy;
                 minDist = dist;
             }
         }
 
-        return closestEnemy;
+        return enemiesArray.Length < 1 ? null : closestEnemy.gameObject.GetComponent<Enemy>();
     }
 }

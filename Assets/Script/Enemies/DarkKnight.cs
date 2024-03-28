@@ -56,10 +56,9 @@ public class DarkKnight : Pathfinder
         {
             if (CanHitPlayer())
             {
-                Slash slash = Instantiate(slashPrefab, slashSpawnPoint).GetComponent<Slash>();
+                Effects.instance.Slash(slashSpawnPoint);
                 animator.SetTrigger("Hit");
                 SoundManager.Play("darkknight_attack");
-                slash.Play(sight.player.transform.position);
                 Player.instance.GetDamage(damage);
             }
             currentHit++;
