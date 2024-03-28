@@ -10,7 +10,7 @@ public class ShopStand : InteractObject
 
     private SaleItem[] allSaleItems;
     private SaleItem objectOnSale;
-    private int itemCost => objectOnSale.price * LevelData.instance.stage;
+    private int itemCost => objectOnSale.price * LevelData.instance.lvl;
     private bool wasUsed = false;
 
     private void Awake() => SetRandomOnSale();
@@ -56,6 +56,6 @@ public class ShopStand : InteractObject
 
         objectOnSale = GetRandomItem();
         itemSprite.sprite = objectOnSale.item.GetComponent<SpriteRenderer>().sprite;
-        priceText.text = objectOnSale.price.ToString();
+        priceText.text = itemCost.ToString();
     }
 }

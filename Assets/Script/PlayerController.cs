@@ -99,6 +99,13 @@ public class PlayerController : MonoBehaviour, IPushable
         sprite.flipX = (target.x >= 0) ? false : true;
     }
 
+    public void Disable()
+    {
+        rb.velocity = Vector2.zero;
+        animator.SetBool("isMoving", false);
+        enabled = false;
+    }
+
     private void GetInputData()
     {
         moveVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;

@@ -12,6 +12,7 @@ public class Hatch : InteractObject
 
         if (stage == 2) SceneController.instance.StartSceneTransition($"Final");
 
+        FindObjectOfType<PlayerController>().Disable();
         SceneController.instance.StartSceneTransition($"Dungeon_{stage}");
     }
 }

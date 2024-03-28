@@ -11,7 +11,7 @@ public abstract class InteractObject : MonoBehaviour
     [SerializeField] private KeyCode key;
     [SerializeField] protected GameObject button;
 
-    private void Start() 
+    protected virtual void Start() 
     {
         trigger = GetComponent<CircleCollider2D>();
         trigger.radius = triggerRange;

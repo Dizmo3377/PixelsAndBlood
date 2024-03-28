@@ -8,7 +8,6 @@ public class SoundManager : Singletone<SoundManager>
 
     public static void Play(string clipName, bool loop = false, float delayTime = 0f)
     {
-        Debug.Log(PlayerPrefs.GetInt("Volume"));
         if (PlayerPrefs.GetInt("Volume") == 0) return;
 
         Stop(clipName);

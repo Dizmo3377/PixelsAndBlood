@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e148293117e2e954fb71670f40c2e54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 8300000, guid: 9dcd3641ee640614dac813d816fcb579, type: 3}
-  gameplay1: {fileID: 8300000, guid: 6f2e00687da4a43498af2df443658f31, type: 3}
-  gameplay2: {fileID: 8300000, guid: 11a4135d871971d42857c5389d64f376, type: 3}
-  final: {fileID: 8300000, guid: 03e5377fa2f36d24c87d8bb47b5bcdc0, type: 3}
-  boss: {fileID: 8300000, guid: dfe83d342550f9b41b59a23fccf4b67a, type: 3}
+  mainMenuMusic: {fileID: 8300000, guid: 9dcd3641ee640614dac813d816fcb579, type: 3}
+  gameplayMusic1: {fileID: 8300000, guid: 6f2e00687da4a43498af2df443658f31, type: 3}
+  gameplayMusic2: {fileID: 8300000, guid: 11a4135d871971d42857c5389d64f376, type: 3}
+  finalMusic: {fileID: 8300000, guid: 03e5377fa2f36d24c87d8bb47b5bcdc0, type: 3}
+  bossMusic: {fileID: 8300000, guid: dfe83d342550f9b41b59a23fccf4b67a, type: 3}
   audioSource: {fileID: 928482037688415334}
 --- !u!82 &928482037688415334
 AudioSource:
@@ -65,7 +65,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

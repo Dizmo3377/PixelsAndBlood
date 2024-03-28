@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MusicManager : Singletone<MusicManager>
 {
-    [SerializeField] private AudioClip mainMenu;
-    [SerializeField] private AudioClip gameplay1;
-    [SerializeField] private AudioClip gameplay2;
-    [SerializeField] private AudioClip final;
-    [SerializeField] private AudioClip boss;
+    [SerializeField] private AudioClip mainMenuMusic;
+    [SerializeField] private AudioClip gameplayMusic1;
+    [SerializeField] private AudioClip gameplayMusic2;
+    [SerializeField] private AudioClip finalMusic;
+    [SerializeField] private AudioClip bossMusic;
 
     [SerializeField] private AudioSource audioSource;
     private float startVolume;
-    private int gameplayMusic = 1;
+    private int currentGameplayMusic = 1;
 
     private void Start()
     {
@@ -30,22 +28,22 @@ public class MusicManager : Singletone<MusicManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         string sceneName = scene.name;
-        gameplayMusic++;
+        currentGameplayMusic++;
 
         switch (sceneName)
         {
             case "MainMenu": 
-                audioSource.clip = mainMenu; 
+                audioSource.clip = mainMenuMusic; 
                 break;
             case "Final":
-                audioSource.clip = final;
+                audioSource.clip = finalMusic;
                 break;
             case "NewGame":
-                gameplayMusic = 1;
-                audioSource.clip = gameplay1;
+                currentGameplayMusic = 1;
+                audioSource.clip = gameplayMusic1;
                 break;
             case "Dungeon_1":
-                audioSource.clip = gameplayMusic % 2 == 0 ? gameplay2 : gameplay1;
+                audioSource.clip = currentGameplayMusic % 2 == 0 ? gameplayMusic2 : gameplayMusic1;
                 break;
         }
 
@@ -55,12 +53,9 @@ public class MusicManager : Singletone<MusicManager>
     public void PlayBossMusic()
     {
         audioSource.Stop();
-        audioSource.clip = boss;
+        audioSource.clip = bossMusic;
         audioSource.Play();
     }
 
-    public void StopMusic()
-    {
-        audioSource.Stop();
-    }
+    public void StopMusic() => audioSource.Stop();
 }

@@ -37,6 +37,7 @@ public class Player : MonoBehaviour, ISaveableJson, IDamagable
     {
         instance = GetComponent<Player>();
         attack = GetComponentInChildren<AttackRange>();
+        GetComponent<PlayerController>().enabled = true;
 
         (healPoints, manaPoints, shieldPoints) = (maxHealPoints, maxManaPoints, maxShieldPoints);
 
