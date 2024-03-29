@@ -23,6 +23,8 @@ public class UI : MonoBehaviour
     [SerializeField] public PauseMenu pauseMenu;
     [SerializeField] public BossMenu bossMenu;
 
+    [SerializeField] public Sprite[] roomIcons;
+
     private Player playerData;
     [HideInInspector] public static UI instance;
 

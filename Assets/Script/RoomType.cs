@@ -1,4 +1,4 @@
-﻿internal enum RoomType
+﻿public enum RoomType
 {
     Start,
     Enemy,

@@ -53,6 +53,7 @@ public class Level : MonoBehaviour
         //Write New Room
         grid[x, y] = Instantiate(newRoom, new Vector3(x * scale, y * scale, 0), Quaternion.identity).GetComponent<Room>();
         grid[x, y].SetCoordinates(x,y);
+        Minimap.CreateCell(x,y, roomType);
         currentRoomCoordinates[0] = x; 
         currentRoomCoordinates[1] = y;
         //Create new Branch
