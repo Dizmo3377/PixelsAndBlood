@@ -5,24 +5,22 @@ using UnityEngine.UI;
 
 public class Cell : MonoBehaviour
 {
-    private Image image;
+    [SerializeField] private Image image;
+    [SerializeField] private GameObject[] branches;
 
     public int x, y;
 
-    private void Awake()
-    {
-        image = GetComponent<Image>();
-    }
-
-    public void Create(RoomType type)
+    public void SetIcon(RoomType type)
     {
         image.sprite = UI.instance.roomIcons[(int)type];
     }
 
-    public void SetState(bool state)
+    public void ChangeAlpha(float alpha)
     {
         var color = image.color;
-        color.a = state ? 0.58f : 0;
+        color.a = alpha;
         image.color = color;
     }
+
+    public void SetBranch(int id, bool state) => branches[id].SetActive(state);
 }

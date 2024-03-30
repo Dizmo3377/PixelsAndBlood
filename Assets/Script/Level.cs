@@ -8,8 +8,9 @@ public class Level : MonoBehaviour
 
     private Room[,] grid = new Room[27,27];
     private List<Room> enemyRooms = new List<Room>();
-    private Vector2Int[] scalars = { Vector2Int.left, Vector2Int.up, Vector2Int.right, Vector2Int.down};
+    private static Vector2Int[] scalars = { Vector2Int.left, Vector2Int.up, Vector2Int.right, Vector2Int.down};
     private int[] currentRoomCoordinates = new int[2];
+    private bool highlightOnMinimap = true;
 
     [Header("Settings")]
     [SerializeField] [Range(2, 5)] private int enemyRoomsCount;
@@ -31,7 +32,7 @@ public class Level : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X)) Regenerate();
     }
 
-    private Vector2Int IntToScalar(int num) => scalars[num];
+    public static Vector2Int IntToScalar(int num) => scalars[num];
     private int BranchIdToRotation(int num) => (num + 2) % scalars.Length;
     private GameObject GetRandomRoom(GameObject[] rooms) => rooms[Random.Range(0, rooms.Length)];
     private bool HasFreeBranch(int x, int y) 
@@ -53,11 +54,21 @@ public class Level : MonoBehaviour
         //Write New Room
         grid[x, y] = Instantiate(newRoom, new Vector3(x * scale, y * scale, 0), Quaternion.identity).GetComponent<Room>();
         grid[x, y].SetCoordinates(x,y);
-        Minimap.CreateCell(x,y, roomType);
+
+        Minimap.InitializeCell(x,y, roomType, highlightOnMinimap);
+
         currentRoomCoordinates[0] = x; 
         currentRoomCoordinates[1] = y;
         //Create new Branch
-        if (roomType != RoomType.Start) grid[x, y].CreateBranch(rotation);
+        if (roomType != RoomType.Start)
+        {
+            grid[x, y].CreateDoor(rotation);
+            var scalar = IntToScalar(rotation);
+            int branchId = (rotation + 2) % scalars.Length;
+            grid[x + scalar.x, y + scalar.y].CreateBranch(branchId);
+
+            if (highlightOnMinimap) Minimap.GetCell(x + scalar.x, y + scalar.y).SetBranch(branchId, true);
+        }
         if (roomType == RoomType.Enemy) enemyRooms.Add(grid[x, y]);
         //Logging
         grid[x, y].gameObject.name = $"{x} || {y}";
@@ -65,11 +76,12 @@ public class Level : MonoBehaviour
 
     private void Generate()
     {
-        //Create Start Room
+        //Create Start Room and first enemy room
         int[] nextRoom = new int[3];
         CreateRoom(grid.GetLength(0) / 3, grid.GetLength(1) / 3, 0, RoomType.Start);
         int[] newBranch = FindFreeBranch(9,9);
         CreateRoom(newBranch[0],newBranch[1], newBranch[2],  RoomType.Enemy);
+        highlightOnMinimap = false;
         //Create Other Rooms
         //Enemy Rooms
         for (int i = 0; i < enemyRoomsCount - 1; i++)

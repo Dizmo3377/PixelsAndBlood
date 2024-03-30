@@ -10,32 +10,55 @@ public class Minimap : MonoBehaviour
     [SerializeField] private TMP_Text levelInfo;
     [SerializeField] private Cell[] cellsList;
 
+    //Dont make public!
     private static Cell[,] cells = new Cell[7,7];
-
-    //[HideInInspector] public static Minimap instance;
 
     private void Awake()
     {
+        if (LevelData.instance.stage > 1) gameObject.SetActive(false);
         PopulateCellsArray();
     }
 
-    private void Start()
+    private void Start() => levelInfo.text = $"{LevelData.instance.stage}-{LevelData.instance.lvl}";
+
+    public static void InitializeCell(int x, int y, RoomType type, bool changeAlpha = true)
     {
-        levelInfo.text = $"{LevelData.instance.stage}-{LevelData.instance.lvl}";
+        var cell = GetCell(x,y);
+
+        if(changeAlpha) cell.ChangeAlpha(HighlightTypeToFloat(HighlightType.WasNotHere));
+        cell.SetIcon(type);
     }
 
-    public static void CreateCell(int x, int y, RoomType type)
+    public static Cell GetCell(int x, int y)
     {
         var cell = cells.Cast<Cell>().Where(c => c.x == x && c.y == y).FirstOrDefault();
 
         if (cell == null)
         {
-            Debug.LogWarning("TY EBLAN");
-            return;
+            Debug.LogError("Cell not found or out of boundaries");
+            return null;
         }
 
-        cell.SetState(true);
-        cell.Create(type);
+        return cell;
+    }
+
+    public static void HighlightCell(int x, int y, HighlightType type)
+    {
+        var cell = GetCell(x, y);
+        float alpha = HighlightTypeToFloat(type);
+        cell.ChangeAlpha(alpha);
+    }
+
+    public static float HighlightTypeToFloat(HighlightType type)
+    {
+        switch (type)
+        {
+            case HighlightType.Hidden: return 0f;
+            case HighlightType.WasNotHere: return 0.2f;
+            case HighlightType.WasHere: return 0.6f;
+            case HighlightType.IsHere: return 1f;
+            default: return 0f;
+        }
     }
 
     private void PopulateCellsArray()
@@ -47,7 +70,7 @@ public class Minimap : MonoBehaviour
                 cells[x, y] = cellsList[y * cells.GetLength(1) + x];
                 cells[x, y].x = x + 6;
                 cells[x, y].y = cells.GetLength(0) - y + 5;
-                cells[x, y].SetState(false);
+                cells[x, y].ChangeAlpha(HighlightTypeToFloat(HighlightType.Hidden));
             }
         }
     }

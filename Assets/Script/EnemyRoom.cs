@@ -32,12 +32,29 @@ public class EnemyRoom : Room
         if (KilledAllEnemies())
         {
             OnEntered();
-            isCleared = true;
-            SpawnChest();
+            OnCleared();
             return;
         }
 
         if (enemiesCount[wave] < 1) ActivateSpawners(++wave);
+    }
+
+    private void OnCleared()
+    {
+        isCleared = true;
+        //Highlight new rooms on minimap
+        for (int i = 0; i < branches.Length; i++)
+        {
+            if (branches[i].activeSelf)
+            {
+                var currentCell = Minimap.GetCell(x, y);
+                currentCell.SetBranch(i, true);
+                Vector2Int connectedRoom = new Vector2Int(x, y) + Level.IntToScalar(i);
+                Minimap.HighlightCell(connectedRoom.x, connectedRoom.y, HighlightType.WasNotHere);
+
+            }
+        }
+        SpawnChest();
     }
 
     private void SpawnChest()
