@@ -261,8 +261,8 @@ MonoBehaviour:
   speed: 10
   damage: 5
   manaCount: 50
-  <hp>k__BackingField: 200
   room: {fileID: 0}
+  <hp>k__BackingField: 200
   showedName: Goblin
   bossRoom: {fileID: 0}
   bombPrefab: {fileID: 8072290158052972934, guid: 059c0059aa440274ea8f026e18c678e4, type: 3}

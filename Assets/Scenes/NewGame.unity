@@ -345,7 +345,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &841567386
 PrefabInstance:
@@ -360,7 +360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1723078872583991938, guid: 8e3fdc4199f61f943bf0b4fd7ad373d8, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 1723078872583991938, guid: 8e3fdc4199f61f943bf0b4fd7ad373d8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -640,7 +640,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1460932728
 PrefabInstance:
@@ -2437,7 +2437,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5502534842369532427, guid: 14ecbfd9e25d4964d8e6c84cb98be16e, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5502534842369532427, guid: 14ecbfd9e25d4964d8e6c84cb98be16e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2539,6 +2539,10 @@ PrefabInstance:
     - target: {fileID: 7642829138514221850, guid: 94607c863a731f645a4c84d921202352, type: 3}
       propertyPath: m_Name
       value: LevelCreator
+      objectReference: {fileID: 0}
+    - target: {fileID: 7642829138514221851, guid: 94607c863a731f645a4c84d921202352, type: 3}
+      propertyPath: bossRoom
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94607c863a731f645a4c84d921202352, type: 3}

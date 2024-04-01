@@ -29,6 +29,12 @@ public class Goblin : Boss
         base.Die();
     }
 
+    protected override void OnDeath()
+    {
+        base.OnDeath();
+        walkingSound.Stop();
+    }
+
     private IEnumerator Behavior()
     {
         //Just a little delay befor start

@@ -14,10 +14,11 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     [HideInInspector] protected bool canMove = false;
 
     [SerializeField] private int manaCount;
-    [field:SerializeField] public int hp {  get; private set; }
+    private bool isDead = false;
 
     [HideInInspector] public EnemyRoom room;
-    private bool isDead = false;
+
+    [field:SerializeField] public int hp {  get; private set; }
 
     public void GetDamage(int amount)
     {
@@ -37,6 +38,17 @@ public abstract class Enemy : MonoBehaviour, IDamagable
         spriteRenderer.flipX = lookDir >= 0 ? false : true;
     }
 
+    protected virtual void OnDeath()
+    {
+        StopAllCoroutines();
+        canMove = false;
+        sight.gameObject.SetActive(false);
+        rb.isKinematic = true;
+        rb.velocity = Vector2.zero;
+        GetComponent<Collider2D>().enabled = false;
+        animator.SetTrigger("Death");
+    }
+
     protected virtual void Die()
     {
         if (isDead) return;
@@ -44,6 +56,6 @@ public abstract class Enemy : MonoBehaviour, IDamagable
         isDead = true;
         Essence.SplashMana(transform, manaCount, 5);
         if (room != null) room.OnEnemyKilled();
-        Destroy(gameObject);
+        OnDeath();
     }
 }

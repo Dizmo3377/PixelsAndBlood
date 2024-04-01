@@ -32,6 +32,7 @@ public class ShopStand : InteractObject
         button.SetActive(false);
         Player.instance.coins -= itemCost;
         itemSprite.sprite = null;
+        SoundManager.Play("shop");
 
         Instantiate(objectOnSale.item, spawnPoint.position, Quaternion.identity);
     }
