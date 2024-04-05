@@ -1,16 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Level : MonoBehaviour
 {
     private const int scale = 29;
 
+    //Align with minimap in future
     private Room[,] grid = new Room[27,27];
     private List<Room> enemyRooms = new List<Room>();
     private static Vector2Int[] scalars = { Vector2Int.left, Vector2Int.up, Vector2Int.right, Vector2Int.down};
     private int[] currentRoomCoordinates = new int[2];
-    private bool highlightOnMinimap = true;
+    private bool highlightRoomsOnMinimap = true;
+    private bool dontSpawnOnEdge = false;
 
     [Header("Settings")]
     [SerializeField] [Range(2, 5)] private int enemyRoomsCount;
@@ -27,16 +30,23 @@ public class Level : MonoBehaviour
         if (LevelData.instance.lvl == 5) bossRoom = true;
         Generate();
     }
-    private void Update()
+
+    private void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.X)) Regenerate();
     }
 
     public static Vector2Int IntToScalar(int num) => scalars[num];
-    private int BranchIdToRotation(int num) => (num + 2) % scalars.Length;
     private GameObject GetRandomRoom(GameObject[] rooms) => rooms[Random.Range(0, rooms.Length)];
-    private bool HasFreeBranch(int x, int y) 
-        => scalars.Any(scalar => grid[x + scalar[0], y + scalar[1]] == null);
+    private int BranchIdToRotation(int num) => (num + 2) % scalars.Length;
+    private bool IsOnMinimapEdge(int x, int y) => Mathf.Abs(9 - x) > 2 || Mathf.Abs(9 - y) > 2;
+    private bool SafeOfEdgeSpawn(int x, int y) => !dontSpawnOnEdge || !IsOnMinimapEdge(x, y);
+    private bool HasFreeBranch(int x, int y)
+    {
+        return scalars.Any(scalar => grid[x + scalar[0], y + scalar[1]] == null 
+        && SafeOfEdgeSpawn(x + scalar[0], y + scalar[1]));
+    }
+
 
     private void CreateRoom(int x, int y, int rotation, RoomType roomType)
     {
@@ -55,7 +65,7 @@ public class Level : MonoBehaviour
         grid[x, y] = Instantiate(newRoom, new Vector3(x * scale, y * scale, 0), Quaternion.identity).GetComponent<Room>();
         grid[x, y].SetCoordinates(x,y);
 
-        Minimap.InitializeCell(x,y, roomType, highlightOnMinimap);
+        Minimap.InitializeCell(x,y, roomType, highlightRoomsOnMinimap);
 
         currentRoomCoordinates[0] = x; 
         currentRoomCoordinates[1] = y;
@@ -67,7 +77,7 @@ public class Level : MonoBehaviour
             int branchId = (rotation + 2) % scalars.Length;
             grid[x + scalar.x, y + scalar.y].CreateBranch(branchId);
 
-            if (highlightOnMinimap) Minimap.GetCell(x + scalar.x, y + scalar.y).SetBranch(branchId, true);
+            if (highlightRoomsOnMinimap) Minimap.GetCell(x + scalar.x, y + scalar.y).SetBranch(branchId, true);
         }
         if (roomType == RoomType.Enemy) enemyRooms.Add(grid[x, y]);
         //Logging
@@ -81,20 +91,26 @@ public class Level : MonoBehaviour
         CreateRoom(grid.GetLength(0) / 3, grid.GetLength(1) / 3, 0, RoomType.Start);
         int[] newBranch = FindFreeBranch(9,9);
         CreateRoom(newBranch[0],newBranch[1], newBranch[2],  RoomType.Enemy);
-        highlightOnMinimap = false;
+        highlightRoomsOnMinimap = true;
+
         //Create Other Rooms
+
         //Enemy Rooms
+        dontSpawnOnEdge = true;
         for (int i = 0; i < enemyRoomsCount - 1; i++)
         {
             nextRoom = FindRoomSpace();
             CreateRoom(nextRoom[0], nextRoom[1], nextRoom[2], RoomType.Enemy);
         }
+        dontSpawnOnEdge = false;
+
         //Bonus Rooms
         for (int i = 0; i < bonusRoomsCount; i++)
         {
             nextRoom = FindRoomSpace();
             CreateRoom(nextRoom[0],nextRoom[1], nextRoom[2], RoomType.Bonus);
         }
+
         //Finish OR Boss Room
         nextRoom = FindRoomSpace();
         RoomType lastRoomType = bossRoom ? RoomType.Boss : RoomType.Finish;
@@ -138,7 +154,7 @@ public class Level : MonoBehaviour
             randomBranch = Random.Range(0, 4);
             newRoom = new Vector2Int(x, y) + IntToScalar(randomBranch);
         }
-        while(grid[newRoom.x, newRoom.y] != null);
+        while(grid[newRoom.x, newRoom.y] != null || !SafeOfEdgeSpawn(newRoom.x, newRoom.y));
 
         //Connect new room to previos room
         (newCoordinates[0], newCoordinates[1]) = (newRoom[0], newRoom[1]);

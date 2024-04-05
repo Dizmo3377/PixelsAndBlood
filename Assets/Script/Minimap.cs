@@ -21,6 +21,21 @@ public class Minimap : MonoBehaviour
 
     private void Start() => levelInfo.text = $"{LevelData.instance.stage}-{LevelData.instance.lvl}";
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            foreach (var cell in cells)
+            {
+                Minimap.HighlightCell(cell.x, cell.y, HighlightType.Hidden);
+                for (int i = 0; i < 4; i++)
+                {
+                    cell.SetBranch(1, false);
+                }
+            }
+        }
+    }
+
     public static void InitializeCell(int x, int y, RoomType type, bool changeAlpha = true)
     {
         var cell = GetCell(x,y);
