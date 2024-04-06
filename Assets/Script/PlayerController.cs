@@ -126,6 +126,7 @@ public class PlayerController : MonoBehaviour, IPushable
 
     public void Disable()
     {
+        walkingSound.Stop();
         rb.velocity = Vector2.zero;
         animator.SetBool("isMoving", false);
         enabled = false;

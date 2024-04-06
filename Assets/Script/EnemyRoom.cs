@@ -16,11 +16,14 @@ public class EnemyRoom : Room
 
     [SerializeField] private GameObject chest;
 
+    private void Start() => canDestroyObjects = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isCleared || !collision.CompareTag("Player")) return;
 
         OnEntered();
+        canDestroyObjects = true;
         PathfindingManager.instance.SetSurface(transform.position);
         ActivateSpawners(0);
     }

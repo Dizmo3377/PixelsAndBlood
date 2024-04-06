@@ -7,6 +7,7 @@ public class Room : MonoBehaviour
     [SerializeField] private GameObject doorPrefab;
     [SerializeField] private GameObject[] doors;
     [SerializeField] protected GameObject[] branches;
+    [HideInInspector] public bool canDestroyObjects = true;
 
     public void SetCoordinates(int x, int y) => (this.x, this.y) = (x , y);
 

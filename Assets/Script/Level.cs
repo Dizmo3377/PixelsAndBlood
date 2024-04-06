@@ -91,7 +91,7 @@ public class Level : MonoBehaviour
         CreateRoom(grid.GetLength(0) / 3, grid.GetLength(1) / 3, 0, RoomType.Start);
         int[] newBranch = FindFreeBranch(9,9);
         CreateRoom(newBranch[0],newBranch[1], newBranch[2],  RoomType.Enemy);
-        highlightRoomsOnMinimap = true;
+        highlightRoomsOnMinimap = false;
 
         //Create Other Rooms
 
