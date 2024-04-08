@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae04adcdf8d1b34f904cb945c66a5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyRoomsCount: 3
-  bonusRoomsCount: 2
   bossRoom: 0
+  enemyRoomsAmount: 3
+  bonusRoomsAmount: 2
   bonusRoomsPrefabs:
   - {fileID: 1241989789273151111, guid: 6cdef7d8672159a4eb10eaeb4f2b2297, type: 3}
   - {fileID: 1241989789273151111, guid: 5edeb0c170810b94cab591f9a2831989, type: 3}

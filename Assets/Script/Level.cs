@@ -5,20 +5,21 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    private const int scale = 29;
+    private const int roomScale = 29; //Adjust to room prefab size
 
-    //Align with minimap in future
-    private Room[,] grid = new Room[27,27];
-    private List<Room> enemyRooms = new List<Room>();
     private static Vector2Int[] scalars = { Vector2Int.left, Vector2Int.up, Vector2Int.right, Vector2Int.down};
+
+    private List<Room> enemyRooms = new List<Room>();
+    private Room[,] grid = new Room[7,7];
+    private Vector2Int middle;
     private int[] currentRoomCoordinates = new int[2];
     private bool highlightRoomsOnMinimap = true;
-    private bool dontSpawnOnEdge = false;
+    private bool dontSpawnRoomsOnEdge = false;
 
     [Header("Settings")]
-    [SerializeField] [Range(2, 5)] private int enemyRoomsCount;
-    [SerializeField] [Range(1, 5)] private int bonusRoomsCount;
-    [SerializeField] private bool bossRoom; //Should not be SerializeField, but it is for debugging
+    [SerializeField] private bool bossRoom;
+    [SerializeField] [Range(2, 5)] private int enemyRoomsAmount;
+    [SerializeField] [Range(1, 5)] private int bonusRoomsAmount;
     [SerializeField] private GameObject[] bonusRoomsPrefabs;
     [SerializeField] private GameObject[] enemyRoomsPrefabs;
     [SerializeField] private GameObject startRoomPrefab;
@@ -27,85 +28,47 @@ public class Level : MonoBehaviour
 
     private void Start() 
     {
+        middle = new Vector2Int((grid.GetLength(0) - 1) / 2, (grid.GetLength(1) - 1) / 2);
+
         if (LevelData.instance.lvl == 5) bossRoom = true;
         Generate();
     }
 
     private void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.X)) Regenerate();
+        if (Application.isEditor && Input.GetKeyDown(KeyCode.X)) Regenerate();
     }
 
     public static Vector2Int IntToScalar(int num) => scalars[num];
-    private GameObject GetRandomRoom(GameObject[] rooms) => rooms[Random.Range(0, rooms.Length)];
     private int BranchIdToRotation(int num) => (num + 2) % scalars.Length;
-    private bool IsOnMinimapEdge(int x, int y) => Mathf.Abs(9 - x) > 2 || Mathf.Abs(9 - y) > 2;
-    private bool SafeOfEdgeSpawn(int x, int y) => !dontSpawnOnEdge || !IsOnMinimapEdge(x, y);
-    private bool HasFreeBranch(int x, int y)
-    {
-        return scalars.Any(scalar => grid[x + scalar[0], y + scalar[1]] == null 
+    private bool SafeOfEdgeSpawn(int x, int y) => !dontSpawnRoomsOnEdge || !IsOnMinimapEdge(x, y);
+    private bool IsOnMinimapEdge(int x, int y) => Mathf.Abs(middle.x - x) > middle.x - 1 || Mathf.Abs(middle.y - y) > middle.x - 1;
+    private bool HasFreeBranch(int x, int y) => scalars.Any(scalar => grid[x + scalar[0], y + scalar[1]] == null 
         && SafeOfEdgeSpawn(x + scalar[0], y + scalar[1]));
-    }
-
-
-    private void CreateRoom(int x, int y, int rotation, RoomType roomType)
-    {
-        //Pick new room of a roomType
-        GameObject newRoom = null;
-        switch (roomType)
-        {
-            case RoomType.Start: newRoom = startRoomPrefab; break;
-            case RoomType.Enemy: newRoom = GetRandomRoom(enemyRoomsPrefabs); break;
-            case RoomType.Bonus: newRoom = GetRandomRoom(bonusRoomsPrefabs); break;
-            case RoomType.Finish: newRoom = finishRoomPrefab; break;
-            case RoomType.Boss: newRoom = bossRoomPrefab; break;
-        }
-
-        //Write New Room
-        grid[x, y] = Instantiate(newRoom, new Vector3(x * scale, y * scale, 0), Quaternion.identity).GetComponent<Room>();
-        grid[x, y].SetCoordinates(x,y);
-
-        Minimap.InitializeCell(x,y, roomType, highlightRoomsOnMinimap);
-
-        currentRoomCoordinates[0] = x; 
-        currentRoomCoordinates[1] = y;
-        //Create new Branch
-        if (roomType != RoomType.Start)
-        {
-            grid[x, y].CreateDoor(rotation);
-            var scalar = IntToScalar(rotation);
-            int branchId = (rotation + 2) % scalars.Length;
-            grid[x + scalar.x, y + scalar.y].CreateBranch(branchId);
-
-            if (highlightRoomsOnMinimap) Minimap.GetCell(x + scalar.x, y + scalar.y).SetBranch(branchId, true);
-        }
-        if (roomType == RoomType.Enemy) enemyRooms.Add(grid[x, y]);
-        //Logging
-        grid[x, y].gameObject.name = $"{x} || {y}";
-    }
 
     private void Generate()
     {
         //Create Start Room and first enemy room
-        int[] nextRoom = new int[3];
-        CreateRoom(grid.GetLength(0) / 3, grid.GetLength(1) / 3, 0, RoomType.Start);
-        int[] newBranch = FindFreeBranch(9,9);
+
+        int[] nextRoom = new int[3]; //nextRoom[0] - x; nextRoom[1] - y; nextRoom[2] - rotation
+        CreateRoom(3, 3, 0, RoomType.Start);
+        int[] newBranch = FindFreeBranchFor(3,3);
         CreateRoom(newBranch[0],newBranch[1], newBranch[2],  RoomType.Enemy);
-        highlightRoomsOnMinimap = false;
+        highlightRoomsOnMinimap = true; //We only want to highlight first 2 rooms, so set this to false
 
         //Create Other Rooms
 
         //Enemy Rooms
-        dontSpawnOnEdge = true;
-        for (int i = 0; i < enemyRoomsCount - 1; i++)
+        dontSpawnRoomsOnEdge = true; //We dont want to spawn enemy rooms on the edge
+        for (int i = 0; i < enemyRoomsAmount - 1; i++)
         {
             nextRoom = FindRoomSpace();
             CreateRoom(nextRoom[0], nextRoom[1], nextRoom[2], RoomType.Enemy);
         }
-        dontSpawnOnEdge = false;
+        dontSpawnRoomsOnEdge = false;
 
         //Bonus Rooms
-        for (int i = 0; i < bonusRoomsCount; i++)
+        for (int i = 0; i < bonusRoomsAmount; i++)
         {
             nextRoom = FindRoomSpace();
             CreateRoom(nextRoom[0],nextRoom[1], nextRoom[2], RoomType.Bonus);
@@ -117,6 +80,46 @@ public class Level : MonoBehaviour
         CreateRoom(nextRoom[0], nextRoom[1], nextRoom[2], lastRoomType);
     }
 
+    private void CreateRoom(int x, int y, int rotation, RoomType roomType)
+    {
+        //Pick new room of a roomType
+        GameObject newRoom = null;
+        switch (roomType)
+        {
+            case RoomType.Start: newRoom = startRoomPrefab; break;
+            case RoomType.Enemy: newRoom = enemyRoomsPrefabs.GetRandom(); break;
+            case RoomType.Bonus: newRoom = bonusRoomsPrefabs.GetRandom(); break;
+            case RoomType.Finish: newRoom = finishRoomPrefab; break;
+            case RoomType.Boss: newRoom = bossRoomPrefab; break;
+        }
+
+        //Create New Room
+        grid[x, y] = Instantiate(newRoom, new Vector3(x * roomScale, y * roomScale, 0), Quaternion.identity).GetComponent<Room>();
+        grid[x, y].SetCoordinates(x,y);
+
+        Minimap.InitializeCell(x,y, roomType, highlightRoomsOnMinimap);
+
+        currentRoomCoordinates[0] = x; 
+        currentRoomCoordinates[1] = y;
+
+        //Create new Branch
+        if (roomType != RoomType.Start)
+        {
+            grid[x, y].CreateDoor(rotation);
+
+            var scalar = IntToScalar(rotation);
+            int branchId = (rotation + 2) % scalars.Length;
+            grid[x + scalar.x, y + scalar.y].CreateBranch(branchId);
+
+            if (highlightRoomsOnMinimap) Minimap.GetCell(x + scalar.x, y + scalar.y).SetBranch(branchId, true);
+        }
+
+        if (roomType == RoomType.Enemy) enemyRooms.Add(grid[x, y]);
+
+        //Logging
+        grid[x, y].gameObject.name = $"X: {x} || Y: {y}";
+    }
+
     private void Regenerate()
     {
         foreach (Room room in grid)
@@ -124,8 +127,8 @@ public class Level : MonoBehaviour
             if (room != null) Destroy(room.gameObject);
         }
         enemyRooms.Clear();
-        currentRoomCoordinates[0] = 9;
-        currentRoomCoordinates[1] = 9;
+        currentRoomCoordinates[0] = 3;
+        currentRoomCoordinates[1] = 3;
         Generate();
     }
 
@@ -140,10 +143,10 @@ public class Level : MonoBehaviour
         currentRoomCoordinates[0] = enemyRooms[randomEnemyRoom].x;
         currentRoomCoordinates[1] = enemyRooms[randomEnemyRoom].y;
 
-        return FindFreeBranch(currentRoomCoordinates[0], currentRoomCoordinates[1]);
+        return FindFreeBranchFor(currentRoomCoordinates[0], currentRoomCoordinates[1]);
     }
 
-    private int[] FindFreeBranch(int x, int y)
+    private int[] FindFreeBranchFor(int x, int y)
     {
         int[] newCoordinates = new int[3];
         int randomBranch;
@@ -156,7 +159,7 @@ public class Level : MonoBehaviour
         }
         while(grid[newRoom.x, newRoom.y] != null || !SafeOfEdgeSpawn(newRoom.x, newRoom.y));
 
-        //Connect new room to previos room
+        //Connect new room to previos room (Basically set proper rotation)
         (newCoordinates[0], newCoordinates[1]) = (newRoom[0], newRoom[1]);
         grid[currentRoomCoordinates[0], currentRoomCoordinates[1]].CreateDoor(randomBranch);
         newCoordinates[2] = BranchIdToRotation(randomBranch);

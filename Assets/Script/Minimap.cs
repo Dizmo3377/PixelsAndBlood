@@ -10,7 +10,6 @@ public class Minimap : MonoBehaviour
     [SerializeField] private TMP_Text levelInfo;
     [SerializeField] private Cell[] cellsList;
 
-    //Dont make public!
     private static Cell[,] cells = new Cell[7,7];
 
     private void Awake()
@@ -23,17 +22,7 @@ public class Minimap : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            foreach (var cell in cells)
-            {
-                Minimap.HighlightCell(cell.x, cell.y, HighlightType.Hidden);
-                for (int i = 0; i < 4; i++)
-                {
-                    cell.SetBranch(1, false);
-                }
-            }
-        }
+        if (Application.isEditor && Input.GetKeyDown(KeyCode.X)) Regenerate();
     }
 
     public static void InitializeCell(int x, int y, RoomType type, bool changeAlpha = true)
@@ -83,9 +72,21 @@ public class Minimap : MonoBehaviour
             for (int x = 0; x < cells.GetLength(1); x++)
             {
                 cells[x, y] = cellsList[y * cells.GetLength(1) + x];
-                cells[x, y].x = x + 6;
-                cells[x, y].y = cells.GetLength(0) - y + 5;
+                cells[x, y].x = x;
+                cells[x, y].y = cells.GetLength(0) - y - 1;
                 cells[x, y].ChangeAlpha(HighlightTypeToFloat(HighlightType.Hidden));
+            }
+        }
+    }
+
+    private void Regenerate()
+    {
+        foreach (var cell in cells)
+        {
+            Minimap.HighlightCell(cell.x, cell.y, HighlightType.Hidden);
+            for (int i = 0; i < 4; i++)
+            {
+                cell.SetBranch(i, false);
             }
         }
     }
