@@ -54,7 +54,7 @@ public class Level : MonoBehaviour
         CreateRoom(3, 3, 0, RoomType.Start);
         int[] newBranch = FindFreeBranchFor(3,3);
         CreateRoom(newBranch[0],newBranch[1], newBranch[2],  RoomType.Enemy);
-        highlightRoomsOnMinimap = true; //We only want to highlight first 2 rooms, so set this to false
+        highlightRoomsOnMinimap = false; //We only want to highlight first 2 rooms, so set this to false
 
         //Create Other Rooms
 

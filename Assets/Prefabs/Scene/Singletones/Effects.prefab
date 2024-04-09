@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slashPrefab: {fileID: 5318291756678998356, guid: d8c29d7468287504db00cdb8ee5f0405, type: 3}
+  damageNumberPrefab: {fileID: 6915606642071020483, guid: 84f6d0f0c0c04b14cbc30bbedc8a2d55, type: 3}

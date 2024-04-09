@@ -25,6 +25,7 @@ public abstract class Enemy : MonoBehaviour, IDamagable
         if (isDead) return;
 
         hp -= amount;
+        Effects.instance.DamageNumber(transform, amount);
 
         if (hp <= 0) Die();
         else animator.SetTrigger("GetDamage");
