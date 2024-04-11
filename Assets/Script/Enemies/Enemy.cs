@@ -14,7 +14,7 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     [HideInInspector] protected bool canMove = false;
 
     [SerializeField] private int manaCount;
-    private bool isDead = false;
+    protected bool isDead = false;
 
     [HideInInspector] public EnemyRoom room;
 

@@ -369,6 +369,7 @@ MonoBehaviour:
   shootSpeed: 0.15
   bulletForce: 40
   range: 5
-  damage: 4
-  accuracy: 0.15
+  damage: 6
+  accuracy: 0.2
   manaCost: 2
+  shake: 0

@@ -7,7 +7,18 @@ public class Inventory : MonoBehaviour
     private static float throwForce = 5;
     public static int primaryDamage => slots[currentWeapon].damage;
 
-    private void Start() => UpdateWeaponIcon();
+    private void Start()
+    {
+        UpdateWeaponIcon();
+
+        if (FindObjectOfType<InitialScene>())
+        {
+            slots[0] = null;
+            slots[1] = null;
+            Weapon startWeapon = Instantiate(GetWeapon("Glock18")).GetComponent<Weapon>();
+            startWeapon.Equiep();
+        }
+    }
 
     private void Update()
     {

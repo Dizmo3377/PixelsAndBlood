@@ -177,10 +177,10 @@ MonoBehaviour:
   speed: 6
   damage: 1
   manaCount: 3
-  <hp>k__BackingField: 20
   room: {fileID: 0}
+  <hp>k__BackingField: 20
   burstDelay: 0.2
-  shootDelay: 1
+  shootDelay: 0.6
   bulletForce: 10
   accuracy: 0
   bullet: {fileID: 6295772629760507607, guid: 164d09106a65ee746aa3aa92f5e97080, type: 3}
@@ -248,7 +248,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.2}
   serializedVersion: 2
-  m_Radius: 11
+  m_Radius: 15
 --- !u!50 &4570229388241647797
 Rigidbody2D:
   serializedVersion: 4

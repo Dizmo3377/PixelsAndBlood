@@ -25,33 +25,29 @@ public class Skeleton : Enemy
     private void FixedUpdate()
     {
         if (sight.player != null) RotateFaceTo(sight.player.transform.position);
-        if (transform.position != moveDir)
+        if (transform.position != moveDir && !isDead)
         {
             transform.position = Vector2.MoveTowards(transform.position, moveDir, speed * Time.unscaledDeltaTime);
         }
+        else animator.SetBool("Run", false);
     }
     private Vector2 Scatter(float amlitude) => new Vector3(Random.Range(-amlitude, amlitude), Random.Range(-amlitude, amlitude));
     private void MoveRandom() => moveDir = (Vector2)transform.position + Scatter(2f);
 
-    public void ShootBurst(int buletsAmount)
+    public IEnumerator ShootBurst(int buletsAmount)
     {
-        //Closure 
         int currentBullet = 0;
-        StartCoroutine(ShootBurst(buletsAmount));
 
-        IEnumerator ShootBurst(int buletsAmount)
+        animator.SetTrigger("Idle");
+        while (currentBullet != buletsAmount)
         {
-            animator.SetTrigger("Idle");
-            while (currentBullet != buletsAmount)
-            {
-                Shoot();
-                yield return new WaitForSeconds(burstDelay);
-                currentBullet++;
-            }
-            rb.velocity = Vector2.zero;
-            MoveRandom();
-            animator.SetTrigger("Run");
+            Shoot();
+            yield return new WaitForSeconds(burstDelay);
+            currentBullet++;
         }
+        rb.velocity = Vector2.zero;
+        animator.SetBool("Run", true);
+        MoveRandom();
     }
 
     private void Shoot()
@@ -78,7 +74,7 @@ public class Skeleton : Enemy
         {
             if (!sight.seePlayer) { yield return null; continue; }
 
-            ShootBurst(2);
+            yield return StartCoroutine(ShootBurst(2));
             yield return new WaitForSeconds(shootDelay);
         }
     }

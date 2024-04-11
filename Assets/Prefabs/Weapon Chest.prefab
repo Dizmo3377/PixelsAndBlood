@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6811bae364345f47acefbdaad73ca2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 35
+  dropChance: 45
   dropObject: {fileID: 2646405589720057772, guid: 1f1ef4ce23ddd164a860aafab56f87f9, type: 3}
 --- !u!114 &5998216459629641813
 MonoBehaviour:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6811bae364345f47acefbdaad73ca2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 40
+  dropChance: 50
   dropObject: {fileID: 3194945740399062670, guid: ef063553b935ca948ac6a6bc1c5a03b5, type: 3}
 --- !u!114 &1476695868
 MonoBehaviour:
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6811bae364345f47acefbdaad73ca2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 25
+  dropChance: 30
   dropObject: {fileID: 8304837158429359593, guid: 10a8fb02ab0c6534fb15f497b7050dc7, type: 3}
 --- !u!114 &8789148377021593714
 MonoBehaviour:
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6811bae364345f47acefbdaad73ca2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 20
+  dropChance: 25
   dropObject: {fileID: 6460092103692588226, guid: 6007235a64bc76445ab10897b4df645f, type: 3}
 --- !u!114 &3895320485511632543
 MonoBehaviour:
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6811bae364345f47acefbdaad73ca2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 5
+  dropChance: 10
   dropObject: {fileID: 5575730548384643677, guid: b1e311da6b4ef6e429c16123a13c9501, type: 3}
 --- !u!114 &3337475775209276060
 MonoBehaviour:
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6811bae364345f47acefbdaad73ca2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 10
+  dropChance: 15
   dropObject: {fileID: 9003654939788164845, guid: 23b259669b6af1243bf2d80e18989aa5, type: 3}
 --- !u!114 &1301576826631365257
 MonoBehaviour:
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6811bae364345f47acefbdaad73ca2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 35
+  dropChance: 40
   dropObject: {fileID: 8159313071909378123, guid: b673e8c1c21186a4eb489a5c3db94d16, type: 3}
 --- !u!114 &8169306963980775780
 MonoBehaviour:
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6811bae364345f47acefbdaad73ca2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 30
+  dropChance: 35
   dropObject: {fileID: 3925050321146090296, guid: b4e872de2b5b3ec4c9059cb150821c71, type: 3}
 --- !u!1 &7779528694304846192
 GameObject:

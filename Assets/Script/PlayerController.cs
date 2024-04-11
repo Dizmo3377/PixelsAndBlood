@@ -39,19 +39,18 @@ public class PlayerController : MonoBehaviour, IPushable
         }
     }
 
-
     private void Awake()
     {
         weaponSprite = transform.Find("Weapon").GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        walkingSound = GetComponent<AudioSource>();
+        walkingSound.Play();
+        walkingSound.Pause();
     }
 
     private void Start()
     {
         playerData = Player.instance;
-        animator = GetComponent<Animator>();
-        walkingSound = GetComponent<AudioSource>();
-        walkingSound.Play();
-        walkingSound.Pause();
     }
 
     private void FixedUpdate()

@@ -27,7 +27,7 @@ public abstract class Weapon : MonoBehaviour
     public int manaCost;
     public float shake;
 
-    private void Start()
+    private void Awake()
     {
         icon = GetComponent<SpriteRenderer>().sprite;
         rb = GetComponent<Rigidbody2D>();

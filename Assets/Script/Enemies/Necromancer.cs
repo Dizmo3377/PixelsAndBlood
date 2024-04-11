@@ -56,8 +56,11 @@ public class Necromancer : Enemy
         }
     }
 
-    private IEnumerator SpawnSlime(Vector3 spawnPoint, float delay)
+    private IEnumerator SpawnSlime(float delay)
     {
+        if (!sight.seePlayer) yield break;
+
+        Vector3 spawnPoint = sight.player.transform.position;
         animator.SetTrigger("Spawn");
         GameObject particle1 = ParticleManager.Create("NecromancerSpawn", transform.position - new Vector3(0,0.3f,0));
         GameObject particle2 = ParticleManager.Create("NecromancerSpawn", spawnPoint);
@@ -68,6 +71,8 @@ public class Necromancer : Enemy
 
     private void Shoot()
     {
+        if (!sight.seePlayer) return;
+
         float angleStep = 20f;
         float currentAngle = -angleStep;
 
@@ -97,13 +102,13 @@ public class Necromancer : Enemy
         {
             if (!sight.seePlayer) { yield return null; continue; }
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 2; i++)
             {
                 yield return StartCoroutine(MoveRandom(3));
                 yield return StartCoroutine(ShootBurst(2));
                 yield return new WaitForSeconds(shootDelay);
             }
-            yield return StartCoroutine(SpawnSlime(sight.player.transform.position, 0.5f));
+            yield return StartCoroutine(SpawnSlime(0.5f));
         }
     }
 }

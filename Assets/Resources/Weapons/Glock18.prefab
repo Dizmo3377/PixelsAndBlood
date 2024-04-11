@@ -141,9 +141,10 @@ MonoBehaviour:
   shootSpeed: 0.3
   bulletForce: 50
   range: 4.5
-  damage: 2
+  damage: 3
   accuracy: 0
   manaCost: 0
+  shake: 0
 --- !u!61 &3194945740399062658
 BoxCollider2D:
   m_ObjectHideFlags: 0

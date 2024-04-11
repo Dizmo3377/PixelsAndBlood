@@ -193,7 +193,7 @@ MonoBehaviour:
   manaCost: 2
   shake: 0
   stageTime: 0.25
-  deafultDamage: 4
+  deafultDamage: 10
   maxStage: 3
 --- !u!1 &6460092103735797787
 GameObject:

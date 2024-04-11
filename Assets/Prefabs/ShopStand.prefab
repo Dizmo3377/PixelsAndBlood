@@ -379,6 +379,8 @@ GameObject:
   - component: {fileID: 6126035421937882625}
   - component: {fileID: 6126035421937882624}
   - component: {fileID: 6126035421937882639}
+  - component: {fileID: 7394834322306724759}
+  - component: {fileID: 6754488235424409242}
   m_Layer: 0
   m_Name: SaleItems
   m_TagString: Untagged
@@ -413,7 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011a7c367e63dc1479b0bb8e0579a6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 30
+  dropChance: 50
   price: 10
   item: {fileID: 4129979335332166254, guid: 52861e154520d634d8779fd52d706851, type: 3}
 --- !u!114 &6126035421937882637
@@ -428,7 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011a7c367e63dc1479b0bb8e0579a6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 50
+  dropChance: 45
   price: 5
   item: {fileID: 1803256630317558331, guid: b087cad417937144896641298dd6511f, type: 3}
 --- !u!114 &6126035421937882636
@@ -443,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011a7c367e63dc1479b0bb8e0579a6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 30
+  dropChance: 45
   price: 10
   item: {fileID: 3324487919946963972, guid: b867b9f80b92a5743bbd41dce1bfda43, type: 3}
 --- !u!114 &6126035421937882635
@@ -473,8 +475,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011a7c367e63dc1479b0bb8e0579a6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 25
-  price: 12
+  dropChance: 5
+  price: 5
   item: {fileID: 3194945740399062670, guid: ef063553b935ca948ac6a6bc1c5a03b5, type: 3}
 --- !u!114 &6126035421937882627
 MonoBehaviour:
@@ -488,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011a7c367e63dc1479b0bb8e0579a6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 25
+  dropChance: 35
   price: 15
   item: {fileID: 8159313071909378123, guid: b673e8c1c21186a4eb489a5c3db94d16, type: 3}
 --- !u!114 &6126035421937882626
@@ -503,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011a7c367e63dc1479b0bb8e0579a6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 20
+  dropChance: 30
   price: 20
   item: {fileID: 2646405589720057772, guid: 1f1ef4ce23ddd164a860aafab56f87f9, type: 3}
 --- !u!114 &6126035421937882625
@@ -518,7 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011a7c367e63dc1479b0bb8e0579a6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 15
+  dropChance: 30
   price: 20
   item: {fileID: 6460092103692588226, guid: 6007235a64bc76445ab10897b4df645f, type: 3}
 --- !u!114 &6126035421937882624
@@ -533,7 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011a7c367e63dc1479b0bb8e0579a6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 15
+  dropChance: 25
   price: 25
   item: {fileID: 3925050321146090296, guid: b4e872de2b5b3ec4c9059cb150821c71, type: 3}
 --- !u!114 &6126035421937882639
@@ -548,9 +550,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011a7c367e63dc1479b0bb8e0579a6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 10
+  dropChance: 20
   price: 40
   item: {fileID: 8304837158429359593, guid: 10a8fb02ab0c6534fb15f497b7050dc7, type: 3}
+--- !u!114 &7394834322306724759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6126035421937882633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 011a7c367e63dc1479b0bb8e0579a6c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropChance: 15
+  price: 50
+  item: {fileID: 9003654939788164845, guid: 23b259669b6af1243bf2d80e18989aa5, type: 3}
+--- !u!114 &6754488235424409242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6126035421937882633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 011a7c367e63dc1479b0bb8e0579a6c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropChance: 15
+  price: 60
+  item: {fileID: 5575730548384643677, guid: b1e311da6b4ef6e429c16123a13c9501, type: 3}
 --- !u!1 &6126035422317657923
 GameObject:
   m_ObjectHideFlags: 0

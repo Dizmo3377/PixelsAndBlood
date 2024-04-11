@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using UnityEngine;
 using System;
+using DG.Tweening;
 
 public class SceneController : Singletone<SceneController>
 {

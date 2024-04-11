@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
         if (Player.instance.isDead) return;
         canvas.gameObject.SetActive(state);
         Time.timeScale = (isPaused = state) ? 0 : 1;
+        AudioListener.pause = state;
     }
 
     public void OnLeave() => Player.instance.Deactivate();

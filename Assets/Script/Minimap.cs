@@ -14,11 +14,14 @@ public class Minimap : MonoBehaviour
 
     private void Awake()
     {
-        if (LevelData.instance.stage > 1) gameObject.SetActive(false);
         PopulateCellsArray();
     }
 
-    private void Start() => levelInfo.text = $"{LevelData.instance.stage}-{LevelData.instance.lvl}";
+    private void Start()
+    {
+        levelInfo.text = $"{LevelData.instance.stage}-{LevelData.instance.lvl}";
+        if (LevelData.instance.stage > 1) gameObject.SetActive(false);
+    }
 
     private void Update()
     {
@@ -39,7 +42,7 @@ public class Minimap : MonoBehaviour
 
         if (cell == null)
         {
-            Debug.LogError("Cell not found or out of boundaries");
+            Debug.LogWarning("Cell not found or out of boundaries");
             return null;
         }
 
@@ -50,7 +53,7 @@ public class Minimap : MonoBehaviour
     {
         var cell = GetCell(x, y);
         float alpha = HighlightTypeToFloat(type);
-        cell.ChangeAlpha(alpha);
+        if(cell != null) cell.ChangeAlpha(alpha);
     }
 
     public static float HighlightTypeToFloat(HighlightType type)
