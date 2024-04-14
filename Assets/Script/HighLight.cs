@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HighLight : MonoBehaviour
 {
-    private List<Transform> weaponsTransform = new List<Transform>();
+    [SerializeField] private List<Transform> weaponsTransform = new List<Transform>();
     private List<Weapon> weaponsScript = new List<Weapon>();
     private Weapon currentWeapon;
     private void OnTriggerEnter2D(Collider2D collision)

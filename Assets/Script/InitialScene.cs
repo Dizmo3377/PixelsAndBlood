@@ -11,10 +11,4 @@ public class InitialScene : MonoBehaviour
         Inventory.slots[0] = null;
         Inventory.slots[1] = null;
     }
-
-    private void Start()
-    {
-        LevelData.instance.lvl = 1;
-        LevelData.instance.stage = 1; 
-    }
 }

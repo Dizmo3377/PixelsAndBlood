@@ -19,12 +19,12 @@ public class Minimap : MonoBehaviour
 
     private void Start()
     {
-        levelInfo.text = $"{LevelData.instance.stage}-{LevelData.instance.lvl}";
         if (LevelData.instance.stage > 1) gameObject.SetActive(false);
     }
 
     private void Update()
     {
+        levelInfo.text = $"{LevelData.instance.stage}-{LevelData.instance.lvl}";
         if (Application.isEditor && Input.GetKeyDown(KeyCode.X)) Regenerate();
     }
 
@@ -42,7 +42,7 @@ public class Minimap : MonoBehaviour
 
         if (cell == null)
         {
-            Debug.LogWarning("Cell not found or out of boundaries");
+            Debug.LogWarning($"Cell not found or out of boundaries {x} - {y}");
             return null;
         }
 

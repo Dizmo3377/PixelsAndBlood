@@ -46,10 +46,8 @@ public class Inventory : MonoBehaviour
         Weapon primary = slots[currentWeapon];
         if (primary == null) return;
 
-        Rigidbody2D rb = Instantiate(GetWeapon(primary.name), Player.instance.transform.position, Quaternion.identity).GetComponent<Rigidbody2D>();
-        rb.GetComponent<Weapon>().dropSpeed = 1f;
-        rb.velocity = new Vector2(Random.Range(-throwForce, throwForce), Random.Range(-throwForce, throwForce));
-        Destroy(slots[currentWeapon]);
+        Weapon weapon = Instantiate(GetWeapon(primary.name), (Vector2)Player.instance.transform.position + Vector2.down * 0.1f, Quaternion.identity).GetComponent<Weapon>();
+        weapon.Throw(throwForce);
         slots[currentWeapon] = null;
 
         UpdateWeaponIcon();

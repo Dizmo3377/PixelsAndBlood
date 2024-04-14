@@ -1,6 +1,8 @@
+using Pathfinding.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -46,6 +48,40 @@ public abstract class Weapon : MonoBehaviour
 
         rb.velocity = rb.velocity * dropSpeed;
         dropSpeed = curve.Evaluate(Time.time - startTime);
+    }
+
+    private bool PointInObject(Vector2 point, float rotation) 
+        => Physics2D.OverlapBoxAll(point, new Vector2(1f, 1f), rotation).Length > 0;
+
+    public void Throw(float force)
+    {
+        Vector2 direction, newPos, pos = transform.position;
+        int maxTries = 1000, tries = 0;
+
+        do
+        {
+            direction = Random.insideUnitCircle.normalized * 1.3f;
+            newPos = new Vector2(pos.x + direction.x, pos.y + direction.y);
+            tries++;
+
+            if (tries >= maxTries)
+            {
+                direction = Vector2.zero;
+                newPos = transform.position;
+                break;
+            }
+        } 
+        while (PointInObject(newPos, transform.rotation.z));
+
+        transform.position = newPos;
+
+        dropSpeed = 1f;
+        rb.velocity = direction * force;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, 0.2f);
     }
 
     public void Equiep()
