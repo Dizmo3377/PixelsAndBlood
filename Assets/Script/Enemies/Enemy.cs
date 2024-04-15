@@ -14,10 +14,10 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     [HideInInspector] protected bool canMove = false;
 
     [SerializeField] private int manaCount;
-    protected bool isDead = false;
 
     [HideInInspector] public EnemyRoom room;
 
+    public bool isDead { get; private set; } = false;
     [field:SerializeField] public int hp {  get; private set; }
 
     public void GetDamage(int amount)

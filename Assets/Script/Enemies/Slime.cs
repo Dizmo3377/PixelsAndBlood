@@ -58,7 +58,7 @@ public class Slime : Pathfinder
 
             SetTriggerState(true);
             moveStartTime = Time.time;
-            RotateFaceTo(pathPoints[CurrentPathIndex]);
+            if (sight.seePlayer) RotateFaceTo(sight.playerPos);
             animator.SetTrigger("Jump");
             SoundManager.PlayRandomRange("slime_jump", 1, 3);
             yield return new WaitForSeconds(jumpDelay);

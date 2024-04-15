@@ -31,7 +31,7 @@ public class DarkKnight : Pathfinder
     {
         if (sight.player == null) return;
 
-        RotateFaceTo(sight.player.transform.position);
+        RotateFaceTo(sight.playerPos);
         if (canMove && HasBuiltPathToPlayer()) Move(pathPoints[CurrentPathIndex]);
     }
 
@@ -39,10 +39,10 @@ public class DarkKnight : Pathfinder
     {
         if (sight.player == null) return false;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, sight.player.transform.position - transform.position);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, sight.playerPos - transform.position);
         if (hit.collider == null || !hit.collider.CompareTag("Player")) return false;
 
-        Vector2 distanceDelta = sight.player.transform.position - transform.position;
+        Vector2 distanceDelta = sight.playerPos - transform.position;
         if (distanceDelta.magnitude > minimalHitDelta) return false;
 
         return true;
@@ -114,7 +114,7 @@ public class DarkKnight : Pathfinder
             canMove = false;
             animator.SetBool("Run", false);
             yield return StartCoroutine(Hit(2));
-            if (sight.seePlayer) BackDash(sight.player.transform.position);
+            if (sight.seePlayer) BackDash(sight.playerPos);
 
             yield return new WaitForSeconds(delayBetweenAttacks);
         }

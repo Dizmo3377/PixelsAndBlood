@@ -11,6 +11,7 @@ public class Necromancer : Enemy
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject enemyForSpawn;
 
+    private List<Enemy> minions;
     private GameObject bullet_cache;
     private Vector3 moveDir;
 
@@ -19,19 +20,22 @@ public class Necromancer : Enemy
         moveDir = transform.position;
         bullet_cache = bullet;
         bullet_cache.GetComponent<EnemyBullet>().damage = damage;
+        minions = new List<Enemy>();
 
         StartCoroutine(HitAndMoveOverTime(0.5f));
     }
 
     private void FixedUpdate()
     {
-        if (sight.player != null) RotateFaceTo(sight.player.transform.position);
+        if (sight.player != null) RotateFaceTo(sight.playerPos);
         if (transform.position != moveDir)
         {
             transform.position = Vector2.MoveTowards(transform.position, moveDir, speed * Time.unscaledDeltaTime);
         }
     }
+
     private Vector2 Scatter(float amlitude) => new Vector3(Random.Range(-amlitude, amlitude), Random.Range(-amlitude, amlitude));
+
     private IEnumerator MoveRandom(int dashAmount)
     {
         animator.SetBool("Run", true);
@@ -60,13 +64,14 @@ public class Necromancer : Enemy
     {
         if (!sight.seePlayer) yield break;
 
-        Vector3 spawnPoint = sight.player.transform.position;
+        Vector3 spawnPoint = sight.playerPos;
         animator.SetTrigger("Spawn");
         GameObject particle1 = ParticleManager.Create("NecromancerSpawn", transform.position - new Vector3(0,0.3f,0));
         GameObject particle2 = ParticleManager.Create("NecromancerSpawn", spawnPoint);
         particle1.transform.parent = transform;
         yield return new WaitForSeconds(delay);
-        Instantiate(enemyForSpawn, spawnPoint, Quaternion.identity);
+        Enemy slime = Instantiate(enemyForSpawn, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
+        minions.Add(slime);
     }
 
     private void Shoot()
@@ -81,7 +86,7 @@ public class Necromancer : Enemy
         for (int i = 0; i < 3; i++)
         {
             if (sight.player == null) continue;
-            Vector3 target = sight.player.transform.position;
+            Vector3 target = sight.playerPos;
             Vector3 dir = Quaternion.Euler(0, 0, currentAngle) * (target - transform.position).normalized;
             Vector2 bulletSpawn = transform.position + dir * 1.2f;
 
@@ -109,6 +114,17 @@ public class Necromancer : Enemy
                 yield return new WaitForSeconds(shootDelay);
             }
             yield return StartCoroutine(SpawnSlime(0.5f));
+        }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        foreach (Enemy minion in minions)
+        {
+            if (minion == null || minion.isDead) return;
+
+            minion.GetDamage(100);
         }
     }
 }

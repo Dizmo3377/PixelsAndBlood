@@ -9,8 +9,11 @@ public class Bow : Weapon
     [SerializeField] private int maxStage;
     private float stretchTime = 0f;
 
+
+
     private int CalculateDamage()
     {
+        damage = deafultDamage;
         int stage = (int)(stretchTime / stageTime);
         stage = Mathf.Clamp(stage, 0, maxStage);
 
@@ -38,7 +41,6 @@ public class Bow : Weapon
     public override void AfterShoot() 
     {
         base.AfterShoot();
-        damage = deafultDamage;
         stretchTime = 0f;
         TensionBar.Instance.Activate(false);
     }

@@ -213,15 +213,15 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4962012465246733656, guid: 5deeddf7f83a6da499c049ca1652e0fe, type: 3}
   nameColor: {r: 0.8395118, g: 0, b: 0.8773585, a: 1}
   name: Bow
-  shootSpeed: 0.5
+  shootSpeed: 0.8
   bulletForce: 70
   range: 10
-  damage: 10
+  damage: 8
   accuracy: 0
   manaCost: 2
   shake: 0
-  stageTime: 0.25
-  deafultDamage: 10
+  stageTime: 0.3
+  deafultDamage: 8
   maxStage: 3
 --- !u!1 &6460092103735797787
 GameObject:

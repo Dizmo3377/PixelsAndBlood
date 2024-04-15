@@ -105,9 +105,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 60
-  m_LinearDrag: 2
-  m_AngularDrag: 0.05
+  m_Mass: 500
+  m_LinearDrag: 5
+  m_AngularDrag: 3
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -205,7 +205,7 @@ MonoBehaviour:
   rb: {fileID: 6326506566053678834}
   spriteRenderer: {fileID: 6326506566053678836}
   speed: 6
-  damage: 2
+  damage: 3
   manaCount: 7
   room: {fileID: 0}
   <hp>k__BackingField: 25
@@ -215,7 +215,7 @@ MonoBehaviour:
   minimalHitDelta: 1.2
   delayBetweenAttacks: 2
   hitSpeed: 0.35
-  dashForce: 4
+  dashForce: 40
   slashSpawnPoint: {fileID: 3835494785666668352}
   slashPrefab: {fileID: 5318291756678998356, guid: d8c29d7468287504db00cdb8ee5f0405, type: 3}
 --- !u!114 &8838537262731687439

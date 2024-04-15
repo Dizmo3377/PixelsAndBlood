@@ -22,7 +22,7 @@ public class HandChanger : MonoBehaviour
 
         Vector3 pos = spriteTransform.transform.localPosition;
         spriteTransform.localPosition = new Vector3(
-            sight.player.transform.position.x > transform.position.x ? positive : negative,
+            sight.playerPos.x > transform.position.x ? positive : negative,
             pos.y,
             pos.z);
     }

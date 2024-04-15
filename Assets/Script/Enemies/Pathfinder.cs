@@ -34,7 +34,7 @@ public abstract class Pathfinder : Enemy
     {
         if (sight.player == null) yield break;
 
-        Path path = ABPath.Construct(transform.position, sight.player.transform.position);
+        Path path = ABPath.Construct(transform.position, sight.playerPos);
         AstarPath.StartPath(path);
         yield return new WaitUntil(() => path.CompleteState != PathCompleteState.NotCalculated);
 

@@ -24,7 +24,7 @@ public class Skeleton : Enemy
 
     private void FixedUpdate()
     {
-        if (sight.player != null) RotateFaceTo(sight.player.transform.position);
+        if (sight.player != null) RotateFaceTo(sight.playerPos);
         if (transform.position != moveDir && !isDead)
         {
             transform.position = Vector2.MoveTowards(transform.position, moveDir, speed * Time.unscaledDeltaTime);
@@ -53,7 +53,7 @@ public class Skeleton : Enemy
     private void Shoot()
     {
         if (sight.player == null) return;
-        Vector3 target = sight.player.transform.position;
+        Vector3 target = sight.playerPos;
         Vector2 dir = (target - transform.position);
                 dir.Normalize();
         Vector2 bulletSpawn = transform.position + (Vector3)dir;

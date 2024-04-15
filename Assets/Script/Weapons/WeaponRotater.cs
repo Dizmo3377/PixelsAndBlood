@@ -15,7 +15,7 @@ public class WeaponRotater : MonoBehaviour
     {
         if (sight.player == null) return;
 
-        Vector3 player = sight.player.transform.position - transform.position;
+        Vector3 player = sight.playerPos - transform.position;
         Vector3 offset = Vector3.ClampMagnitude(player + positionOffset, maxOffsetDistance);
 
         spriteTransform.position = transform.position + offset;

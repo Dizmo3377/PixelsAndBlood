@@ -66,7 +66,7 @@ public class Boar : Enemy
         {
             if (!sight.seePlayer) { yield return null; continue; }
 
-            moveDir = (sight.player.transform.position - transform.position).normalized;
+            moveDir = (sight.playerPos - transform.position).normalized;
             SetTriggerState(true);
             SoundManager.PlayRandomRange("boar", 1, 4);
             yield return new WaitForSeconds(runTime);

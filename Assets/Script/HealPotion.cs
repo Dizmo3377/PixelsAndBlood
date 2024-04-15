@@ -10,7 +10,7 @@ public class HealPotion : InteractObject
     private void Drink()
     {
         Player.instance.Heal(healAmount);
-        GameObject particle = ParticleManager.Create("Heal", transform.position);
+        GameObject particle = ParticleManager.Create("Heal", Player.instance.transform.position);
         SoundManager.Play("potion");
         particle.transform.parent = Player.instance.transform;
         Destroy(gameObject);

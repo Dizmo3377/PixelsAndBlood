@@ -83,10 +83,10 @@ public class Goblin : Boss
     {
         if (sight.player == null) return false;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, sight.player.transform.position - transform.position);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, sight.playerPos - transform.position);
 
         if (hit.collider != null &&
-            Vector2.Distance(transform.position, sight.player.transform.position) < hitDistance &&
+            Vector2.Distance(transform.position, sight.playerPos) < hitDistance &&
             hit.collider.CompareTag("Player"))
             return true;
 
@@ -96,9 +96,9 @@ public class Goblin : Boss
     private void ThrowBomb()
     {
         if (sight.player == null) return;
-        RotateFaceTo(sight.player.transform.position);
+        RotateFaceTo(sight.playerPos);
 
-        Vector3 throwVector = (sight.player.transform.position - transform.position).normalized;
+        Vector3 throwVector = (sight.playerPos - transform.position).normalized;
 
         Rigidbody2D bomb = Instantiate
         (
@@ -133,7 +133,7 @@ public class Goblin : Boss
     private IEnumerator RunToPlayer()
     {
         if (sight.player == null) yield break;
-        Vector3 player = sight.player.transform.position;
+        Vector3 player = sight.playerPos;
 
         animator.SetBool("Run", true);
         walkingSound.UnPause();
