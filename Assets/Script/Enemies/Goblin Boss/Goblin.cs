@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Goblin : Boss
@@ -7,6 +8,7 @@ public class Goblin : Boss
     [SerializeField] private GameObject minionPrefab;
     [SerializeField] private float throwForce;
 
+    private List<Enemy> minions;
     private Vector2 spawnPoint;
     private AudioSource walkingSound;
     private int startHealth;
@@ -21,11 +23,18 @@ public class Goblin : Boss
         walkingSound = GetComponent<AudioSource>();
         walkingSound.Play();
         walkingSound.Pause();
+        minions = new List<Enemy>();
     }
 
     protected override void Die()
     {
         SoundManager.Play("goblin_death");
+        foreach (Enemy minion in minions)
+        {
+            if (minion == null || minion.isDead) continue;
+
+            minion.GetDamage(100);
+        }
         base.Die();
     }
 
@@ -155,8 +164,19 @@ public class Goblin : Boss
     private void SpawnMinions()
     {
         SoundManager.Play("necromancer");
-        Instantiate(minionPrefab, (Vector2)transform.position + Vector2.left * 2, Quaternion.identity);
-        Instantiate(minionPrefab, (Vector2)transform.position + Vector2.right * 2, Quaternion.identity);
+
+        Enemy minion1 = Instantiate(
+            minionPrefab, 
+            (Vector2)transform.position + Vector2.left * 2, 
+            Quaternion.identity).GetComponent<Enemy>();
+
+        Enemy minion2 = Instantiate(
+            minionPrefab, 
+            (Vector2)transform.position + Vector2.right * 2, 
+            Quaternion.identity).GetComponent<Enemy>();
+
+        minions.Add(minion1);
+        minions.Add(minion2);
     }
 
     private IEnumerator Heal()

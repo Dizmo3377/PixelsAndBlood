@@ -122,7 +122,7 @@ public class Necromancer : Enemy
         base.Die();
         foreach (Enemy minion in minions)
         {
-            if (minion == null || minion.isDead) return;
+            if (minion == null || minion.isDead) continue;
 
             minion.GetDamage(100);
         }
