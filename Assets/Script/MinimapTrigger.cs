@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MinimapTrigger : MonoBehaviour
@@ -14,12 +12,14 @@ public class MinimapTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
+
         Minimap.HighlightCell(room.x, room.y, HighlightType.IsHere);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
+
         Minimap.HighlightCell(room.x, room.y, HighlightType.WasHere);
     }
 }

@@ -490,7 +490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.52329165, y: 0.8565927}
   m_AnchorMax: {x: 0.52329165, y: 0.8565927}
-  m_AnchoredPosition: {x: -0.00019836426, y: 13.455109}
+  m_AnchoredPosition: {x: -0.00019836426, y: 13.455078}
   m_SizeDelta: {x: 84.1, y: 26.909973}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &640408846
@@ -796,8 +796,6 @@ MonoBehaviour:
   - {fileID: 119127806}
   - {fileID: 1938912072}
   - {fileID: 973977174}
-  x: 0
-  y: 0
 --- !u!1 &1109162997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,8 +1940,6 @@ MonoBehaviour:
   - {fileID: 787041906292585189}
   - {fileID: 2149582368279660}
   - {fileID: 4109273296291319162}
-  x: 0
-  y: 0
 --- !u!1 &177700026500491130
 GameObject:
   m_ObjectHideFlags: 0
@@ -2042,8 +2038,6 @@ MonoBehaviour:
   - {fileID: 6067004856466135446}
   - {fileID: 5656442050814167442}
   - {fileID: 3942997169409375184}
-  x: 0
-  y: 0
 --- !u!1 &213532860540039522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2292,8 +2286,6 @@ MonoBehaviour:
   - {fileID: 7560326415280671105}
   - {fileID: 1911659477144760939}
   - {fileID: 5316043003912006248}
-  x: 0
-  y: 0
 --- !u!1 &304013793192163108
 GameObject:
   m_ObjectHideFlags: 0
@@ -4092,7 +4084,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.59901, y: -0.19}
+  m_AnchoredPosition: {x: -0.00000035762787, y: 0.000002861023}
   m_SizeDelta: {x: 233.37, y: 233.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &596011745044670621
@@ -4144,7 +4136,6 @@ GameObject:
   - component: {fileID: 596011745048242037}
   - component: {fileID: 596011745048242039}
   - component: {fileID: 596011745048242038}
-  - component: {fileID: 596011745048242056}
   m_Layer: 5
   m_Name: WEAPON
   m_TagString: Untagged
@@ -4213,62 +4204,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &596011745048242056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596011745048242036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 596011745048242038}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 596011744989307012}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
-        m_MethodName: ChangeWeapon
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &596011745233133600
 GameObject:
   m_ObjectHideFlags: 0
@@ -4775,6 +4710,7 @@ RectTransform:
   - {fileID: 596011744766084020}
   - {fileID: 596011746163347384}
   - {fileID: 596011745048242037}
+  - {fileID: 2904728152027106675}
   m_Father: {fileID: 596011744989307010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5272,8 +5208,6 @@ MonoBehaviour:
   - {fileID: 794453264043904542}
   - {fileID: 6407753797698462292}
   - {fileID: 7756257816988520099}
-  x: 0
-  y: 0
 --- !u!1 &787041906292585189
 GameObject:
   m_ObjectHideFlags: 0
@@ -5672,8 +5606,6 @@ MonoBehaviour:
   - {fileID: 6954304441916496083}
   - {fileID: 6831532155827884183}
   - {fileID: 2906522881547933379}
-  x: 0
-  y: 0
 --- !u!1 &977870355538858385
 GameObject:
   m_ObjectHideFlags: 0
@@ -5772,8 +5704,6 @@ MonoBehaviour:
   - {fileID: 7338488493970441213}
   - {fileID: 3299594937786031553}
   - {fileID: 8706137581477222673}
-  x: 0
-  y: 0
 --- !u!1 &1002819596097934892
 GameObject:
   m_ObjectHideFlags: 0
@@ -6547,8 +6477,6 @@ MonoBehaviour:
   - {fileID: 8207844726513772556}
   - {fileID: 3923377384755827704}
   - {fileID: 1673008389243201371}
-  x: 0
-  y: 0
 --- !u!1 &1268559494615448707
 GameObject:
   m_ObjectHideFlags: 0
@@ -6872,8 +6800,6 @@ MonoBehaviour:
   - {fileID: 6203814440047273037}
   - {fileID: 7555885496203187041}
   - {fileID: 2204687357759572724}
-  x: 0
-  y: 0
 --- !u!1 &1491639730881611746
 GameObject:
   m_ObjectHideFlags: 0
@@ -7272,8 +7198,6 @@ MonoBehaviour:
   - {fileID: 8830009169155292337}
   - {fileID: 3677981391262673520}
   - {fileID: 4247401129630839939}
-  x: 0
-  y: 0
 --- !u!1 &1641425146779765265
 GameObject:
   m_ObjectHideFlags: 0
@@ -7672,8 +7596,6 @@ MonoBehaviour:
   - {fileID: 6788253564337167093}
   - {fileID: 5932842507661070556}
   - {fileID: 554331347566207002}
-  x: 0
-  y: 0
 --- !u!1 &1759511750838027251
 GameObject:
   m_ObjectHideFlags: 0
@@ -7922,8 +7844,6 @@ MonoBehaviour:
   - {fileID: 8795575948773003647}
   - {fileID: 492148165397487815}
   - {fileID: 6525354273817232226}
-  x: 0
-  y: 0
 --- !u!1 &1887409859098586127
 GameObject:
   m_ObjectHideFlags: 0
@@ -8172,8 +8092,6 @@ MonoBehaviour:
   - {fileID: 7248524969703930762}
   - {fileID: 7825759379231701145}
   - {fileID: 213532860540039522}
-  x: 0
-  y: 0
 --- !u!1 &1921339409925157805
 GameObject:
   m_ObjectHideFlags: 0
@@ -8422,8 +8340,6 @@ MonoBehaviour:
   - {fileID: 4572418869871319052}
   - {fileID: 5225163533903679957}
   - {fileID: 7485102885548032836}
-  x: 0
-  y: 0
 --- !u!1 &2072600311466169715
 GameObject:
   m_ObjectHideFlags: 0
@@ -8522,8 +8438,6 @@ MonoBehaviour:
   - {fileID: 7624014317254009518}
   - {fileID: 5707760497098433763}
   - {fileID: 8646070652918189327}
-  x: 0
-  y: 0
 --- !u!1 &2131014623070503360
 GameObject:
   m_ObjectHideFlags: 0
@@ -8622,8 +8536,6 @@ MonoBehaviour:
   - {fileID: 6712832759216445075}
   - {fileID: 1329133328890916458}
   - {fileID: 1551132603322038494}
-  x: 0
-  y: 0
 --- !u!1 &2163253103127180855
 GameObject:
   m_ObjectHideFlags: 0
@@ -8722,8 +8634,6 @@ MonoBehaviour:
   - {fileID: 5085323124631526928}
   - {fileID: 4180363796039636968}
   - {fileID: 90897252764363350}
-  x: 0
-  y: 0
 --- !u!1 &2204687357759572724
 GameObject:
   m_ObjectHideFlags: 0
@@ -9122,8 +9032,6 @@ MonoBehaviour:
   - {fileID: 7356651412091680681}
   - {fileID: 9163791313903039484}
   - {fileID: 6170637768833477803}
-  x: 0
-  y: 0
 --- !u!1 &2514225180088199175
 GameObject:
   m_ObjectHideFlags: 0
@@ -9222,8 +9130,6 @@ MonoBehaviour:
   - {fileID: 8412045472929036963}
   - {fileID: 7408810923658248385}
   - {fileID: 7095338687972158370}
-  x: 0
-  y: 0
 --- !u!1 &2528707435107953303
 GameObject:
   m_ObjectHideFlags: 0
@@ -9922,8 +9828,6 @@ MonoBehaviour:
   - {fileID: 309267403245107964}
   - {fileID: 1294724007538756559}
   - {fileID: 5502338155384201727}
-  x: 0
-  y: 0
 --- !u!1 &3024466230449500746
 GameObject:
   m_ObjectHideFlags: 0
@@ -10403,8 +10307,6 @@ MonoBehaviour:
   - {fileID: 6630151135711998293}
   - {fileID: 1921339409925157805}
   - {fileID: 6910857752619730197}
-  x: 0
-  y: 0
 --- !u!1 &3212120937612586752
 GameObject:
   m_ObjectHideFlags: 0
@@ -10803,8 +10705,6 @@ MonoBehaviour:
   - {fileID: 6445568194581206115}
   - {fileID: 7623679751675418346}
   - {fileID: 2812076149188438547}
-  x: 0
-  y: 0
 --- !u!1 &3359466586343502298
 GameObject:
   m_ObjectHideFlags: 0
@@ -11353,8 +11253,6 @@ MonoBehaviour:
   - {fileID: 1770859633968840824}
   - {fileID: 5942252774332325752}
   - {fileID: 4276723066033052186}
-  x: 0
-  y: 0
 --- !u!1 &3677981391262673520
 GameObject:
   m_ObjectHideFlags: 0
@@ -11753,8 +11651,6 @@ MonoBehaviour:
   - {fileID: 6610043479887005137}
   - {fileID: 8234669055178073198}
   - {fileID: 4547619878593366529}
-  x: 0
-  y: 0
 --- !u!1 &3840377860795253997
 GameObject:
   m_ObjectHideFlags: 0
@@ -12360,8 +12256,6 @@ MonoBehaviour:
   - {fileID: 1268559494615448707}
   - {fileID: 9171187003533013935}
   - {fileID: 4522925065276364312}
-  x: 0
-  y: 0
 --- !u!1 &4180363796039636968
 GameObject:
   m_ObjectHideFlags: 0
@@ -12535,8 +12429,6 @@ MonoBehaviour:
   - {fileID: 2531660746960635892}
   - {fileID: 8100182063441328851}
   - {fileID: 6655943633551463206}
-  x: 0
-  y: 0
 --- !u!1 &4207444512727111181
 GameObject:
   m_ObjectHideFlags: 0
@@ -12710,8 +12602,6 @@ MonoBehaviour:
   - {fileID: 8138405696288750376}
   - {fileID: 1958125544851847131}
   - {fileID: 5467355595100798474}
-  x: 0
-  y: 0
 --- !u!1 &4247401129630839939
 GameObject:
   m_ObjectHideFlags: 0
@@ -12960,8 +12850,6 @@ MonoBehaviour:
   - {fileID: 9032121942131680458}
   - {fileID: 431092661074920993}
   - {fileID: 2695730783558554880}
-  x: 0
-  y: 0
 --- !u!1 &4360881677784543409
 GameObject:
   m_ObjectHideFlags: 0
@@ -13360,8 +13248,6 @@ MonoBehaviour:
   - {fileID: 3387720012719692160}
   - {fileID: 4804819089975367360}
   - {fileID: 3722212097576493801}
-  x: 0
-  y: 0
 --- !u!1 &4641417800067093171
 GameObject:
   m_ObjectHideFlags: 0
@@ -13610,8 +13496,6 @@ MonoBehaviour:
   - {fileID: 1759511750838027251}
   - {fileID: 1141168473747073946}
   - {fileID: 3092884260581518361}
-  x: 0
-  y: 0
 --- !u!1 &4790608037932030109
 GameObject:
   m_ObjectHideFlags: 0
@@ -13710,8 +13594,6 @@ MonoBehaviour:
   - {fileID: 148415441465898524}
   - {fileID: 1201590029671064095}
   - {fileID: 1887409859098586127}
-  x: 0
-  y: 0
 --- !u!1 &4804819089975367360
 GameObject:
   m_ObjectHideFlags: 0
@@ -14110,8 +13992,6 @@ MonoBehaviour:
   - {fileID: 1641425146779765265}
   - {fileID: 3359466586343502298}
   - {fileID: 1126978826204284532}
-  x: 0
-  y: 0
 --- !u!1 &5192626728734481686
 GameObject:
   m_ObjectHideFlags: 0
@@ -15035,8 +14915,6 @@ MonoBehaviour:
   - {fileID: 6693837447825705636}
   - {fileID: 5752450722120908395}
   - {fileID: 5613040798976530858}
-  x: 0
-  y: 0
 --- !u!1 &5752450722120908395
 GameObject:
   m_ObjectHideFlags: 0
@@ -15210,8 +15088,6 @@ MonoBehaviour:
   - {fileID: 8919738980238948529}
   - {fileID: 8416571255099260739}
   - {fileID: 3334854369346528295}
-  x: 0
-  y: 0
 --- !u!1 &5780055982435334525
 GameObject:
   m_ObjectHideFlags: 0
@@ -15760,8 +15636,6 @@ MonoBehaviour:
   - {fileID: 7412848954328750309}
   - {fileID: 7499240080471280242}
   - {fileID: 802182054220903569}
-  x: 0
-  y: 0
 --- !u!1 &6115120684354760007
 GameObject:
   m_ObjectHideFlags: 0
@@ -16252,8 +16126,6 @@ MonoBehaviour:
   - {fileID: 8896424846299351656}
   - {fileID: 2327516202663481894}
   - {fileID: 1081965751497259113}
-  x: 0
-  y: 0
 --- !u!1 &6303668712087554699
 GameObject:
   m_ObjectHideFlags: 0
@@ -16352,8 +16224,6 @@ MonoBehaviour:
   - {fileID: 3348854408503790642}
   - {fileID: 6328240453249181978}
   - {fileID: 865099734765564941}
-  x: 0
-  y: 0
 --- !u!1 &6328240453249181978
 GameObject:
   m_ObjectHideFlags: 0
@@ -16429,6 +16299,138 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6343569827541638580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2904728152027106675}
+  - component: {fileID: 6460914296813346094}
+  - component: {fileID: 288525633589560814}
+  - component: {fileID: 7869933412032219672}
+  m_Layer: 5
+  m_Name: Switch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2904728152027106675
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6343569827541638580}
+  m_LocalRotation: {x: 0.00000037450695, y: 4.2454924e-12, z: 0.0000008493661, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5000001, y: 1.5000001, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 596011745973199756}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 533, y: -121}
+  m_SizeDelta: {x: 54.78, y: 54.78}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6460914296813346094
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6343569827541638580}
+  m_CullTransparentMesh: 1
+--- !u!114 &288525633589560814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6343569827541638580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: fb2c108d66ac29543857ccd3981bae78, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7869933412032219672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6343569827541638580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 288525633589560814}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 596011744989307012}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_MethodName: ChangeWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6366650230510248729
 GameObject:
   m_ObjectHideFlags: 0
@@ -16677,8 +16679,6 @@ MonoBehaviour:
   - {fileID: 4001353796867473881}
   - {fileID: 7690883257567144747}
   - {fileID: 4641417800067093171}
-  x: 0
-  y: 0
 --- !u!1 &6412916585136258844
 GameObject:
   m_ObjectHideFlags: 0
@@ -17941,8 +17941,6 @@ MonoBehaviour:
   - {fileID: 2528707435107953303}
   - {fileID: 62660157774347483}
   - {fileID: 9107496502159685061}
-  x: 0
-  y: 0
 --- !u!1 &6788253564337167093
 GameObject:
   m_ObjectHideFlags: 0
@@ -18341,8 +18339,6 @@ MonoBehaviour:
   - {fileID: 7772642368995485002}
   - {fileID: 1036890096854612946}
   - {fileID: 6412916585136258844}
-  x: 0
-  y: 0
 --- !u!1 &6910857752619730197
 GameObject:
   m_ObjectHideFlags: 0
@@ -18816,8 +18812,6 @@ MonoBehaviour:
   - {fileID: 4689769678828126512}
   - {fileID: 4819400482479841945}
   - {fileID: 3612872437487146415}
-  x: 0
-  y: 0
 --- !u!1 &7248524969703930762
 GameObject:
   m_ObjectHideFlags: 0
@@ -19741,8 +19735,6 @@ MonoBehaviour:
   - {fileID: 8707584938857074763}
   - {fileID: 490766436942998731}
   - {fileID: 2628719923308969479}
-  x: 0
-  y: 0
 --- !u!1 &7623679751675418346
 GameObject:
   m_ObjectHideFlags: 0
@@ -19991,8 +19983,6 @@ MonoBehaviour:
   - {fileID: 8962353806090046498}
   - {fileID: 6759562051102398987}
   - {fileID: 5606217695867299982}
-  x: 0
-  y: 0
 --- !u!1 &7690883257567144747
 GameObject:
   m_ObjectHideFlags: 0
@@ -20541,8 +20531,6 @@ MonoBehaviour:
   - {fileID: 6620372326648598093}
   - {fileID: 5192626728734481686}
   - {fileID: 3665896844114892707}
-  x: 0
-  y: 0
 --- !u!1 &7869429497011137193
 GameObject:
   m_ObjectHideFlags: 0
@@ -21091,8 +21079,6 @@ MonoBehaviour:
   - {fileID: 6115120684354760007}
   - {fileID: 2240525961280452190}
   - {fileID: 1604933370271744444}
-  x: 0
-  y: 0
 --- !u!1 &8138405696288750376
 GameObject:
   m_ObjectHideFlags: 0
@@ -21491,8 +21477,6 @@ MonoBehaviour:
   - {fileID: 3092679199183396763}
   - {fileID: 3024466230449500746}
   - {fileID: 6535095554652810582}
-  x: 0
-  y: 0
 --- !u!1 &8268885472425703574
 GameObject:
   m_ObjectHideFlags: 0
@@ -21591,8 +21575,6 @@ MonoBehaviour:
   - {fileID: 4136485342435452150}
   - {fileID: 382354264736892090}
   - {fileID: 344105589414435811}
-  x: 0
-  y: 0
 --- !u!1 &8371222861584475896
 GameObject:
   m_ObjectHideFlags: 0
@@ -21991,8 +21973,6 @@ MonoBehaviour:
   - {fileID: 1675257582945454804}
   - {fileID: 5933214075598761944}
   - {fileID: 487454373779124589}
-  x: 0
-  y: 0
 --- !u!1 &8646070652918189327
 GameObject:
   m_ObjectHideFlags: 0
@@ -22991,8 +22971,6 @@ MonoBehaviour:
   - {fileID: 3668588032486116540}
   - {fileID: 2643677287849139822}
   - {fileID: 8257702406570206725}
-  x: 0
-  y: 0
 --- !u!1 &9163791313903039484
 GameObject:
   m_ObjectHideFlags: 0

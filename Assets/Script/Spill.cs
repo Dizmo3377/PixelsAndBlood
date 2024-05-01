@@ -6,12 +6,12 @@ public class Spill : MonoBehaviour
 {
     [SerializeField] private bool fire;
     [SerializeField] private bool poison;
+    [SerializeField] private float destroyDelay;
     [SerializeField] private Animator animator;
     [SerializeField] private ParticleSystem particle;
-    [SerializeField] private float destroyDelay;
     [SerializeField] private AudioSource audioSource;
 
-    private void Start()
+    private void Awake()
     {
         particle.Stop();
         var main = particle.main;
@@ -19,8 +19,9 @@ public class Spill : MonoBehaviour
         particle.Play();
         audioSource.Play();
 
-        StartCoroutine(ExtintCor());
+        StartCoroutine(Extintion());
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -36,7 +37,7 @@ public class Spill : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private IEnumerator ExtintCor()
+    private IEnumerator Extintion()
     {
         yield return new WaitForSeconds(destroyDelay);
         animator.SetTrigger("Destroy");

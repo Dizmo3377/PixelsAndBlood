@@ -1,29 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ParticleManager : Singletone<ParticleManager>
 {
     public static GameObject[] particles;
-    public override void Awake() { base.Awake(); GetData(); }
-    public static GameObject Create(string name, Vector2 position, float delay = 0f, bool isLoop = false) 
-    {
-        for (int i = 0; i < particles.Length; i++)
-        {
-            if (particles[i].name == name)
-            {
-                GameObject particle = Instantiate(particles[i], position, Quaternion.identity);
-                ParticleSystem ps = particle.GetComponent<ParticleSystem>();
-                var main = ps.main;
-                if (!isLoop) main.stopAction = ParticleSystemStopAction.Destroy;
-                ps.Play();
-                return particle;
-            }
-        }
-        return null;
-    }
 
-    private void GetData()
+    public void Start() => LoadParticles();
+
+    private void LoadParticles()
     {
         try
         {
@@ -31,8 +15,24 @@ public class ParticleManager : Singletone<ParticleManager>
         }
         catch (System.NullReferenceException)
         {
-            Debug.LogError("Error loading assets in ParticleManager. Folder is missing or has a wrong name");
+            Debug.LogError("Error loading assets in ParticleManager. Folder is missing or invalid. Use Resources/Particles");
             throw;
         }
     }
+
+    public GameObject Create(string name, Vector2 position, float delay = 0f, bool isLoop = false) 
+    {
+        GameObject particlePrefab = particles.FirstOrDefault(p => p.name == name);
+        if (particlePrefab == null) return null;
+
+        GameObject particle = Instantiate(particlePrefab, position, Quaternion.identity);
+        ParticleSystem particleSystem = particle.GetComponent<ParticleSystem>();
+
+        var main = particleSystem.main;
+        if (!isLoop) main.stopAction = ParticleSystemStopAction.Destroy;
+
+        particleSystem.Play();
+        return particle;
+    }
+
 }

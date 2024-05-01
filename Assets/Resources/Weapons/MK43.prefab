@@ -356,8 +356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7bea42c245e6e640ae39a98983a3b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  dropSpeed: 0
   curve:
     serializedVersion: 2
     m_Curve:
@@ -392,12 +390,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bulletPrefab: {fileID: 1621143583561882403, guid: aace072fd62aed744886aff19cc309d3, type: 3}
-  nameColor: {r: 0.7326329, g: 0, b: 0.8773585, a: 1}
-  name: MK43
-  shootSpeed: 0.15
-  bulletForce: 40
-  range: 5
-  damage: 6
-  accuracy: 0.2
-  manaCost: 2
-  shake: 0
+  <nameColor>k__BackingField: {r: 1, g: 0, b: 0.8858533, a: 1}
+  <shake>k__BackingField: 0
+  <bulletForce>k__BackingField: 40
+  <accuracy>k__BackingField: 0.2
+  <name>k__BackingField: MK43
+  <shootSpeed>k__BackingField: 0.15
+  <damage>k__BackingField: 6
+  <manaCost>k__BackingField: 2

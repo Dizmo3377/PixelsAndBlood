@@ -1,15 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] public int waveId;
+    private EnemyRoom enemyRoom;
+
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] public EnemyRoom enemyRoom;
+
+    public int waveId;
+
     private void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -18,18 +18,13 @@ public class Spawner : MonoBehaviour
         SetAlpha(0);
         Initialize();
     }
+    private void Initialize() => enemyRoom.AddSpawner(this, waveId);
 
     private void SetAlpha(float value)
     {
         var tempColor = sprite.color;
         tempColor.a = value;
         sprite.color = tempColor;
-    }
-
-    private void Initialize()
-    {
-        enemyRoom.enemiesCount[waveId]++;
-        enemyRoom.spawners.Add(this);
     }
 
     public void Activate()

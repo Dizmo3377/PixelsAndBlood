@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class ManaPotion : InteractObject
 {
-    [SerializeField] int manaAmount;
+    [SerializeField] private int manaAmount;
+
     protected override void OnInteract() => Drink();
 
     private void Drink()
     {
-        Player.instance.ChangeMana(manaAmount);
-        GameObject particle = ParticleManager.Create("Mana", Player.instance.transform.position);
-        SoundManager.Play("potion");
+        Player.instance.manaPoints += manaAmount;
+        GameObject particle = ParticleManager.instance.Create("Mana", Player.instance.transform.position);
+        SoundManager.instance.Play("potion");
         particle.transform.parent = Player.instance.transform;
         Destroy(gameObject);
     }

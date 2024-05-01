@@ -11,39 +11,34 @@ public class Bomb : MonoBehaviour
 
     private Animator animator;
 
-    private void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
-        Explode();
+        StartCoroutine(Explode());
     }
 
-    private void Explode()
+    private IEnumerator Explode()
     {
-        StartCoroutine(Explode());
+        yield return new WaitForSeconds(idleDelay);
 
-        IEnumerator Explode()
+        animator.SetTrigger("Burn");
+        yield return new WaitForSeconds(burnDelay);
+
+        animator.SetTrigger("Explode");
+        Collider2D[] objectsInExplosionZone = Physics2D.OverlapCircleAll(transform.position, range);
+        foreach (Collider2D obj in objectsInExplosionZone)
         {
-            yield return new WaitForSeconds(idleDelay);
+            if (obj.TryGetComponent(out IDamagable damagable))
+                damagable.GetDamage(damage);
 
-            animator.SetTrigger("Burn");
-            yield return new WaitForSeconds(burnDelay);
-
-            animator.SetTrigger("Explode");
-            Collider2D[] objectsInExplosionZone = Physics2D.OverlapCircleAll(transform.position, range);
-            foreach (Collider2D obj in objectsInExplosionZone)
-            {
-                if (obj.TryGetComponent(out IDamagable damagable)) 
-                    damagable.GetDamage(damage);
-
-                if (obj.TryGetComponent(out IPushable pushable)) 
-                    pushable.pushVector = (obj.transform.position - transform.position).normalized * blastWave;
-            }
-
-            CameraShaker.Shake(0.1f, 0.5f, 2);
-            SoundManager.Play("bomb");
-
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
-            Destroy(gameObject);
+            if (obj.TryGetComponent(out IPushable pushable))
+                pushable.pushVector = (obj.transform.position - transform.position).normalized * blastWave;
         }
+
+        CameraShaker.Shake(0.1f, 0.5f, 2);
+        SoundManager.instance.Play("bomb");
+
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        Destroy(gameObject);
     }
 }

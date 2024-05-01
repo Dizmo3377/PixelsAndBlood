@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponChest : MonoBehaviour
@@ -11,10 +9,15 @@ public class WeaponChest : MonoBehaviour
     private Animator animator;
     private GambleItem[] weapons;
 
-    private void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
         weapons = gambleData.GetComponents<GambleItem>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player")) Open();
     }
 
     private void Open()
@@ -23,9 +26,15 @@ public class WeaponChest : MonoBehaviour
         opened = true;
 
         animator.SetTrigger("Open");
-        SoundManager.PlayRandomRange("chest", 1, 3);
-        Rigidbody2D weaponRb = Instantiate(GetRandomItem().GetComponent<Rigidbody2D>(),
-            transform.position, Quaternion.identity);
+        SoundManager.instance.PlayRandomRange("chest", 1, 3);
+
+        Rigidbody2D weaponRb = Instantiate
+        (
+            GetRandomItem().GetComponent<Rigidbody2D>(),
+            transform.position, 
+            Quaternion.identity
+        );
+
         weaponRb.velocity = new Vector2(RandomVelocity(), RandomVelocity());
     }
 
@@ -45,8 +54,4 @@ public class WeaponChest : MonoBehaviour
 
     private float RandomVelocity() => Random.Range(-dropVelocity, dropVelocity);
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player")) Open();
-    }
 }

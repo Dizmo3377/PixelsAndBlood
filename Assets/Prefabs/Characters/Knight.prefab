@@ -968,12 +968,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e959bc1fc505e4d8f082cdb62b0b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 4942391553936132178}
+  weaponSprite: {fileID: 969743929}
+  walkingSound: {fileID: 2080865210131472751}
+  rb: {fileID: 4942391553936132176}
+  sprite: {fileID: 4942391553936132189}
   speed: 10
   meeleDamage: 2
   meeleSpeed: 0.4
   closeCombatDistance: 1.4
-  rb: {fileID: 4942391553936132176}
-  sprite: {fileID: 4942391553936132189}
 --- !u!95 &4942391553936132178
 Animator:
   serializedVersion: 7
@@ -1008,16 +1011,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d89f28002bf8844ab952eecfebae2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healPoints: 0
-  manaPoints: 0
-  shieldPoints: 0
-  coins: 45
-  poisoned: 0
-  fired: 0
-  maxHealPoints: 10
-  maxManaPoints: 200
-  maxShieldPoints: 6
-  isDead: 0
+  _coins: 0
+  _healPoints: 0
+  _manaPoints: 0
 --- !u!114 &2008243117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1258,7 +1254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 636adaedee03f3547b8862bd5b1e18aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponsTransform: []
 --- !u!1 &7009781656629443478
 GameObject:
   m_ObjectHideFlags: 0

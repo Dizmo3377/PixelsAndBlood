@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class LaserCast : MonoBehaviour
 {
-    [HideInInspector] public int damage;
-    [SerializeField] private float decaySpeed;
+    public int damage { get; set; }
+    [field:SerializeField] public float decaySpeed {  get; private set; }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,6 +14,7 @@ public class LaserCast : MonoBehaviour
     {
         Vector3 scale = transform.localScale;
         transform.localScale = new Vector3(scale.x - decaySpeed, scale.y, scale.z);
+
         if (scale.x <= 0) Destroy(gameObject);
     }
 }

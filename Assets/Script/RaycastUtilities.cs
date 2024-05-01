@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class RaycastUtilities
+public static class RaycastUtilities
 {
     public static bool PointerIsOverUI(Vector2 screenPos)
     {

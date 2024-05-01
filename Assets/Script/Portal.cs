@@ -5,9 +5,10 @@ public class Portal : InteractObject
     [SerializeField] private string sceneName;
 
     protected override void OnInteract() => Transition();
+
     private void Transition()
     {
-        FindObjectOfType<PlayerController>().Disable();
+        FindFirstObjectByType<PlayerController>().Disable();
         SceneController.instance.StartSceneTransition(sceneName);
     }
 }

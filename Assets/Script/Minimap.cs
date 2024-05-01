@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Minimap : MonoBehaviour
 {
@@ -12,10 +9,7 @@ public class Minimap : MonoBehaviour
 
     private static Cell[,] cells = new Cell[7,7];
 
-    private void Awake()
-    {
-        PopulateCellsArray();
-    }
+    private void Awake() => PopulateCellsArray();
 
     private void Start()
     {
@@ -28,7 +22,7 @@ public class Minimap : MonoBehaviour
         if (Application.isEditor && Input.GetKeyDown(KeyCode.X)) Regenerate();
     }
 
-    public static void InitializeCell(int x, int y, RoomType type, bool changeAlpha = true)
+    public static void LinkCellToRoom(int x, int y, RoomType type, bool changeAlpha = true)
     {
         var cell = GetCell(x,y);
 
@@ -75,8 +69,7 @@ public class Minimap : MonoBehaviour
             for (int x = 0; x < cells.GetLength(1); x++)
             {
                 cells[x, y] = cellsList[y * cells.GetLength(1) + x];
-                cells[x, y].x = x;
-                cells[x, y].y = cells.GetLength(0) - y - 1;
+                cells[x, y].Initialize(x, cells.GetLength(0) - y - 1);
                 cells[x, y].ChangeAlpha(HighlightTypeToFloat(HighlightType.Hidden));
             }
         }
@@ -86,7 +79,7 @@ public class Minimap : MonoBehaviour
     {
         foreach (var cell in cells)
         {
-            Minimap.HighlightCell(cell.x, cell.y, HighlightType.Hidden);
+            HighlightCell(cell.x, cell.y, HighlightType.Hidden);
             for (int i = 0; i < 4; i++)
             {
                 cell.SetBranch(i, false);

@@ -18,20 +18,13 @@ public class Boar : Enemy
     {
         if (collision.collider.CompareTag("Player")) Attack(collision.collider);
 
-        //&& - logical "AND" works with bools
-        //& - bitwise "AND" works on the bit level, compares every bit.
-        //<< - bitwise left shift
-
-        //NOTE! deafult layer is 0, so 1 << 0 = 1 (0001). Therefore 1 << collision.gameObject.layer
-        //should offset 1 (0001) to match layersForBounce.value in binary system, for instance
-        //001010000001 & 0001. There is one match (1 and 1), so value will not be 0, so there is
-        //layer in layer mask :)
         if ((layersForBounce.value & (1 << collision.gameObject.layer)) != 0) Bounce(collision);
     }
 
     private void FixedUpdate()
     {
         if (!canMove) return;
+
         rb.velocity = moveDir * speed;
         RotateFaceTo((Vector2)transform.position + moveDir);
     }
@@ -68,8 +61,9 @@ public class Boar : Enemy
 
             moveDir = (sight.playerPos - transform.position).normalized;
             SetTriggerState(true);
-            SoundManager.PlayRandomRange("boar", 1, 4);
+            SoundManager.instance.PlayRandomRange("boar", 1, 4);
             yield return new WaitForSeconds(runTime);
+
             SetTriggerState(false);
             yield return new WaitForSeconds(runDealy);
         }

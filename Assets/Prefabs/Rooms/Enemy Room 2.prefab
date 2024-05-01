@@ -260,8 +260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36763c6657d73c45a4c27e30457e8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 0
-  y: 0
   doorPrefab: {fileID: 8024668505674821624, guid: a1d2826a8d8bb7e4d8288dea4003fd07, type: 3}
   doors:
   - {fileID: 1241989789267313740}
@@ -274,10 +272,8 @@ MonoBehaviour:
   - {fileID: 1241989790164248926}
   - {fileID: 1241989790002588314}
   canDestroyObjects: 1
-  wave: 0
-  enemiesCount: 000000000000000000000000
-  spawners: []
   chest: {fileID: 1723078872583991936, guid: 8e3fdc4199f61f943bf0b4fd7ad373d8, type: 3}
+  spawners: []
 --- !u!61 &2749908775148019671
 BoxCollider2D:
   m_ObjectHideFlags: 0

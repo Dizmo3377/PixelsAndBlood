@@ -4,26 +4,27 @@ using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour, IPushable
 {
-    [SerializeField] public static Animator animator;
-    [SerializeField] public static SpriteRenderer weaponSprite;
+    public Animator animator;
+    public SpriteRenderer weaponSprite;
+    public AudioSource walkingSound;
+
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private float speed;
     [SerializeField] private int meeleDamage;
     [SerializeField] private float meeleSpeed;
     [SerializeField] private float closeCombatDistance;
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private SpriteRenderer sprite;
 
-    private Player playerData;
+    private bool isShooting = false;
+    private Player player;
     private Enemy aimTarget;
     private Vector3 mousePos = Vector2.zero;
     private Vector2 moveVector;
     private Vector2 pushVectorValue;
-    private bool isShooting = false;
 
-    public static AudioSource walkingSound;
+    private Vector3 shootingTargetPos => aimTarget == null ? mousePos : aimTarget.transform.position;
 
     public float pushTime { get; set; }
-    private Vector3 aimTargetPosition => aimTarget == null ? mousePos : aimTarget.transform.position;
 
     public Vector2 pushVector 
     {
@@ -41,16 +42,13 @@ public class PlayerController : MonoBehaviour, IPushable
 
     private void Awake()
     {
-        weaponSprite = transform.Find("Weapon").GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
-        walkingSound = GetComponent<AudioSource>();
         walkingSound.Play();
         walkingSound.Pause();
     }
 
     private void Start()
     {
-        playerData = Player.instance;
+        player = GetComponent<Player>();
     }
 
     private void FixedUpdate()
@@ -65,13 +63,17 @@ public class PlayerController : MonoBehaviour, IPushable
 
         GetInputData();
 
-        if (Input.GetMouseButton(0) && !isShooting && !RaycastUtilities.PointerIsOverUI(Input.mousePosition))
-            StartCoroutine(Shoot());
+        if (CanShoot()) StartCoroutine(Shoot());
 
         animator.SetBool("isMoving", moveVector != Vector2.zero ? true : false);
-        RotateFace(isShooting ? aimTargetPosition - transform.position : moveVector);
-        RotateWeapon(isShooting ? aimTargetPosition : mousePos);
+        if (moveVector == Vector2.zero) walkingSound.Pause();
+        else walkingSound.UnPause();
+
+        FlipFace(isShooting ? shootingTargetPos - transform.position : moveVector);
+        RotateWeapon(isShooting ? shootingTargetPos : mousePos);
     }
+
+    private bool CanShoot() => Input.GetMouseButton(0) && !isShooting && !RaycastUtilities.PointerIsOverUI(Input.mousePosition);
 
     private IEnumerator Shoot()
     {
@@ -83,12 +85,12 @@ public class PlayerController : MonoBehaviour, IPushable
         else
         {
             Weapon weapon = Inventory.slots[Inventory.currentWeapon];
-            if (weapon == null || playerData.manaPoints < weapon.manaCost) yield break;
+            if (weapon == null || player.manaPoints < weapon.manaCost) yield break;
 
             isShooting = true;
             yield return weapon.OnShoot();
-            weapon.Shoot(aimTargetPosition);
-            playerData.ChangeMana(-weapon.manaCost);
+            weapon.Shoot(shootingTargetPos);
+            player.manaPoints -= weapon.manaCost;
             weapon.AfterShoot();
 
             yield return new WaitForSeconds(weapon.shootSpeed);
@@ -101,8 +103,8 @@ public class PlayerController : MonoBehaviour, IPushable
     {
         if (aimTarget != null) aimTarget.GetDamage(meeleDamage);
 
-        Effects.instance.Slash(transform, aimTargetPosition);
-        SoundManager.PlayRandomRange("punch", 1, 2);
+        Effects.instance.Slash(transform, shootingTargetPos);
+        SoundManager.instance.PlayRandomRange("punch", 1, 2);
 
         yield return new WaitForSeconds(meeleSpeed);
     }
@@ -117,7 +119,7 @@ public class PlayerController : MonoBehaviour, IPushable
         else weaponSprite.flipY = true;
     }
 
-    public void RotateFace(Vector3 target)
+    public void FlipFace(Vector3 target)
     {
         if (!isShooting && target.x == 0) return;
         sprite.flipX = (target.x >= 0) ? false : true;
@@ -134,19 +136,15 @@ public class PlayerController : MonoBehaviour, IPushable
     private void GetInputData()
     {
         moveVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-
-        if (moveVector == Vector2.zero) walkingSound.Pause();
-        else walkingSound.UnPause();
-
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        aimTarget = playerData.attack.ClosestEnemy();
+        aimTarget = player.attack.ClosestEnemy();
     }
 
     private bool CloseToEnemy()
     {
         if (aimTarget == null) return false;
 
-        Vector2 direction = aimTargetPosition - transform.position;
+        Vector2 direction = shootingTargetPos - transform.position;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
 

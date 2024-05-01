@@ -175,8 +175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e61e6a9f0587d499b6952dee4d8357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: d5dc486b0de5f18449a5fcba09a86f13, type: 3}
-  dropSpeed: 0
   curve:
     serializedVersion: 2
     m_Curve:
@@ -211,16 +209,15 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bulletPrefab: {fileID: 1268197539575288476, guid: 4a99cc8dc41f50b44b4fb3fc105323c4, type: 3}
-  nameColor: {r: 0.26173997, g: 1, b: 0, a: 1}
-  name: SCAR
-  shootSpeed: 0.8
-  bulletForce: 50
-  range: 7
-  damage: 5
-  accuracy: 0.2
-  manaCost: 2
-  shake: 0
-  burstDelay: 0.1
+  <nameColor>k__BackingField: {r: 1, g: 0.9083374, b: 0, a: 1}
+  <shake>k__BackingField: 0
+  <bulletForce>k__BackingField: 50
+  <accuracy>k__BackingField: 0.2
+  <name>k__BackingField: SCAR
+  <shootSpeed>k__BackingField: 0.8
+  <damage>k__BackingField: 5
+  <manaCost>k__BackingField: 2
+  <burstDelay>k__BackingField: 0.1
 --- !u!1 &3925050321171083233
 GameObject:
   m_ObjectHideFlags: 0

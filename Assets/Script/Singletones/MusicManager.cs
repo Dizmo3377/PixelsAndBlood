@@ -57,5 +57,5 @@ public class MusicManager : Singletone<MusicManager>
         audioSource.Play();
     }
 
-    public void StopMusic() => audioSource.Stop();
+    public void StopMusic() => instance.audioSource.Stop();
 }

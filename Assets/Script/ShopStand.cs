@@ -13,7 +13,11 @@ public class ShopStand : InteractObject
     private int itemCost => objectOnSale.price * LevelData.instance.lvl;
     private bool wasUsed = false;
 
-    private void Awake() => SetRandomOnSale();
+    protected override void Awake()
+    {
+        base.Awake();
+        SetRandomOnSale();
+    }
 
     public override void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,7 +36,7 @@ public class ShopStand : InteractObject
         button.SetActive(false);
         Player.instance.coins -= itemCost;
         itemSprite.sprite = null;
-        SoundManager.Play("shop");
+        SoundManager.instance.Play("shop");
 
         Instantiate(objectOnSale.item, spawnPoint.position, Quaternion.identity);
     }

@@ -356,8 +356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ac519a0a0815f4d85d31d2b1ca757c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  dropSpeed: 0
   curve:
     serializedVersion: 2
     m_Curve:
@@ -392,12 +390,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bulletPrefab: {fileID: 1611463588588695857, guid: c3aa4bddf0829da44b3a061da33cef60, type: 3}
-  nameColor: {r: 0.8301887, g: 0, b: 0, a: 1}
-  name: Lazer
-  shootSpeed: 0.3
-  bulletForce: 40
-  range: 6
-  damage: 6
-  accuracy: 0.05
-  manaCost: 4
-  shake: 0
+  <nameColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  <shake>k__BackingField: 0
+  <bulletForce>k__BackingField: 40
+  <accuracy>k__BackingField: 0.05
+  <name>k__BackingField: Lazer
+  <shootSpeed>k__BackingField: 0.3
+  <damage>k__BackingField: 6
+  <manaCost>k__BackingField: 4

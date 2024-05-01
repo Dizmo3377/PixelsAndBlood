@@ -32,7 +32,7 @@ public class Spikes : MonoBehaviour
         Player.instance.GetDamage(1);
         if (!trapSoundPlayed)
         {
-            SoundManager.Play("spikes");
+            SoundManager.instance.Play("spikes");
             trapSoundPlayed = true;
         }
     }

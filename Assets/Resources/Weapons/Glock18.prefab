@@ -102,8 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee15981f547706a418c077bdd9cc43c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  dropSpeed: 0
   curve:
     serializedVersion: 2
     m_Curve:
@@ -138,15 +136,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bulletPrefab: {fileID: 1268197539575288476, guid: 4a99cc8dc41f50b44b4fb3fc105323c4, type: 3}
-  nameColor: {r: 0.2396226, g: 0.48417735, b: 1, a: 1}
-  name: Glock18
-  shootSpeed: 0.3
-  bulletForce: 50
-  range: 4.5
-  damage: 3
-  accuracy: 0
-  manaCost: 0
-  shake: 0
+  <nameColor>k__BackingField: {r: 0, g: 0.7888689, b: 1, a: 1}
+  <shake>k__BackingField: 0
+  <bulletForce>k__BackingField: 50
+  <accuracy>k__BackingField: 0
+  <name>k__BackingField: Glock18
+  <shootSpeed>k__BackingField: 0.3
+  <damage>k__BackingField: 3
+  <manaCost>k__BackingField: 0
 --- !u!61 &3194945740399062658
 BoxCollider2D:
   m_ObjectHideFlags: 0

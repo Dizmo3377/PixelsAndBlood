@@ -1,25 +1,19 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class SCAR : Weapon
 {
-    [SerializeField] private float burstDelay;
-    public override void Shoot(Vector3 target)
-    {
-        Console.WriteLine("OVERRIDE");
-        Player.instance.StartCoroutine(BurstShoot(0,3,target));
-    }
+    [field:SerializeField] private float burstDelay { get; set; }
+    public override void Shoot(Vector3 target) 
+        => Player.instance.StartCoroutine(BurstShoot(0, 3, target));
 
-    private IEnumerator BurstShoot(int curBullet, int buletsAmount, Vector3 target)
+    private IEnumerator BurstShoot(int currentBullet, int buletsAmount, Vector3 target)
     {
-        if (curBullet == buletsAmount) yield break;
+        if (currentBullet == buletsAmount) yield break;
 
         base.Shoot(target);
-        SoundManager.Play("scar");
+        SoundManager.instance.Play("scar");
         yield return new WaitForSeconds(burstDelay);
-        Player.instance.StartCoroutine(BurstShoot(curBullet + 1,buletsAmount,target));
+        Player.instance.StartCoroutine(BurstShoot(currentBullet + 1, buletsAmount, target));
     }
 }

@@ -7,6 +7,7 @@ public class DamageNumber : MonoBehaviour
     private TMP_Text number;
 
     private void Awake() => number = GetComponent<TMP_Text>();
+
     public void SetNumber(int value) => number.text = value.ToString(); 
 
     public void SetRightScale()
@@ -15,7 +16,7 @@ public class DamageNumber : MonoBehaviour
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
-    public void Tween()
+    public void FadeMoveAnimation()
     {
         DOTween.Sequence()
             .Append(number.DOFade(0f, 1f))

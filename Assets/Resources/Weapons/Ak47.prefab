@@ -356,8 +356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b64ff61b6f8d743b2df0e7ef4f220b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  dropSpeed: 0
   curve:
     serializedVersion: 2
     m_Curve:
@@ -392,12 +390,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bulletPrefab: {fileID: 1268197539575288476, guid: 4a99cc8dc41f50b44b4fb3fc105323c4, type: 3}
-  nameColor: {r: 0.091252565, g: 1, b: 0, a: 1}
-  name: Ak47
-  shootSpeed: 0.16
-  bulletForce: 50
-  range: 5
-  damage: 4
-  accuracy: 0.1
-  manaCost: 1
-  shake: 0.1
+  <nameColor>k__BackingField: {r: 0.1409483, g: 1, b: 0, a: 1}
+  <shake>k__BackingField: 0.1
+  <bulletForce>k__BackingField: 50
+  <accuracy>k__BackingField: 0.1
+  <name>k__BackingField: Ak47
+  <shootSpeed>k__BackingField: 0.16
+  <damage>k__BackingField: 4
+  <manaCost>k__BackingField: 1

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class InteractObject : MonoBehaviour
@@ -11,7 +9,7 @@ public abstract class InteractObject : MonoBehaviour
     [SerializeField] private KeyCode key;
     [SerializeField] protected GameObject button;
 
-    protected virtual void Start() 
+    protected virtual void Awake() 
     {
         trigger = GetComponent<CircleCollider2D>();
         trigger.radius = triggerRange;
@@ -25,6 +23,7 @@ public abstract class InteractObject : MonoBehaviour
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.TryGetComponent(out Player entity)) return;
+
         player = entity;
         button.SetActive(true);
     }
@@ -32,6 +31,7 @@ public abstract class InteractObject : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.TryGetComponent(out Player entity)) return;
+
         player = null;
         button.SetActive(false);
     }

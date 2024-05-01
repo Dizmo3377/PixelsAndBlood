@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectsBar : MonoBehaviour
 {
     [SerializeField] private GameObject fireSprite; 
     [SerializeField] private GameObject poisonSprite; 
+
     private void Update()
     {
         fireSprite.SetActive(Player.instance.fired == 0 ? false : true);

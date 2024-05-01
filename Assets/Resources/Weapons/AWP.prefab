@@ -175,8 +175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6622cd1332f56b840b4fdf17a00e1c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  dropSpeed: 0
   curve:
     serializedVersion: 2
     m_Curve:
@@ -211,15 +209,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bulletPrefab: {fileID: 1268197539575288476, guid: fd0ae3ed2b205d246a90a2b554629fb2, type: 3}
-  nameColor: {r: 1, g: 0.3830654, b: 0, a: 1}
-  name: AWP
-  shootSpeed: 1.2
-  bulletForce: 90
-  range: 15
-  damage: 15
-  accuracy: 0
-  manaCost: 4
-  shake: 0.25
+  <nameColor>k__BackingField: {r: 1, g: 1, b: 0, a: 1}
+  <shake>k__BackingField: 0.25
+  <bulletForce>k__BackingField: 90
+  <accuracy>k__BackingField: 0
+  <name>k__BackingField: AWP
+  <shootSpeed>k__BackingField: 1.2
+  <damage>k__BackingField: 15
+  <manaCost>k__BackingField: 4
 --- !u!1 &8304837158438961456
 GameObject:
   m_ObjectHideFlags: 0

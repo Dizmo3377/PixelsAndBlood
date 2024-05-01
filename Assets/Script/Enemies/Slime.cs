@@ -10,7 +10,7 @@ public class Slime : Pathfinder
 
     private float moveStartTime = 0f;
     private float evaluation = 0f;
-    private bool isAtacking = false;
+    private bool canAttack = false;
 
     private Vector2 JumpDirection => (pathPoints[CurrentPathIndex] - transform.position).normalized;
 
@@ -19,30 +19,32 @@ public class Slime : Pathfinder
     private void OnCollisionEnter2D(Collision2D collision) => Attack(collision.collider);
     private void OnCollisionStay2D(Collision2D collision) => Attack(collision.collider);
 
-    //Need to refactor this later
     private void FixedUpdate()
     {
-        if (!canMove || sight.player == null || !HasBuiltPathToPlayer()) return;
+        if (!CanJump()) return;
 
         if (ReachedCurrentPathPoint()) CurrentPathIndex++;
 
         evaluation = jumpCurve.Evaluate(Time.time - moveStartTime);
+
         if(pathPoints != null) rb.velocity = JumpDirection * evaluation * speed;
         if (evaluation <= 0) SetTriggerState(false);
     }
 
+    private bool CanJump() => canMove && sight.seePlayer && HasBuiltPathToPlayer();
+
     private void Attack(Collider2D toAttack)
     {
-        if (!toAttack.CompareTag("Player") || !isAtacking) return;
+        if (!toAttack.CompareTag("Player") || !canAttack) return;
 
         Player.instance.GetDamage(damage);
         animator.SetTrigger("Attack");
-        isAtacking = false;
+        canAttack = false;
     }
 
     private void SetTriggerState(bool state)
     {
-        (canMove, isAtacking) = (state,state);
+        (canMove, canAttack) = (state, state);
         evaluation = state ? 1f : 0f;
     }
 
@@ -54,13 +56,14 @@ public class Slime : Pathfinder
         {
             if (!sight.seePlayer) { yield return null; continue; }
             DeletePath();
-            yield return StartCoroutine(GeneratePath());
 
+            yield return StartCoroutine(GeneratePath());
             SetTriggerState(true);
             moveStartTime = Time.time;
+
             if (sight.seePlayer) RotateFaceTo(sight.playerPos);
             animator.SetTrigger("Jump");
-            SoundManager.PlayRandomRange("slime_jump", 1, 3);
+            SoundManager.instance.PlayRandomRange("slime_jump", 1, 3);
             yield return new WaitForSeconds(jumpDelay);
         }
     }

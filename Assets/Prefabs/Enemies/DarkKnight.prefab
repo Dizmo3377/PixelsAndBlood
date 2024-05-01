@@ -213,7 +213,7 @@ MonoBehaviour:
   reachingDelta: 0.2
   drawGizmos: 0
   minimalHitDelta: 1.2
-  delayBetweenAttacks: 2
+  delayBetweenAttacks: 0.7
   hitSpeed: 0.35
   dashForce: 40
   slashSpawnPoint: {fileID: 3835494785666668352}
@@ -233,7 +233,7 @@ MonoBehaviour:
   spriteTransform: {fileID: 5156914674939856829}
   sight: {fileID: 6326506566117314631}
   maxOffsetDistance: 0.6
-  rotateOffset: -45
+  rotationOffset: -45
   positionOffset: {x: 0, y: -0.5, z: 0}
 --- !u!1 &6326506566117314683
 GameObject:

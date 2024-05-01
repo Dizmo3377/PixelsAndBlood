@@ -12,14 +12,14 @@ public class Necromancer : Enemy
     [SerializeField] private GameObject enemyForSpawn;
 
     private List<Enemy> minions;
-    private GameObject bullet_cache;
+    private GameObject bulletCache;
     private Vector3 moveDir;
 
     private void Awake()
     {
         moveDir = transform.position;
-        bullet_cache = bullet;
-        bullet_cache.GetComponent<EnemyBullet>().damage = damage;
+        bulletCache = bullet;
+        bulletCache.GetComponent<EnemyBullet>().damage = damage;
         minions = new List<Enemy>();
 
         StartCoroutine(HitAndMoveOverTime(0.5f));
@@ -34,16 +34,19 @@ public class Necromancer : Enemy
         }
     }
 
-    private Vector2 Scatter(float amlitude) => new Vector3(Random.Range(-amlitude, amlitude), Random.Range(-amlitude, amlitude));
+    private Vector2 RandomVector(float amlitude) => new Vector3(Random.Range(-amlitude, amlitude), Random.Range(-amlitude, amlitude));
 
-    private IEnumerator MoveRandom(int dashAmount)
+    private IEnumerator MoveRandom(int movesAmount)
     {
+        float delayBetweenMoves = 0.4f;
         animator.SetBool("Run", true);
-        for (int i = 0; i < dashAmount; i++)
+
+        for (int i = 0; i < movesAmount; i++)
         {
-            moveDir = (Vector2)transform.position + Scatter(3f);
-            yield return new WaitForSeconds(0.4f);
+            moveDir = (Vector2)transform.position + RandomVector(3f);
+            yield return new WaitForSeconds(delayBetweenMoves);
         }
+
         moveDir = transform.position;
         animator.SetBool("Run", false);
     }
@@ -51,6 +54,7 @@ public class Necromancer : Enemy
     private IEnumerator ShootBurst(int shotsAmount)
     {
         int currentShot = 0;
+
         while (currentShot != shotsAmount)
         {
             Shoot();
@@ -64,12 +68,27 @@ public class Necromancer : Enemy
     {
         if (!sight.seePlayer) yield break;
 
-        Vector3 spawnPoint = sight.playerPos;
+        Vector2 direction, spawnPoint, startPoint = sight.playerPos;
+        int maxTries = 1000, tries = 0;
+
+        //Ensure that we will not spawn slime in player or other object
+        do
+        {
+            float radiusAdjustment = 2f;
+            direction = Random.insideUnitCircle * radiusAdjustment;
+            spawnPoint = new Vector2(startPoint.x + direction.x, startPoint.y + direction.y);
+            tries++;
+
+            //If there is no space to spawn a slime, dont spawn it
+            if (tries >= maxTries) yield break;
+        }
+        while (spawnPoint.BoxOverlapsSomething(Vector2.one, 0) || !spawnPoint.CanReachPlayer());
+
         animator.SetTrigger("Spawn");
-        GameObject particle1 = ParticleManager.Create("NecromancerSpawn", transform.position - new Vector3(0,0.3f,0));
-        GameObject particle2 = ParticleManager.Create("NecromancerSpawn", spawnPoint);
+        GameObject particle1 = ParticleManager.instance.Create("NecromancerSpawn", transform.position - new Vector3(0,0.3f,0));
         particle1.transform.parent = transform;
         yield return new WaitForSeconds(delay);
+
         Enemy slime = Instantiate(enemyForSpawn, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
         minions.Add(slime);
     }
@@ -81,7 +100,7 @@ public class Necromancer : Enemy
         float angleStep = 20f;
         float currentAngle = -angleStep;
 
-        SoundManager.Play("necromancer");
+        SoundManager.instance.Play("necromancer");
 
         for (int i = 0; i < 3; i++)
         {
@@ -90,7 +109,7 @@ public class Necromancer : Enemy
             Vector3 dir = Quaternion.Euler(0, 0, currentAngle) * (target - transform.position).normalized;
             Vector2 bulletSpawn = transform.position + dir * 1.2f;
 
-            Rigidbody2D bullet = Instantiate(bullet_cache, bulletSpawn, Quaternion.identity).GetComponent<Rigidbody2D>();
+            Rigidbody2D bullet = Instantiate(bulletCache, bulletSpawn, Quaternion.identity).GetComponent<Rigidbody2D>();
             bullet.velocity = dir * bulletForce;
 
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -113,13 +132,14 @@ public class Necromancer : Enemy
                 yield return StartCoroutine(ShootBurst(2));
                 yield return new WaitForSeconds(shootDelay);
             }
-            yield return StartCoroutine(SpawnSlime(0.5f));
+            yield return StartCoroutine(SpawnSlime(0.2f));
         }
     }
 
     protected override void Die()
     {
         base.Die();
+
         foreach (Enemy minion in minions)
         {
             if (minion == null || minion.isDead) continue;

@@ -1,6 +1,3 @@
-using System.Collections;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -31,24 +28,29 @@ public class UI : MonoBehaviour
     public void Awake()
     {
         instance = this;
-        playerData = FindObjectOfType<Player>();
-        UpdateWeapon();
+        playerData = FindFirstObjectByType<Player>();
+        UpdateWeaponIcon();
     }
 
-    private void Update()
+    private void Update() => Render();
+
+    public void ChangeWeapon() => Inventory.ChangeWeapon();
+
+    public void FadeOut(float duration) => group.DOFade(0, duration);
+
+    private void Render()
     {
         coinsText.text = playerData.coins.ToString();
         healthText.text = playerData.healPoints.ToString();
         shieldText.text = playerData.shieldPoints.ToString();
         manaText.text = playerData.manaPoints.ToString();
 
-        healthImage.fillAmount = (float)playerData.healPoints / playerData.maxHealPoints;
-        shieldImage.fillAmount = (float)playerData.shieldPoints / playerData.maxShieldPoints;
-        manaImage.fillAmount = (float)playerData.manaPoints / playerData.maxManaPoints;
+        healthImage.fillAmount = (float)playerData.healPoints / Player.maxHealPoints;
+        shieldImage.fillAmount = (float)playerData.shieldPoints / Player.maxShieldPoints;
+        manaImage.fillAmount = (float)playerData.manaPoints / Player.maxManaPoints;
     }
 
-    public void ChangeWeapon() => Inventory.ChangeWeapon();
-    public void UpdateWeapon()
+    public void UpdateWeaponIcon()
     {
         Weapon weapon = Inventory.slots[Inventory.currentWeapon];
 
@@ -66,5 +68,4 @@ public class UI : MonoBehaviour
         }
     }
 
-    public void FadeOut(float duration) => group.DOFade(0, duration);
 }

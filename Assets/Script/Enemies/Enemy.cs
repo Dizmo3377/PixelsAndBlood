@@ -20,6 +20,8 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     public bool isDead { get; private set; } = false;
     [field:SerializeField] public int hp {  get; private set; }
 
+    public void Heal(int amount) => hp += amount;
+
     public void GetDamage(int amount)
     {
         if (isDead) return;
@@ -31,23 +33,10 @@ public abstract class Enemy : MonoBehaviour, IDamagable
         else animator.SetTrigger("GetDamage");
     }
 
-    public void Heal(int amount) => hp += amount;
-
     protected void RotateFaceTo(Vector3 point)
     {
         float lookDir = (point - transform.position).normalized.x;
         spriteRenderer.flipX = lookDir >= 0 ? false : true;
-    }
-
-    protected virtual void OnDeath()
-    {
-        StopAllCoroutines();
-        canMove = false;
-        sight.gameObject.SetActive(false);
-        rb.isKinematic = true;
-        rb.velocity = Vector2.zero;
-        GetComponent<Collider2D>().enabled = false;
-        animator.SetTrigger("Death");
     }
 
     protected virtual void Die()
@@ -55,8 +44,21 @@ public abstract class Enemy : MonoBehaviour, IDamagable
         if (isDead) return;
 
         isDead = true;
-        Essence.SplashMana(transform, manaCount, 5);
+        Effects.instance.SplashMana(transform, manaCount, 5);
         if (room != null) room.OnEnemyKilled();
         OnDeath();
+    }
+
+    protected virtual void OnDeath()
+    {
+        StopAllCoroutines();
+
+        canMove = false;
+        rb.isKinematic = true;
+        GetComponent<Collider2D>().enabled = false;
+        sight.gameObject.SetActive(false);
+
+        rb.velocity = Vector2.zero;
+        animator.SetTrigger("Death");
     }
 }

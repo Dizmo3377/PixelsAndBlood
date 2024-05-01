@@ -6,7 +6,8 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float smoothSpeed;
     private Transform target;
 
-    private void Awake() => target = FindObjectOfType<Player>().transform;
+    private void Awake() => target = FindFirstObjectByType<Player>().transform;
+
     private void FixedUpdate()
     {
         if (target == null) return;

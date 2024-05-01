@@ -1,56 +1,46 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HighLight : MonoBehaviour
 {
-    [SerializeField] private List<Transform> weaponsTransform = new List<Transform>();
-    private List<Weapon> weaponsScript = new List<Weapon>();
+    private List<Weapon> weapons = new List<Weapon>();
     private Weapon currentWeapon;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Weapon"))
-        {
-            weaponsTransform.Add(collision.transform);
-            weaponsScript.Add(collision.GetComponent<Weapon>());
-        }
+        if (!collision.CompareTag("Weapon")) return;
+
+        weapons.Add(collision.GetComponent<Weapon>());
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Weapon"))
-        {
-            for (int i = 0; i < weaponsTransform.Count; i++)
-            {
-                if (weaponsTransform[i].gameObject == collision.gameObject)
-                {
-                    weaponsTransform.RemoveAt(i);
-                    weaponsScript[i].Highlight(false);
-                    weaponsScript.RemoveAt(i);
-                }
-            }
-        }
+        if (!collision.CompareTag("Weapon")) return;
+
+        Weapon weapon = weapons.First(w => w.gameObject == collision.gameObject);
+        weapon.Highlight(false);
+        weapons.Remove(weapon);
     }
 
     private void Update()
     {
-        if (weaponsTransform.Count < 1) return;
+        if (weapons.Count < 1) return;
 
-        if (weaponsTransform.Count == 1)
+        if (weapons.Count == 1)
         {
-            weaponsScript[0].Highlight(true);
-            currentWeapon = weaponsScript[0];
+            weapons[0].Highlight(true);
+            currentWeapon = weapons[0];
         }
         else
         {
-            int id = GetClosestWeapon(weaponsTransform.ToArray());
-            currentWeapon = weaponsScript[id];
-            for (int i = 0; i < weaponsScript.Count; i++)
-            {
-                if (i == id) weaponsScript[i].Highlight(true);
-                else weaponsScript[i].Highlight(false);
-            }
+            Weapon closestWeapon = GetClosestWeapon();
+            currentWeapon = closestWeapon;
+
+            weapons.ForEach(w => w.Highlight(false));
+            closestWeapon.Highlight(true);
         }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             currentWeapon.Equiep();
@@ -58,20 +48,23 @@ public class HighLight : MonoBehaviour
         }
     }
 
-    int GetClosestWeapon(Transform[] weapon)
+    Weapon GetClosestWeapon()
     {
-        int minimumT = 0;
-        float minDist = Mathf.Infinity;
-        Vector3 currentPos = transform.position;
-        for (int i = 0; i < weapon.Length; i++)
+        Weapon closestWeapon = weapons[0];
+        float closestDistace = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+
+        foreach (Weapon weapon in weapons)
         {
-            float dist = Vector3.Distance(weapon[i].position, currentPos);
-            if (dist < minDist)
+            float distance = Vector3.Distance(weapon.transform.position, currentPosition);
+
+            if (distance < closestDistace)
             {
-                minimumT = i;
-                minDist = dist;
+                closestWeapon = weapon;
+                closestDistace = distance;
             }
         }
-        return minimumT;
+
+        return closestWeapon;
     }
 }

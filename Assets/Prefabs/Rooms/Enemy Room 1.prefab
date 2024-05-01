@@ -258,8 +258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36763c6657d73c45a4c27e30457e8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 0
-  y: 0
   doorPrefab: {fileID: 8024668505674821624, guid: a1d2826a8d8bb7e4d8288dea4003fd07, type: 3}
   doors:
   - {fileID: 1241989789267313740}
@@ -272,10 +270,8 @@ MonoBehaviour:
   - {fileID: 1241989790164248926}
   - {fileID: 1241989790002588314}
   canDestroyObjects: 1
-  wave: 0
-  enemiesCount: 000000000000000000000000
-  spawners: []
   chest: {fileID: 1723078872583991936, guid: 8e3fdc4199f61f943bf0b4fd7ad373d8, type: 3}
+  spawners: []
 --- !u!61 &2749908775148019671
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9189,6 +9185,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5463675803685911975}
     m_Modifications:
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Center.x
+      value: -0.00024998188
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Center.y
+      value: -0.000100016594
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Extent.x
+      value: 3.5004501
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Extent.y
+      value: 3.5008998
+      objectReference: {fileID: 0}
     - target: {fileID: 4763248071716123407, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
       propertyPath: m_Name
       value: Torch (2)
@@ -9255,6 +9267,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5463675803685911975}
     m_Modifications:
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Center.x
+      value: -0.00024998188
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Center.y
+      value: -0.000100016594
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Extent.x
+      value: 3.5004501
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Extent.y
+      value: 3.5008998
+      objectReference: {fileID: 0}
     - target: {fileID: 4763248071716123407, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
       propertyPath: m_Name
       value: Torch (1)
@@ -9321,6 +9349,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5463675803685911975}
     m_Modifications:
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Center.x
+      value: -0.00024998188
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Center.y
+      value: -0.000100016594
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Extent.x
+      value: 3.5004501
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Extent.y
+      value: 3.5008998
+      objectReference: {fileID: 0}
     - target: {fileID: 4763248071716123407, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
       propertyPath: m_Name
       value: Torch (3)
@@ -10627,6 +10671,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5463675803685911975}
     m_Modifications:
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Center.x
+      value: -0.00024998188
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Center.y
+      value: -0.000100016594
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Extent.x
+      value: 3.5004501
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763248071347909539, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
+      propertyPath: m_LocalBounds.m_Extent.y
+      value: 3.5008998
+      objectReference: {fileID: 0}
     - target: {fileID: 4763248071716123407, guid: ce4c64bfa85fa204d989c0ba0e5f2874, type: 3}
       propertyPath: m_Name
       value: Torch

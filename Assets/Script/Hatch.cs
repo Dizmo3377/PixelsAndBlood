@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Hatch : InteractObject
 {
     private bool entered = false;
@@ -14,9 +10,9 @@ public class Hatch : InteractObject
         LevelData.instance.IterateLevelData();
         int stage = LevelData.instance.stage;
 
-        if (stage == 2) SceneController.instance.StartSceneTransition($"Final");
+        if (stage == 2) SceneController.instance.StartSceneTransition("Final");
 
-        FindObjectOfType<PlayerController>().Disable();
+        FindFirstObjectByType<PlayerController>().Disable();
         SceneController.instance.StartSceneTransition($"Dungeon_{stage}");
     }
 }

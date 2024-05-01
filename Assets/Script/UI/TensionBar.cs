@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TensionBar : MonoBehaviour
 {
-    public static TensionBar Instance;
-
     [SerializeField] private Sprite cellFull;
     [SerializeField] private Sprite cellEmpty;
     [SerializeField] private Image[] cells;
     [SerializeField] private GameObject loadingBar;
-
-    private void Awake() => Instance = this;
 
     public void Activate(bool state)
     {
@@ -21,9 +15,9 @@ public class TensionBar : MonoBehaviour
 
         loadingBar.SetActive(state);
     }
-    public void Highlight(int number)
+    public void Highlight(int highLighteStage)
     {
-        if (number < 0 || number >= cells.Length) return;
-        cells[number].sprite = cellFull;
+        if (highLighteStage < 0 || highLighteStage >= cells.Length) return;
+        cells[highLighteStage].sprite = cellFull;
     }
 }

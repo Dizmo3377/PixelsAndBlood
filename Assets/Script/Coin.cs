@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Coin : MonoBehaviour
@@ -9,19 +7,16 @@ public class Coin : MonoBehaviour
     [SerializeField] private AnimationCurve curve;
     [SerializeField] private float startTime;
 
-    private void Start()
-    {
-        startTime = Time.time;
-    }
+    private void Awake() => startTime = Time.time;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            int coint = Random.Range(1, 4);
-            Player.instance.AddCoins(coint);
-            SoundManager.PlayRandomRange("coin", 1 , 2);
-            Destroy(gameObject);
-        }
+        if (!collision.gameObject.CompareTag("Player")) return;
+
+        int value = Random.Range(1, 4);
+        Player.instance.coins += value;
+        SoundManager.instance.PlayRandomRange("coin", 1, 2);
+        Destroy(gameObject);
     }
 
     private void FixedUpdate()

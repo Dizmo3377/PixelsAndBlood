@@ -28,7 +28,7 @@ public class Goblin : Boss
 
     protected override void Die()
     {
-        SoundManager.Play("goblin_death");
+        SoundManager.instance.Play("goblin_death");
         foreach (Enemy minion in minions)
         {
             if (minion == null || minion.isDead) continue;
@@ -83,7 +83,7 @@ public class Goblin : Boss
         if (!CanHitPlayer(2f)) yield break;
 
         animator.SetTrigger("Hit");
-        SoundManager.PlayRandomRange("bonk", 1, 3);
+        SoundManager.instance.PlayRandomRange("bonk", 1, 3);
         yield return new WaitForSeconds(0.1f);
         sight.player.GetComponent<IDamagable>().GetDamage(damage);
     }
@@ -117,7 +117,7 @@ public class Goblin : Boss
         ).GetComponent<Rigidbody2D>();
 
         bomb.AddForce(throwVector * throwForce * 100, ForceMode2D.Impulse);
-        SoundManager.PlayRandomRange("woosh", 1, 3);
+        SoundManager.instance.PlayRandomRange("woosh", 1, 3);
     }
 
     private IEnumerator RunToSpawnPoint()
@@ -163,7 +163,7 @@ public class Goblin : Boss
 
     private void SpawnMinions()
     {
-        SoundManager.Play("necromancer");
+        SoundManager.instance.Play("necromancer");
 
         Enemy minion1 = Instantiate(
             minionPrefab, 
@@ -182,8 +182,8 @@ public class Goblin : Boss
     private IEnumerator Heal()
     {
         animator.SetTrigger("Heal");
-        SoundManager.Play("goblin_heal");
-        GameObject particle = ParticleManager.Create("Heal", transform.position);
+        SoundManager.instance.Play("goblin_heal");
+        GameObject particle = ParticleManager.instance.Create("Heal", transform.position);
         particle.transform.parent = transform;
         Heal(30);
         yield return new WaitForSeconds(2f);

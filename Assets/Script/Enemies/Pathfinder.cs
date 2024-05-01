@@ -24,11 +24,13 @@ public abstract class Pathfinder : Enemy
 
     private void OnDrawGizmos()
     {
-        if (!drawGizmos || !Application.isPlaying || !HasBuiltPathToPlayer()) return;
+        if (!CanDrawGizmos()) return;
 
         Physics2D.Linecast(transform.position, pathPoints[CurrentPathIndex]);
         foreach (var item in pathPoints) Gizmos.DrawSphere(item, 0.3f);
     }
+
+    private bool CanDrawGizmos() => drawGizmos && Application.isPlaying && HasBuiltPathToPlayer();
 
     protected IEnumerator GeneratePath()
     {

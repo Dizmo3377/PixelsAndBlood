@@ -5,30 +5,70 @@ using UnityEngine;
 [System.Serializable]
 public class Player : MonoBehaviour, ISaveableJson, IDamagable
 {
-    [Header("Stats")]
-    public int healPoints;
-    public int manaPoints;
-    public int shieldPoints;
+    private const int maxCoins = 9999;
+    private const int maxFireTicks = 10;
+    private const int maxPoisonTicks = 10;
+    private const float shieldRecoveryDelay = 2f;
+    private const float debuffDamageDelay = 1f;
 
-    public int coins;
-    public int poisoned = 0;
-    public int fired = 0;
+    public const int maxHealPoints = 10;
+    public const int maxManaPoints = 200;
+    public const int maxShieldPoints = 6;
 
-    [Header("Limits")]
-    public int maxHealPoints;
-    public int maxManaPoints;
-    public int maxShieldPoints;
+    [SerializeField] private int _coins;
+    [SerializeField] private int _healPoints;
+    [SerializeField] private int _manaPoints;
+    private int _shieldPoints;
+    private int _poisoned;
+    private int _fired;
+    private float lastHitTime;
 
-    [HideInInspector] public bool isDead = false;
-    private static float hitTime;
-
+    [NonSerialized, HideInInspector] public static Player instance;
     [NonSerialized, HideInInspector] public AttackRange attack;
-
-    public static Vector3 position => instance.transform.position;
+    [NonSerialized, HideInInspector] public TensionBar tensionBar;
+    [NonSerialized, HideInInspector] public PlayerController controller;
 
     public string saveName => "Player";
 
-    [NonSerialized] public static Player instance;
+    public static Vector3 position => instance.transform.position;
+
+    [field:NonSerialized] public bool isDead {  get; private set; }
+
+    public int healPoints
+    {
+        get { return _healPoints; }
+        private set { _healPoints = Math.Clamp(value, 0, maxHealPoints); }
+    }
+
+    public int manaPoints 
+    {
+        get { return _manaPoints; }
+        set { _manaPoints = Math.Clamp(value, 0, maxManaPoints); }
+    }
+
+    public int shieldPoints
+    {
+        get { return _shieldPoints; }
+        set { _shieldPoints = Math.Clamp(value, 0, maxShieldPoints); }
+    }
+
+    public int coins
+    {
+        get { return _coins; }
+        set { _coins = Math.Clamp(value, 0, maxCoins); }
+    }
+
+    public int poisoned
+    {
+        get { return _poisoned; }
+        set { _poisoned = Math.Clamp(value, 0, maxPoisonTicks); }
+    }
+
+    public int fired
+    {
+        get { return _fired; }
+        set { _fired = Math.Clamp(value, 0, maxFireTicks); }
+    }
 
     private void OnEnable() => SceneController.onTransitionStart += () => JsonHelper.Save(this);
     private void OnDisable() => SceneController.onTransitionStart -= () => JsonHelper.Save(this);
@@ -37,34 +77,62 @@ public class Player : MonoBehaviour, ISaveableJson, IDamagable
     {
         instance = GetComponent<Player>();
         attack = GetComponentInChildren<AttackRange>();
-        GetComponent<PlayerController>().enabled = true;
+        tensionBar = GetComponentInChildren<TensionBar>();
+        controller = GetComponent<PlayerController>();
+        controller.enabled = true;
 
         (healPoints, manaPoints, shieldPoints) = (maxHealPoints, maxManaPoints, maxShieldPoints);
 
-        StartCoroutine(ShieldRecovery(2f));
-        StartCoroutine(EffectsIterator());
+        StartCoroutine(ShieldRecoveryIterator());
+        StartCoroutine(DebuffDamageIterator());
     }
 
     private void Start() => JsonHelper.LoadOnNextLevel(this);
-    public void AddCoins(int count) => coins += count;
-    public void Heal(int amount) => healPoints = Mathf.Clamp(healPoints += amount, 0, maxHealPoints);
-    public void ChangeMana(int amount) => manaPoints = Mathf.Clamp(manaPoints += amount, 0, maxManaPoints);
+
+    private IEnumerator DebuffDamageIterator()
+    {
+        while (true)
+        {
+            ApplyFireDamage();
+            ApplyPoisonDamage();
+            yield return new WaitForSeconds(debuffDamageDelay);
+        }
+    }
+
+    private IEnumerator ShieldRecoveryIterator()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(shieldRecoveryDelay);
+            if (shieldPoints < maxShieldPoints && (Time.time - lastHitTime) > shieldRecoveryDelay) shieldPoints++;
+        }
+    }
+
+    public void Heal(int amount)
+    {
+        if (amount < 0) return;
+
+        healPoints += amount;
+    }
+
     public void GetDamage(int amount)
     {
-        hitTime = Time.time;
-        PlayerController.animator.SetTrigger("GetDamage");
+        if (amount < 0) return;
+
+        lastHitTime = Time.time;
+        controller.animator.SetTrigger("GetDamage");
 
         if (shieldPoints > 0)
         {
-            shieldPoints = Mathf.Clamp(shieldPoints -= amount, 0, maxShieldPoints);
-            SoundManager.Play("shield");
+            shieldPoints -= amount;
+            SoundManager.instance.Play("shield");
             if (shieldPoints == 0) CameraShaker.Shake(0.1f, 0.5f, 2);
         }
         else
         {
             healPoints -= amount;
             CameraShaker.Shake(0.1f, 0.5f, 2);
-            SoundManager.PlayRandomRange("hit", 1, 2);
+            SoundManager.instance.PlayRandomRange("hit", 1, 2);
             if (healPoints <= 0) Die();
         }
     }
@@ -79,57 +147,41 @@ public class Player : MonoBehaviour, ISaveableJson, IDamagable
 
     private void Die()
     {
+        controller.weaponSprite.sprite = null;
+        (healPoints, manaPoints, shieldPoints) = (0,0,0);
+
         Deactivate();
+        StopAllCoroutines();
 
         UI.instance.bossMenu.SetState(false);
         UI.instance.FadeOut(2f);
-        PlayerController.animator.SetTrigger("Death");
-        PlayerController.weaponSprite.sprite = null;
-        SoundManager.Play("death");
+        UI.instance.deathMenu.ShowWithDelay(2f);
+
+        SoundManager.instance.Play("death");
         MusicManager.instance.StopMusic();
-        PlayerController.walkingSound.Stop();
-        (healPoints, manaPoints, shieldPoints) = (0,0,0);
 
-        StopAllCoroutines();
-        StartCoroutine(ShowDeathMenu());
-
-        IEnumerator ShowDeathMenu()
-        {
-            yield return new WaitForSeconds(2f);
-            UI.instance.deathMenu.Show();
-        }
+        controller.animator.SetTrigger("Death");
+        controller.walkingSound.Stop();
     }
 
-    private IEnumerator EffectsIterator()
+    private void ApplyFireDamage()
     {
-        //In future we can make "fired" and "poisened" classes
-        while (true)
-        {
-            EffectApply(ref fired);
-            EffectApply(ref poisoned);
-            yield return new WaitForSeconds(1);
-        }
+        if (fired <= 0) return;
+
+        fired--;
+        GetDamage(1);
     }
 
-    private void EffectApply(ref int effect)
+    private void ApplyPoisonDamage()
     {
-        if (effect > 0)
-        {
-            effect -= 1;
-            GetDamage(1);
-        }
-    }
+        if (poisoned <= 0) return;
 
-    private IEnumerator ShieldRecovery(float delay)
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(delay);
-            if (shieldPoints < maxShieldPoints && (Time.time - hitTime) > delay) shieldPoints++;
-        }
+        poisoned--;
+        GetDamage(1);
     }
 
     public string SaveJson() => JsonUtility.ToJson(this, true);
+
     public void LoadJson(string data)
     {
         JsonUtility.FromJsonOverwrite(data, this);

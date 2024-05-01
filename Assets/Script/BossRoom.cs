@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossRoom : Room
@@ -19,7 +17,7 @@ public class BossRoom : Room
         if (activated || isCleared || !collision.CompareTag("Player")) return;
 
         Activate();
-        PathfindingManager.instance.SetSurface(transform.position);
+        PathfindingManager.instance.SetSurfaceTo(transform.position);
         OnEntered();
     }
 
@@ -28,10 +26,8 @@ public class BossRoom : Room
         Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
         MusicManager.instance.PlayBossMusic();
         activated = true;
-        //smth
     }
 
-    //Call this in Boss script, when he dies
     public void OnCleared()
     {
         isCleared = true;

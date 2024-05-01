@@ -356,8 +356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22f22d75ca3620e4681f722beefaff55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  dropSpeed: 0
   curve:
     serializedVersion: 2
     m_Curve:
@@ -392,13 +390,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bulletPrefab: {fileID: 1268197539575288476, guid: 4a99cc8dc41f50b44b4fb3fc105323c4, type: 3}
-  nameColor: {r: 0.9583843, g: 1, b: 0, a: 1}
-  name: SawedOff
-  shootSpeed: 1
-  bulletForce: 75
-  range: 5
-  damage: 5
-  accuracy: 0.7
-  manaCost: 2
-  shake: 0.25
-  fraction: 5
+  <nameColor>k__BackingField: {r: 0, g: 1, b: 0.0353837, a: 1}
+  <shake>k__BackingField: 0.25
+  <bulletForce>k__BackingField: 75
+  <accuracy>k__BackingField: 0.7
+  <name>k__BackingField: SawedOff
+  <shootSpeed>k__BackingField: 1
+  <damage>k__BackingField: 5
+  <manaCost>k__BackingField: 2
+  <fraction>k__BackingField: 6

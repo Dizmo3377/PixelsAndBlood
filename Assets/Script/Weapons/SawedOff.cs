@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class SawedOff : Weapon
 {
-    [SerializeField] private int fraction;
+    [field:SerializeField] public int fraction {  get; private set; }
     public override void Shoot(Vector3 target)
     {
         for (int i = 0; i < fraction; i++) base.Shoot(target);
 
-        SoundManager.PlayRandomRange("sawedoff", 1, 2);
+        SoundManager.instance.PlayRandomRange("sawedoff", 1, 2);
     }
 }

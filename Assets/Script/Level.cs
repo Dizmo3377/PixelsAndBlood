@@ -97,7 +97,7 @@ public class Level : MonoBehaviour
         grid[x, y] = Instantiate(newRoom, new Vector3(x * roomScale, y * roomScale, 0), Quaternion.identity).GetComponent<Room>();
         grid[x, y].SetCoordinates(x,y);
 
-        Minimap.InitializeCell(x,y, roomType, highlightRoomsOnMinimap);
+        Minimap.LinkCellToRoom(x,y, roomType, highlightRoomsOnMinimap);
 
         currentRoomCoordinates[0] = x; 
         currentRoomCoordinates[1] = y;

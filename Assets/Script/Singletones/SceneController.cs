@@ -3,7 +3,6 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using UnityEngine;
 using System;
-using DG.Tweening;
 
 public class SceneController : Singletone<SceneController>
 {
@@ -27,7 +26,7 @@ public class SceneController : Singletone<SceneController>
     {
         onTransitionStart?.Invoke();
         instance.blackScreen.gameObject.SetActive(true);
-        FindObjectOfType<EventSystem>().enabled = false;
+        FindFirstObjectByType<EventSystem>().enabled = false;
 
         yield return instance.StartCoroutine(Fade(1f));
         SceneManager.LoadScene(newSceneName);

@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
-using Pathfinding;
 using System;
 
 public class DarkKnight : Pathfinder
@@ -17,9 +14,7 @@ public class DarkKnight : Pathfinder
 
     private Vector3 moveDir;
 
-    //In future replace this with single call (maybe)
-    private static bool reachedPlayer = false;
-    private Func<bool> hasReachedPlayer = new Func<bool>(() => reachedPlayer);
+    private bool reachedPlayer = false;
 
     private void Awake()
     {
@@ -48,7 +43,12 @@ public class DarkKnight : Pathfinder
         return true;
     }
 
-    private IEnumerator WaitForReachingPlayer() { yield return new WaitUntil(hasReachedPlayer); reachedPlayer = false; }
+    private IEnumerator WaitForReachingPlayer() 
+    { 
+        yield return new WaitUntil(() => reachedPlayer); 
+        reachedPlayer = false; 
+    }
+
     private IEnumerator Hit(int combo)
     {
         int currentHit = 0;
@@ -58,11 +58,13 @@ public class DarkKnight : Pathfinder
             {
                 Effects.instance.Slash(slashSpawnPoint);
                 animator.SetTrigger("Hit");
-                SoundManager.Play("darkknight_attack");
+                SoundManager.instance.Play("darkknight_attack");
                 Player.instance.GetDamage(damage);
+                yield return new WaitForSeconds(hitSpeed);
             }
+            else yield return null;
+
             currentHit++;
-            yield return new WaitForSeconds(hitSpeed);
         }
     }
 
@@ -86,16 +88,17 @@ public class DarkKnight : Pathfinder
         animator.SetBool("Run", false);
         reachedPlayer = true;
         DeletePath();
-        hasReachedPlayer.Invoke();
+        reachedPlayer = true;
     }
 
     private void BackDash(Vector3 target)
     {
         moveDir = target - transform.position;
         if (!CanHitPlayer()) return;
+
         rb.AddForce(-moveDir.normalized * dashForce * 100, ForceMode2D.Impulse);
-        GameObject dust = ParticleManager.Create("Dust", transform.position - new Vector3(0, 0.5f, 0));
-        SoundManager.Play("darkknight_dash");
+        GameObject dust = ParticleManager.instance.Create("Dust", transform.position - new Vector3(0, 0.5f, 0));
+        SoundManager.instance.Play("darkknight_dash");
         dust.transform.parent = transform;
     }
 

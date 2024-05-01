@@ -6,7 +6,7 @@ public class Barrel : MonoBehaviour, IDamagable
     [SerializeField] private GameObject smokePrefab;
     private Room room;
 
-    private void Start()
+    private void Awake()
     {
         room = GetComponentInParent<Room>();
     }
@@ -16,7 +16,7 @@ public class Barrel : MonoBehaviour, IDamagable
         if (room != null && !room.canDestroyObjects) return;
 
         GameObject prefab = Instantiate(spillPrefab, transform.position, Quaternion.identity);
-        SoundManager.Play("barrel_explosion");
+        SoundManager.instance.Play("barrel_explosion");
         Instantiate(smokePrefab, transform.position, Quaternion.identity).transform.parent = prefab.transform;
         Destroy(gameObject);
     }

@@ -1,15 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
-using TMPro;
-using DG.Tweening.Core.Easing;
-using Unity.VisualScripting;
 
 public class Effects : Singletone<Effects>
 {
     [SerializeField] private GameObject slashPrefab;
     [SerializeField] private GameObject damageNumberPrefab;
+    [SerializeField] private GameObject manaPrefab;
 
     public void Slash(Transform spawnPoint)
     {
@@ -34,6 +29,16 @@ public class Effects : Singletone<Effects>
 
         damageNumber.SetRightScale();
         damageNumber.SetNumber(number);
-        damageNumber.Tween();
+        damageNumber.FadeMoveAnimation();
+    }
+
+    public void SplashMana(Transform transform, int count, float force)
+    {
+        Rigidbody2D[] mana = new Rigidbody2D[count];
+        for (int i = 0; i < mana.Length; i++)
+        {
+            mana[i] = Instantiate(manaPrefab.GetComponent<Rigidbody2D>(), transform.position, Quaternion.identity);
+            mana[i].velocity = new Vector2(Random.Range(-force, force), Random.Range(-force, force));
+        }
     }
 }

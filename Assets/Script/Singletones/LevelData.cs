@@ -1,12 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelData : Singletone<LevelData>, ISaveableJson
 {
     public int lvl;
     public int stage;
+
     public string saveName => "LevelData";
     public bool isInitial => FindFirstObjectByType<InitialScene>() != null;
 
@@ -34,5 +32,6 @@ public class LevelData : Singletone<LevelData>, ISaveableJson
     }
 
     public string SaveJson() => JsonUtility.ToJson(this, true);
+
     public void LoadJson(string data) => JsonUtility.FromJsonOverwrite(data, this);
 }

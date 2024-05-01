@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,15 +5,14 @@ using UnityEngine;
 public class EnemyRoom : Room
 {
     private bool isCleared = false;
+    private int wave = 0;
+    private int[] enemiesCount = new int[3];
 
-    public int wave = 0;
-    public int[] enemiesCount = new int[3];
+    [SerializeField] private GameObject chest;
 
     public delegate void EnterAction();
     public static event EnterAction OnEntered;
     public List<Spawner> spawners;
-
-    [SerializeField] private GameObject chest;
 
     private void Start() => canDestroyObjects = false;
 
@@ -24,8 +22,17 @@ public class EnemyRoom : Room
 
         OnEntered();
         canDestroyObjects = true;
-        PathfindingManager.instance.SetSurface(transform.position);
+        PathfindingManager.instance.SetSurfaceTo(transform.position);
         ActivateSpawners(0);
+    }
+
+    private bool KilledAllEnemies() => enemiesCount.All(x => x <= 0);
+    private void ActivateSpawners(int wave) => spawners.Where(s => s.waveId == wave).ToList().ForEach(s => s.Activate());
+
+    public void AddSpawner(Spawner spawner, int wave)
+    {
+        enemiesCount[wave]++;
+        spawners.Add(spawner);
     }
 
     public void OnEnemyKilled()
@@ -76,9 +83,6 @@ public class EnemyRoom : Room
         while (Physics2D.OverlapBoxAll(new Vector2(x, y), new Vector2(1, 1), 0f).Length > 0);
 
         Instantiate(chest, new Vector2(x,y), Quaternion.identity);
-        ParticleManager.Create("ChestSpawn", new Vector2(x, y));
+        ParticleManager.instance.Create("ChestSpawn", new Vector2(x, y));
     }
-
-    private bool KilledAllEnemies() => enemiesCount.All(x => x <= 0);
-    private void ActivateSpawners(int wave) => spawners.Where(s => s.waveId == wave).ToList().ForEach(s => s.Activate());
 }

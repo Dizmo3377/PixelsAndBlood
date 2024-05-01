@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     {
         UpdateWeaponIcon();
 
-        if (FindObjectOfType<InitialScene>())
+        if (FindFirstObjectByType<InitialScene>())
         {
             slots[0] = null;
             slots[1] = null;
@@ -35,9 +35,12 @@ public class Inventory : MonoBehaviour
 
     public static void UpdateWeaponIcon()
     {
-        if (slots[currentWeapon] != null) PlayerController.weaponSprite.sprite = slots[currentWeapon].icon;
-        else PlayerController.weaponSprite.sprite = null;
-        UI.instance.UpdateWeapon();
+        SpriteRenderer weaponRenderer = Player.instance.controller.weaponSprite;
+
+        if (slots[currentWeapon] != null) weaponRenderer.sprite = slots[currentWeapon].icon;
+        else weaponRenderer.sprite = null;
+
+        UI.instance.UpdateWeaponIcon();
     }
     private static GameObject GetWeapon(string name) => Resources.Load<GameObject>("Weapons/" + name);
 

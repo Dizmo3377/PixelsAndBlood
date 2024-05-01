@@ -1,28 +1,27 @@
-using Pathfinding;
 using UnityEngine;
 
 public class Box : MonoBehaviour, IDamagable
 {
-    private int hp;
+    private int healPoints;
     private Room room;
 
-    private void Start()
+    private void Awake()
     {
         room = GetComponentInParent<Room>();
-        hp = Random.Range(2, 6);
+        healPoints = Random.Range(2, 6);
     }
 
     public void GetDamage(int amount)
     {
         if (room != null && !room.canDestroyObjects) return;
 
-        hp -= amount;
+        healPoints -= amount;
 
-        ParticleManager.Create("BoxDestroy", transform.position, 4);
+        ParticleManager.instance.Create("BoxDestroy", transform.position, 4);
 
-        if (hp <= 0)
+        if (healPoints <= 0)
         {
-            SoundManager.PlayRandomRange("box_destroyed", 1, 4);
+            SoundManager.instance.PlayRandomRange("box_destroyed", 1, 4);
             Destroy(gameObject);
         }
     }

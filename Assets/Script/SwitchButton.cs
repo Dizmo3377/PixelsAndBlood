@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SwitchButton : MonoBehaviour
 {
-    [SerializeField] private string key; //variable which we switch
+    [SerializeField] private string key; //PlayerPrefs key which we switch
     [SerializeField] private int currentState = 1;
     [SerializeField] private Sprite[] stateOnSprites;
     [SerializeField] private Sprite[] stateOffSprites;
@@ -30,13 +28,13 @@ public class SwitchButton : MonoBehaviour
     {
         var spriteState = button.spriteState;
 
-        if (currentState == 0) //turn it on
+        if (currentState == 0) //Turn on
         {
             currentState = 1;
             image.sprite = stateOnSprites[0];
             spriteState.pressedSprite = stateOnSprites[1];
         }
-        else //turn it off
+        else //Turn off
         {
             currentState = 0;
             image.sprite = stateOffSprites[0];
