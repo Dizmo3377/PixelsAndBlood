@@ -7,7 +7,7 @@ public class LaserCast : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out IDamagable damagable)) damagable.GetDamage(damage);
+        if (collision.TryGetComponent(out IPhysicallyDamagable damagable)) damagable.GetDamage(damage);
     }
 
     private void FixedUpdate()

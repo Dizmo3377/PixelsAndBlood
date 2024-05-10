@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Barrel : MonoBehaviour, IDamagable
+public class Barrel : MonoBehaviour, IPhysicallyDamagable
 {
     [SerializeField] private GameObject spillPrefab;
     [SerializeField] private GameObject smokePrefab;

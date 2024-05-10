@@ -3,17 +3,16 @@ using System.Collections;
 using UnityEngine;
 
 [System.Serializable]
-public class Player : MonoBehaviour, ISaveableJson, IDamagable
+public class Player : MonoBehaviour, ISaveableJson, IPhysicallyDamagable, IEffectDamagable
 {
     private const int maxCoins = 9999;
     private const int maxFireTicks = 10;
     private const int maxPoisonTicks = 10;
-    private const float shieldRecoveryDelay = 2f;
-    private const float debuffDamageDelay = 1f;
-
     public const int maxHealPoints = 10;
     public const int maxManaPoints = 200;
     public const int maxShieldPoints = 6;
+    private const float shieldRecoveryDelay = 2f;
+
 
     [SerializeField] private int _coins;
     [SerializeField] private int _healPoints;
@@ -29,7 +28,6 @@ public class Player : MonoBehaviour, ISaveableJson, IDamagable
     [NonSerialized, HideInInspector] public PlayerController controller;
 
     public string saveName => "Player";
-
     public static Vector3 position => instance.transform.position;
 
     [field:NonSerialized] public bool isDead {  get; private set; }
@@ -83,28 +81,18 @@ public class Player : MonoBehaviour, ISaveableJson, IDamagable
 
         (healPoints, manaPoints, shieldPoints) = (maxHealPoints, maxManaPoints, maxShieldPoints);
 
-        StartCoroutine(ShieldRecoveryIterator());
-        StartCoroutine(DebuffDamageIterator());
+        StartCoroutine(ShieldRecoveryIterator(shieldRecoveryDelay));
+        StartCoroutine(GetComponent<IEffectDamagable>().DebuffDamageIterator());
     }
 
     private void Start() => JsonHelper.LoadOnNextLevel(this);
 
-    private IEnumerator DebuffDamageIterator()
+    private IEnumerator ShieldRecoveryIterator(float delay)
     {
         while (true)
         {
-            ApplyFireDamage();
-            ApplyPoisonDamage();
-            yield return new WaitForSeconds(debuffDamageDelay);
-        }
-    }
-
-    private IEnumerator ShieldRecoveryIterator()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(shieldRecoveryDelay);
-            if (shieldPoints < maxShieldPoints && (Time.time - lastHitTime) > shieldRecoveryDelay) shieldPoints++;
+            yield return new WaitForSeconds(delay);
+            if (shieldPoints < maxShieldPoints && (Time.time - lastHitTime) > delay) shieldPoints++;
         }
     }
 
@@ -148,7 +136,7 @@ public class Player : MonoBehaviour, ISaveableJson, IDamagable
     private void Die()
     {
         controller.weaponSprite.sprite = null;
-        (healPoints, manaPoints, shieldPoints) = (0,0,0);
+        (healPoints, manaPoints, shieldPoints, fired, poisoned) = (0,0,0,0,0);
 
         Deactivate();
         StopAllCoroutines();
@@ -164,7 +152,7 @@ public class Player : MonoBehaviour, ISaveableJson, IDamagable
         controller.walkingSound.Stop();
     }
 
-    private void ApplyFireDamage()
+    public void ApplyFireDamage()
     {
         if (fired <= 0) return;
 
@@ -172,7 +160,7 @@ public class Player : MonoBehaviour, ISaveableJson, IDamagable
         GetDamage(1);
     }
 
-    private void ApplyPoisonDamage()
+    public void ApplyPoisonDamage()
     {
         if (poisoned <= 0) return;
 

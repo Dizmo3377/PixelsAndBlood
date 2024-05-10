@@ -15,8 +15,10 @@ public class Necromancer : Enemy
     private GameObject bulletCache;
     private Vector3 moveDir;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         moveDir = transform.position;
         bulletCache = bullet;
         bulletCache.GetComponent<EnemyBullet>().damage = damage;

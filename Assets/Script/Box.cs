@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Box : MonoBehaviour, IDamagable
+public class Box : MonoBehaviour, IPhysicallyDamagable
 {
     private int healPoints;
     private Room room;

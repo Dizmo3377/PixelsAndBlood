@@ -13,10 +13,12 @@ public class Skeleton : Enemy
     private GameObject arrowCache;
     private Vector3 moveDir;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         moveDir = transform.position;
-        arrowCache = arrow; 
+        arrowCache = arrow;
         arrowCache.GetComponent<EnemyBullet>().damage = damage;
 
         StartCoroutine(ShootAndMoveOverTime(0.5f));

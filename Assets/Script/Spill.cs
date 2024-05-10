@@ -24,10 +24,10 @@ public class Spill : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.TryGetComponent(out IEffectDamagable entity))
         {
-            if (fire) Player.instance.fired = 3;
-            if (poison) Player.instance.poisoned = 3;
+            if (fire) entity.fired = 3;
+            if (poison) entity.poisoned = 3;
         }
     }
 

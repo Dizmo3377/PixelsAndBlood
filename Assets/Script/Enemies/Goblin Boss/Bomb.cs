@@ -28,7 +28,7 @@ public class Bomb : MonoBehaviour
         Collider2D[] objectsInExplosionZone = Physics2D.OverlapCircleAll(transform.position, range);
         foreach (Collider2D obj in objectsInExplosionZone)
         {
-            if (obj.TryGetComponent(out IDamagable damagable))
+            if (obj.TryGetComponent(out IPhysicallyDamagable damagable))
                 damagable.GetDamage(damage);
 
             if (obj.TryGetComponent(out IPushable pushable))

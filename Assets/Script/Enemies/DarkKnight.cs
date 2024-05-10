@@ -16,8 +16,9 @@ public class DarkKnight : Pathfinder
 
     private bool reachedPlayer = false;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         StartCoroutine(HitAndMoveOverTime(0.5f));
         CalculatePathToPlayer();
     }

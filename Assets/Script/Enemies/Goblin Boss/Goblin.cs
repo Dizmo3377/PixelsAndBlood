@@ -85,7 +85,7 @@ public class Goblin : Boss
         animator.SetTrigger("Hit");
         SoundManager.instance.PlayRandomRange("bonk", 1, 3);
         yield return new WaitForSeconds(0.1f);
-        sight.player.GetComponent<IDamagable>().GetDamage(damage);
+        sight.player.GetComponent<IPhysicallyDamagable>().GetDamage(damage);
     }
 
     private bool CanHitPlayer(float hitDistance)

@@ -9,7 +9,7 @@ public class RikoshetBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.TryGetComponent(out IDamagable entity)) 
+        if (collision.collider.TryGetComponent(out IPhysicallyDamagable entity)) 
             entity.GetDamage(Inventory.primaryDamage);
 
         if ((layersForBounce.value & (1 << collision.gameObject.layer)) != 0) 
